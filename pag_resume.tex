@@ -1,0 +1,201 @@
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Medium Length Professional CV
+% LaTeX Template
+% Version 2.0 (8/5/13)
+%
+% This template has been downloaded from:
+% http://www.LaTeXTemplates.com
+%
+% Original author:
+% Trey Hunner (http://www.treyhunner.com/)
+%
+% Important note:
+% This template requires the resume.cls file to be in the same directory as the
+% .tex file. The resume.cls file provides the resume style used for structuring the
+% document.
+%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+%----------------------------------------------------------------------------------------
+%	PACKAGES AND OTHER DOCUMENT CONFIGURATIONS
+%----------------------------------------------------------------------------------------
+
+\documentclass{resume} % Use the custom resume.cls style
+
+\usepackage[left=0.75in,top=0.6in,right=0.75in,bottom=0.6in]{geometry} % Document margins
+
+\usepackage{multicol} %columns for lists
+\usepackage{paralist} %lists without indentation
+\usepackage{hyperref} %links - http and mailto
+\hypersetup{hidelinks} %hide boxes around links
+%check out other hyperref options
+
+\setlength\multicolsep{0pt} %remove space before and after multicol
+
+\def\sectionskip{\smallskip} % The space after the heading section
+\def\nameskip{\medskip} % The space after your name at the top
+\def\addressskip{} % The space between the two address (or phone/email) lines
+
+\name{Justin W. Paglierani} % Your name
+\address{6551 E. Preston St \\ Mesa, AZ 85215} % Your address
+\address{\href{https://jpaglier.blogspot.com}{https://jpaglier.blogspot.com} \\ \href{https://www.bitbucket.org/jpaglier}{https://www.bitbucket.org/jpaglier}} %blog and bitbucket
+\address{(480)~233~-~9666 \\ \href{mailto:jpaglier@asu.edu}{jpaglier@asu.edu}} % Your phone number and email
+
+\begin{document}
+
+%----------------------------------------------------------------------------------------
+%	EDUCATION SECTION
+%----------------------------------------------------------------------------------------
+
+\begin{rSection}{Education}
+
+%had to add raggedright here for some reason because it didn't like the thesis line being added
+\textbf{\raggedright{Arizona State University, Ira A. Fulton School of Engineering\\}}
+M.S. in Computer Science (Information Assurance)\hfill GPA: 3.97 \hfill \emph{December 2013}\\
+%thesis, flush with the right
+{\small\raggedleft{\textbf{Thesis:} ``A Framework for Extended Acquisition and Uniform Representation of Forensic Email Evidence''\\}}
+B.S. in Computer Science (Information Assurance)\hfill \emph{January 2011}
+
+\textbf{Relevant Coursework}
+\begin{multicols}{2}
+	\begin{asparaitem} \itemsep1pt \parskip0pt \parsep0pt
+		\item Computer System Security
+		\item Data and Information Security
+		\item Software Security
+		\item Advanced Computer Network Security
+		\item Computer and Network Forensics
+		\item Embedded Operating System Internals 
+		\item Advanced Operating Systems
+	\end{asparaitem}
+\end{multicols}
+
+\end{rSection}
+
+
+%----------------------------------------------------------------------------------------
+%   COURSE PROJECTS SECTION - THIS PROBABLY WONT LIVE HERE TOO LONG
+%----------------------------------------------------------------------------------------
+
+\begin{rSection}{Course Projects}
+
+\begin{asparaitem} \itemsep1pt \parskip0pt \parsep0pt
+	\item \href{https://bitbucket.org/jpaglier/cse536-kernel-dev}{Distributed messaging service with accompanying kernel-level transport protocol \hfill (Linux, C)}
+	\item Web-based document management system \hfill (Java, Struts2, Tomcat 6, Linux, MySQL)
+	\item Cloud-based file sharing protocol and application \hfill (Linux, Python)
+	\item \href{https://bitbucket.org/jpaglier/2012-spring-cse494-598_g-project}{Volume and file system analysis tool with an emphasis on FAT systems \hfill (Python)}
+	\item Build a secure network containing Apache and bind servers \hfill (iptables, Squid, Snort)
+	\item Database system supporting access control and k-anonymity functionality \hfill (Java, MySQL)
+	\item Smart sprinkler controller system using an embedded platform \hfill (Linux, cron, Apache, C/C++)
+\end{asparaitem}
+
+\end{rSection}
+
+
+%----------------------------------------------------------------------------------------
+%	WORK EXPERIENCE SECTION
+%----------------------------------------------------------------------------------------
+
+\begin{rSection}{Experience}
+
+\begin{rSubsection}{\href{http://www.frbsf.org/}{Federal Reserve Bank of San Francisco}}{January 2014 - Present}{Information Security Analyst II, Local Incident Response Team}{San Francisco, CA}
+
+	\item Nothing yet
+	
+\end{rSubsection}
+
+%------------------------------------------------
+
+\begin{rSubsection}{\href{http://sefcom.asu.edu/}{SEFCOM, Arizona State University}}{January 2011 - December 2013}{Research Assistant}{Tempe, AZ}
+
+	\medskip %multicols breaks the spacing for some reason
+	\begin{multicols}{2}
+		\item Develop novel e-mail forensics methodologies
+		\item Conduct  analysis of Android malware
+		\item Create a taxonomy of Android malware
+		\item Deploy and manage a cloud for use in a \\ collaborative forensics platform (OpenStack)
+		\item Prepare  and deliver weekly presentations
+	\end{multicols}
+
+\end{rSubsection}
+
+%------------------------------------------------
+
+\begin{rSubsection}{National Incident Response Team of the Federal Reserve System}{May 2013 - August 2013}{Intern}{San Francisco, CA}
+
+	\item Develop and test a web-based wrapper for penetration testing tools used to provide a middle layer between tools and the functions they perform \hfill (Django)
+
+\end{rSubsection}
+
+%------------------------------------------------
+
+\begin{rSubsection}{\href{http://www.federalreserve.gov/}{Board of Governors of the Federal Reserve System}}{May 2012 - August 2012}{IT Intern, Messaging \& Mobile}{Washington, DC}
+
+	\item Develop/test/document an e-discovery tool. (Ruby, CoffeeScript)	
+	\item Document/test a mobile device management platform. (MobileIron, Android, iPhone)
+
+\end{rSubsection}
+
+\begin{rSubsection}{\href{http://www.onsemi.com/}{ON Semiconductor}}{May 2010 - January 2011}{Computer Science Intern, Global Reliability}{Phoenix, AZ}
+
+	\item Assist in testing and development of Reliability Management System (Java EE)
+
+\end{rSubsection}
+
+\end{rSection}
+
+%----------------------------------------------------------------------------------------
+%	TECHNICAL STRENGTHS SECTION
+%----------------------------------------------------------------------------------------
+
+\begin{rSection}{Technical Strengths}
+
+\begin{tabular}{ @{} >{\bfseries}l @{\hspace{6ex}} l }
+Programming Languages & Java, Python, C/C++, Ruby \\
+Design Patterns & MVC, Service Locator, etc. \\
+Protocols \& APIs & XML, JSON, REST \\
+Network Administration/Security & Wireshark, iptables, Snort, etc. \\
+Operating Systems & Linux, Windows \\
+Databases & MySQL, SQLite \\
+Tools & Git, Vim
+\end{tabular}
+
+\end{rSection}
+
+%----------------------------------------------------------------------------------------
+%	PUBLICATIONS SECTION
+%----------------------------------------------------------------------------------------
+
+\begin{rSection}{Publications}
+\textbf{Published:}
+\href{http://eudl.eu/doi/10.4108/icst.collaboratecom.2013.254125#!}{``Towards Comprehensive and Collaborative Forensics on Email Evidence''}, In Proceedings of \href{http://collaboratecom.org/2013/show/home}{9th IEEE International Conference on Collaborative Computing: Networking, Applications and Worksharing (CollaborateCom)}, 2013.
+\end{rSection}
+
+%----------------------------------------------------------------------------------------
+%	AWARDS SECTION
+%----------------------------------------------------------------------------------------
+
+\begin{rSection}{Awards and Activities}
+
+\begin{asparaitem} \itemsep1pt \parskip0pt \parsep0pt
+	\item National Science Foundation Scholarship for Service \hfill January 2012 - December 2013
+	\item \href{http://asulug.org/2013/09/installfest-fall-2013-results/}{\($1$st\) place: State Farm’s ASU Linux User Group CTF \hfill September 2013}
+	\item \href{https://code.djangoproject.com/ticket/20760}{Accepted patch: Timing attack in Django authentication module (Ticket \#20760)} \hfill July 2013
+	\item Participant –-- UCSB International CTF –-- Arizona State University Team \hfill December 2010
+	\item Undergraduate Teaching Assistant – CSE 100 Introduction to Java Programming \hfill Fall 2009
+\end{asparaitem}
+
+\end{rSection}
+
+%----------------------------------------------------------------------------------------
+%	EXAMPLE SECTION
+%----------------------------------------------------------------------------------------
+
+%\begin{rSection}{Section Name}
+
+%Section content\ldots
+
+%\end{rSection}
+
+%----------------------------------------------------------------------------------------
+
+\end{document}
