@@ -26,6 +26,10 @@
 \usepackage{array} % Required for boldface (\bf and \bfseries) tabular columns
 \usepackage{ifthen} % Required for ifthenelse statements
 
+\usepackage{wrapfig}
+\usepackage{graphicx}
+\usepackage{color}
+
 \pagestyle{empty} % Suppress page numbers
 
 %----------------------------------------------------------------------------------------
@@ -48,7 +52,7 @@
     \def \@addresstwo {#1}
   }{
   \@ifundefined{@addressthree}{
-  \def \@addressthree {#1}
+    \def \@addressthree {#1}
   }{
      \def \@addressone {#1}
   }}
@@ -67,9 +71,21 @@
 % \printname is used to print the name as a page header
 \def \printname {
   \begingroup
-    \hfil{\MakeUppercase{\namesize\bf \@name}}\hfil
+    \hfil{\namesize\bf \@name}\hfil
     \nameskip\break
   \endgroup
+}
+
+\def \icon#1#2{\def\@icon{#2} \def\@iconwidth{#1}}
+
+% \printicon is used to place an icon in the top right corner
+\def \printicon {
+	\begingroup
+		\begin{wrapfigure}{r}{0.51in}
+			\includegraphics[width=\@iconwidth]{\@icon}
+		\end{wrapfigure}
+		{\tiny \color{white} .}
+	\endgroup
 }
 
 %----------------------------------------------------------------------------------------
@@ -79,6 +95,7 @@
 \let\ori@document=\document
 \renewcommand{\document}{
   \ori@document  % Begin document
+  \printicon
   \printname % Print the name specified with \name
   \@ifundefined{@addressone}{}{ % Print the first address if specified
     \printaddress{\@addressone}}
@@ -107,14 +124,32 @@
 }
 
 %----------------------------------------------------------------------------------------
+%	PUBLICATIONS FORMATTING
+%----------------------------------------------------------------------------------------
+
+% Leverages the bibliography to print a list of publications
+\newcommand{\mybibliography}[1]{
+\nocite{*}
+{\def\section*{}
+\bibliography{#1}}
+}
+\renewcommand{\refname}{
+  \normalfont\selectfont\normalsize
+  \sectionskip
+  \MakeUppercase{\bf publications} % Section title
+  \sectionlineskip
+  \hrule % Horizontal line
+}
+
+%----------------------------------------------------------------------------------------
 %	WORK EXPERIENCE FORMATTING
 %----------------------------------------------------------------------------------------
 
-\newenvironment{rSubsection}[4]{ % 4 input arguments - company name, year(s) employed, job title and location
- {\bf #1} \hfill {#2} % Bold company name and date on the right
+\newenvironment{rSubsection}[5]{ % 4 input arguments - company name, year(s) employed, job title and location
+ {\bf #1} \hfill {\em #2} % Bold company name and italic date on the right
  \ifthenelse{\equal{#3}{}}{}{ % If the third argument is not specified, don't print the job title and location line
   \\
-  {\em #3} \hfill {\em #4} % Italic job title and location
+  {#3} \hfill {#4} % Job title and location
   }\smallskip
   \begin{list}{$\cdot$}{\leftmargin=0em} % \cdot used for bullets, no indentation
    \itemsep -0.5em \vspace{-0.5em} % Compress items in list together for aesthetics
