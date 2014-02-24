@@ -164,3 +164,20 @@
 \def\sectionlineskip{\medskip} % The space above the horizontal line for each section 
 \def\nameskip{\bigskip} % The space after your name at the top
 \def\sectionskip{\medskip} % The space after the heading section
+
+%----------------------------------------------------------------------------------------
+%	FOOTER COMMNADS: PRINT THE MODIFIED DATE OF THE MAIN .TEX FILE
+%----------------------------------------------------------------------------------------
+
+\usepackage[left=0.75in,top=0.6in,right=0.75in,bottom=0.75in]{geometry} % Document margins
+\usepackage{filemod}
+\renewcommand{\thefilemoddate}[3]{#2/#3/#1}
+\usepackage{fancyhdr} %for adding a footer
+\pagestyle{fancy}
+\renewcommand{\headrulewidth}{0pt}
+\lhead{}
+\chead{}
+\rhead{}
+\lfoot{}
+\cfoot{\tiny \textit{Revised \filemodprintdate{\jobname}}}
+\rfoot{}
