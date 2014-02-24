@@ -1,0 +1,281 @@
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Medium Length Professional CV
+% LaTeX Template
+% Version 2.0 (8/5/13)
+%
+% This template has been downloaded from:
+% http://www.LaTeXTemplates.com
+%
+% Original author:
+% Trey Hunner (http://www.treyhunner.com/)
+%
+% Important note:
+% This template requires the resume.cls file to be in the same directory as the
+% .tex file. The resume.cls file provides the resume style used for structuring the
+% document.
+%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+%----------------------------------------------------------------------------------------
+%	PACKAGES AND OTHER DOCUMENT CONFIGURATIONS
+%----------------------------------------------------------------------------------------
+
+\documentclass{resume} % Use the custom resume.cls style
+
+\usepackage[left=0.75in,top=0.6in,right=0.75in,bottom=0.75in]{geometry} % Document margins
+
+% Set font to sans serif
+\renewcommand*{\familydefault}{\sfdefault}
+
+\usepackage{multicol} %columns for lists
+\usepackage{paralist} %lists without indentation
+\usepackage{hyperref} %links - http and mailto
+\hypersetup{hidelinks} %hide boxes around links
+%check out other hyperref options
+
+\usepackage{microtype}
+
+\setlength\multicolsep{0pt} %remove space before and after multicol
+
+\def\sectionskip{\smallskip} % The space after the heading section
+\def\nameskip{\medskip} % The space after your name at the top
+\def\addressskip{} % The space between the two address (or phone/email) lines
+
+\name{Michael K. Mabey} % Your name
+\address{(480)~788--3411 \\ \href{mailto:mmabey@asu.edu}{mmabey@asu.edu}} % Your phone number and email
+\address{5606 S Hurricane Ct Unit E \\ Tempe, AZ 85283} % Your address
+%\address{\href{https://jpaglier.blogspot.com}{https://jpaglier.blogspot.com} \\ %\href{https://www.bitbucket.org/jpaglier}{https://www.bitbucket.org/jpaglier}} %blog and bitbucket
+
+\icon{0.5in}{LinkedInQR}
+
+\begin{document}
+
+%----------------------------------------------------------------------------------------
+%	EDUCATION SECTION
+%----------------------------------------------------------------------------------------
+
+\begin{rSection}{Education}
+
+\textbf{PhD Computer Science (Information Assurance)}\hfill \emph{May 2016}\\
+Arizona State University $\mid$ GPA 3.81\hfill {Tempe, AZ}
+
+\textbf{M.S. Computer Science (Information Assurance)}\hfill \emph{Aug 2011}\\
+Arizona State University $\mid$ GPA 3.58\hfill {Tempe, AZ}\\
+\textit{Thesis:} \href{http://repository.asu.edu/attachments/56996/content/Mabey_asu_0010N_10959.pdf}{Collaborative Digital Forensics: Architecture, Mechanisms, and Case Study}
+
+\textbf{B.S. Computer Science (Information Systems)}\hfill \emph{May 2009}\\
+Utah State University $\mid$ GPA 3.25\hfill {Logan, UT}
+
+%\textbf{Relevant Coursework}
+%\begin{multicols}{2}
+%	\begin{asparaitem} \itemsep1pt \parskip0pt \parsep0pt
+%		\item Computer System Security
+%		\item Data and Information Security
+%		\item Software Security
+%		\item Advanced Computer Network Security
+%		\item Computer and Network Forensics
+%		\item Embedded Operating System Internals 
+%		\item Advanced Operating Systems
+%	\end{asparaitem}
+%\end{multicols}
+
+\end{rSection}
+
+
+%----------------------------------------------------------------------------------------
+%   COURSE PROJECTS SECTION
+%----------------------------------------------------------------------------------------
+
+%\begin{rSection}{Course Projects}
+%
+%\begin{asparaitem} \itemsep1pt \parskip0pt \parsep0pt
+%	\item \href{https://bitbucket.org/jpaglier/cse536-kernel-dev}{Distributed messaging service with accompanying kernel-level transport protocol \hfill (Linux, C)}
+%	\item Web-based document management system \hfill (Java, Struts2, Tomcat 6, Linux, MySQL)
+%	\item Cloud-based file sharing protocol and application \hfill (Linux, Python)
+%	\item \href{https://bitbucket.org/jpaglier/2012-spring-cse494-598_g-project}{Volume and file system analysis tool with an emphasis on FAT systems \hfill (Python)}
+%	\item Build a secure network containing Apache and bind servers \hfill (iptables, Squid, Snort)
+%	\item Database system supporting access control and k-anonymity functionality \hfill (Java, MySQL)
+%	\item Smart sprinkler controller system using an embedded platform \hfill (Linux, cron, Apache, C/C++)
+%\end{asparaitem}
+%
+%\end{rSection}
+
+
+%----------------------------------------------------------------------------------------
+%	WORK EXPERIENCE SECTION
+%----------------------------------------------------------------------------------------
+
+\begin{rSection}{Experience}
+
+%\begin{rSubsection}{1: Company}{2: Dates}{3: Title}{4: Location}
+%\end{rSubsection}
+
+\begin{rSubsection}{Research Assistant~}{Nov 2009 -- Present}{\href{http://sefcom.asu.edu/}{Security Engineering for Future Computing (SEFCOM) Lab, ASU}}{Tempe, AZ\\{\textnormal{\textit{Advisor}: Prof. Gail-Joon Ahn\hfill \textit{Sponsors}: Department of Energy and National Science Foundation}}}
+	
+	\item Recipient of the Department of Defense Information Assurance Scholarship Program (IASP) for the 2012--2013 and 2013--2014 school years.
+	
+	\item Developed a web email acquisition approach that reestablishes persistent cookie sessions stored by a browser, and automated the process using \textbf{Python} and \textbf{Selenium}.
+	%Wrote an accompanying \textbf{Python} script that used \textbf{Selenium} to then interact with the online email account.
+	
+	\item Designed and implemented the core components of a modular, highly scalable, collaboration-centric digital forensic framework built on the \textbf{OpenStack} cloud architecture. Functions of the components included distributed job scheduling, storage management, and concise evidence representation and transmission.
+	
+	\item Set up and maintained an \textbf{OpenVPN} installation for the SEFCOM lab.
+		
+	\item Researched methods for performing forensic acquisition on \textbf{Android} devices.
+	
+	\item Acted as a mentor for an undergraduate student that otherwise would not have pursued a master's degree and collaborated with him on the research for his thesis.
+	
+\end{rSubsection}
+
+%------------------------------------------------
+
+\begin{rSubsection}{Teaching Assistant}{Aug 2010 -- Present}{Arizona State University}{Tempe, AZ}
+	
+	\item Instructor for FSE 100 Introduction to Engineering: Fall 2011, Spring \& Fall 2012, and Spring \& Fall 2013.
+
+	\item Spring 2014: Assistant to Dr. Ryan Meuth for FSE 100 Introduction to Engineering.
+	
+	\item Spring 2014: Assistant to Dr. Debra Calliss for CSE 423/424 Capstone I and CSE 485/486 Capstone II.
+	
+	\item Spring 2011: Assistant to Dr. Gail-Joon Ahn for CSE 467 Data \& Information Security.
+	
+	\item Fall 2010: Assistant to Dr. Gail-Joon Ahn for CSE 465 Information Assurance.
+	
+\end{rSubsection}
+
+%------------------------------------------------
+
+\begin{rSubsection}{Student Trainee}{June 2013 -- Aug 2013}{US Army}{Fort Meade, MD}
+
+
+	\item Summer internship in connection with DoD IASP scholarship.
+
+\end{rSubsection}
+
+%------------------------------------------------
+
+\begin{rSubsection}{Graduate Student Summer Intern}{May 2011 -- Jul 2011}{Sandia National Laboratories}{Albuquerque, NM}
+
+	\item Helped design a dynamic malware analysis framework built on \textbf{OpenStack}, allowing incident responders to define customizable analysis environments and use arbitrary analysis tools in triage or manual analysis mode.
+	
+	\item Wrote \textbf{Python} scripts to automate the setup process for using a SheevaPlug computer as a wireless intrusion detection agent running \textbf{Kismet}.
+
+\end{rSubsection}
+
+%------------------------------------------------
+
+\begin{rSubsection}{Graduate Student Recruitment Specialist/Webmaster}{Jul 2006 -- Aug 2009}{Electrical \& Computer Engineering Department USU}{Logan, UT}
+
+	\item Primary responsibilities included maintaining and augmenting the department website using \textbf{PHP}, \textbf{MySQL}, and other basic web technologies like \textbf{CSS}, \textbf{JavaScript}, and an \textbf{SMTP} server.
+	
+	\item Replaced a \textbf{MS Access} database by porting the old data to a \textbf{MySQL} server and creating a set of \textbf{Python} programs with the \textbf{Dabo} framework that interfaced with the database.
+	
+	%\item Wrote \textbf{Python} scripts to convert tab-delimited and Excel formatted data to \textbf{SQL} entries.
+	
+	%\item Created a testing environment using an \textbf{Apache} web server, \textbf{PHP}, \textbf{MySQL}, and \textbf{SVN}.
+	
+	%\item Gathered statistics on web visitors, inquiries from students, and applicants' credentials for the purpose of improving graduate student recruitment processes for the department.
+	
+	%\item Responded to inquiries from potential domestic and international graduate students.
+
+\end{rSubsection}
+
+\end{rSection}
+
+%----------------------------------------------------------------------------------------
+%	PUBLICATIONS SECTION
+%----------------------------------------------------------------------------------------
+
+\bibliographystyle{resumepubs}
+\mybibliography{mypapers}
+
+%----------------------------------------------------------------------------------------
+%	TECHNICAL STRENGTHS SECTION
+%----------------------------------------------------------------------------------------
+
+\begin{rSection}{Technical Strengths}
+
+\begin{tabular}{ @{} >{\bfseries}l @{\hspace{6ex}} l }
+Research Interests & Digital Forensics, Internet of Things, Cloud Computing \\
+Programming Languages & Python, C/C++, HTML, CSS \\
+%Design Patterns & MVC, Service Locator, etc. \\
+Protocols \& APIs & JSON, XML, REST \\
+Network Administration/Security & Wireshark, iptables \\
+Operating Systems & Windows, Linux, Chrome OS \\
+Databases & MySQL, SQLite \\
+%Tools & Git, Vim
+\end{tabular}
+
+\end{rSection}
+
+%----------------------------------------------------------------------------------------
+%	SCHOOL PROJECTS SECTION
+%----------------------------------------------------------------------------------------
+
+\begin{rSection}{Relevant School Projects}
+\begin{list}{$\cdot$}{\leftmargin=0em} % \cdot used for bullets, no indentation
+   \itemsep -0.5em
+
+	\item Implemented \textbf{Python} scripts that interpreted MBRs and boot sectors for FAT file systems.
+	
+	\item Wrote a program in \textbf{Python} to scan \textbf{C} and \textbf{C++} source files for commonly used but insecure function calls, which then suggested to the user more secure yet equivalent library functions.
+	
+	%\item Implemented a ``robot'' for the Google Wave platform that translated hex and binary to ASCII as well as interpreted MBRs and VBRs. See http://code.google.com/p/forensie/.
+	
+	\item \href{http://csilm.usu.edu/~securityninja/}{Created a web-based interactive learning module designed to teach basic principles of password strength and symmetrical encryption using \textbf{Python}, \textbf{JavaScript}, and \textbf{Ajax}.}
+	
+	%\item Wrote a program in \textbf{C++} that accepted a file containing cipher text created with a symmetrical encryption algorithm and attempted to discover the original key and plain text.
+	
+	\item Demonstrated a buffer overflow attack on a \textbf{C++} program using \textbf{gdb}.
+	
+	%\item Configured a \textbf{Linux} machine to be a \textbf{DNS} server, a \textbf{DHCP} server, and a web server that used \textbf{SSL} and authentication via \textbf{htaccess} rules.
+	
+	%\item Set up a basic logging system in \textbf{Linux} with \textbf{Snort} and \textbf{syslog}.
+	
+	%\item Created a map of local wireless networks by war-walking while running \textbf{NetStumbler}.
+	
+	%\item Analyzed Internet Explorer vulnerabilities using Security Innovation's \textbf{Holodeck} program.
+
+\end{list}
+
+\end{rSection}
+
+%----------------------------------------------------------------------------------------
+%	AWARDS SECTION
+%----------------------------------------------------------------------------------------
+
+\begin{rSection}{Awards and Activities}
+
+\begin{list}{$\cdot$}{\leftmargin=0em} % \cdot used for bullets, no indentation
+   \itemsep -0.5em
+	
+	\item DoD Information Assurance Scholarship Program (IASP) Recipient (2 years) \hfill 2012--2014
+
+	\item Inducted into Eta Kappa Nu (HKN) Engineering Honors Society \hfill November 2010
+	
+	\item Team Leader --- ASU team in the UCSB International CTF \hfill 2009, 2010
+	
+	\item Tallest Graduate Student at ASU \hfill (not an actual award)
+
+%	\item National Science Foundation Scholarship for Service \hfill January 2012 - December 2013
+%	\item \href{http://asulug.org/2013/09/installfest-fall-2013-results/}{\($1$st\) place: State Farm's ASU Linux User Group CTF \hfill September 2013}
+%	\item \href{https://code.djangoproject.com/ticket/20760}{Accepted patch: Timing attack in Django authentication module (Ticket \#20760)} \hfill July 2013
+%	\item Participant –-- UCSB International CTF –-- Arizona State University Team \hfill December 2010
+%	\item Undergraduate Teaching Assistant – CSE 100 Introduction to Java Programming \hfill Fall 2009
+\end{list}
+
+\end{rSection}
+
+%----------------------------------------------------------------------------------------
+%	EXAMPLE SECTION
+%----------------------------------------------------------------------------------------
+
+%\begin{rSection}{Section Name}
+
+%Section content\ldots
+
+%\end{rSection}
+
+%----------------------------------------------------------------------------------------
+
+\end{document}
