@@ -169,7 +169,7 @@
 %	FOOTER COMMNADS: PRINT THE MODIFIED DATE OF THE MAIN .TEX FILE
 %----------------------------------------------------------------------------------------
 
-\usepackage[left=0.75in,top=0.6in,right=0.75in,bottom=0.75in]{geometry} % Document margins
+\usepackage[left=0.75in,top=0.75in,right=0.75in,bottom=0.75in]{geometry} % Document margins
 \usepackage{filemod}
 \renewcommand{\thefilemoddate}[3]{#2/#3/#1}
 \usepackage{fancyhdr} %for adding a footer
