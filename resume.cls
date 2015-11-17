@@ -4,7 +4,7 @@
 % This template has been downloaded from:
 % http://www.LaTeXTemplates.com
 %
-% This class file defines the structure and design of the template. 
+% This class file defines the structure and design of the template.
 %
 % Original header:
 % Copyright (C) 2010 by Trey Hunner
@@ -29,6 +29,12 @@
 \usepackage{wrapfig}
 \usepackage{graphicx}
 \usepackage{color}
+\usepackage{stix}  % Provides the "very small white circle" used as a bullet for sub-lists
+\usepackage{microtype}
+\usepackage{multicol} %columns for lists
+
+\usepackage{bibunits} % Allows for multiple bibliographies
+\defaultbibliographystyle{resumepubs}
 
 \pagestyle{empty} % Suppress page numbers
 
@@ -39,23 +45,29 @@
 \def \name#1{\def\@name{#1}} % Defines the \name command to set name
 \def \@name {} % Sets \@name to empty by default
 
+\def \footername#1{\def\@footername{#1}} % Defines the \footername command to set footername
+\def \@footername {} % Sets \@footername to empty by default
+
 \def \addressSep {$\diamond$} % Set default address separator to a diamond
 
-% One, two or three address lines can be specified 
+% One, two or three address lines can be specified
 \let \@addressone \relax
 \let \@addresstwo \relax
 \let \@addressthree \relax
 
 % \address command can be used to set the first, second, and third address (last 2 optional)
 \def \address #1{
-  \@ifundefined{@addresstwo}{
-    \def \@addresstwo {#1}
+  \@ifundefined{@addressone}{
+    \def \@addressone {#1}
   }{
-  \@ifundefined{@addressthree}{
-    \def \@addressthree {#1}
-  }{
-     \def \@addressone {#1}
-  }}
+    \@ifundefined{@addresstwo}{
+      \def \@addresstwo {#1}
+    }{
+      \@ifundefined{@addressthree}{
+        \def \@addressthree {#1}
+      }{}
+    }
+  }
 }
 
 % \printaddress is used to style an address line (given as input)
@@ -82,6 +94,7 @@
 \def \printicon {
 	\begingroup
 		\begin{wrapfigure}{r}{0.51in}
+      \vspace{-2ex}
 			\includegraphics[width=\@iconwidth]{\@icon}
 		\end{wrapfigure}
 		{\tiny \color{white} .}
@@ -123,45 +136,90 @@
   \end{list}
 }
 
-%----------------------------------------------------------------------------------------
-%	PUBLICATIONS FORMATTING
-%----------------------------------------------------------------------------------------
-
-% Leverages the bibliography to print a list of publications
-\newcommand{\mybibliography}[1]{
-\nocite{*}
-{\def\section*{}
-\bibliography{#1}}
-}
-\renewcommand{\refname}{
-  \normalfont\selectfont\normalsize
+\newboolean{inSubection}
+\newenvironment{rSubsection}[1]{
   \sectionskip
-  \MakeUppercase{\bf publications} % Section title
+  {\bf #1}
+  \setboolean{inSubection}{true}
+  \begin{rBulletList}
+}{
+  \end{rBulletList}
+  \setboolean{inSubection}{false}
+}
+
+\newenvironment{rSectionHeading}[1]{ % 1 input argument - section name
+  \sectionskip
+  \MakeUppercase{\bf #1} % Section title
   \sectionlineskip
   \hrule % Horizontal line
 }
 
 %----------------------------------------------------------------------------------------
+%	PUBLICATIONS FORMATTING
+%----------------------------------------------------------------------------------------
+
+% Leverages the bibliography to print a list of publications
+\newcommand{\mybibliography}[2]{
+  \def \mybibsource {#1}
+  \def \mybibtitle {#2}
+  \begin{bibunit}
+  \nocite{*}
+  \vspace{-1.5ex}
+  \putbib[\mybibsource]
+  \end{bibunit}
+}
+\renewcommand{\refname}{\normalfont\selectfont\normalsize \bf \mybibtitle \vspace{-2.5ex}}
+
+%----------------------------------------------------------------------------------------
 %	WORK EXPERIENCE FORMATTING
 %----------------------------------------------------------------------------------------
 
-\newenvironment{rSubsection}[5]{ % 4 input arguments - company name, year(s) employed, job title and location
+\newcounter{rBulletDepth}  % Keep track of how deep we are nested
+\newenvironment{rBulletList}[1][1]{%
+  \stepcounter{rBulletDepth}
+  \ifthenelse{\isodd{\value{rBulletDepth}}}{% Change the symbol we use based on the depth
+    \def \rBulletSymbol{$\cdot$}}{%
+    \def \rBulletSymbol{$\vysmwhtcircle$}  }
+  \ifthenelse{\value{rBulletDepth}>1}{% Set margin to 0 if at the first level, do nothing otherwise
+    \def \rBulletMargin{}  }{%
+    \def \rBulletMargin{\leftmargin=0em}  }
+  \def \rNumCols{#1}
+  \ifthenelse{\rNumCols>1}{%
+    \vspace{1ex}
+    \begin{multicols}{\rNumCols}
+    \begin{list}{\rBulletSymbol}{\rBulletMargin} % \cdot used for bullets, no indentation
+     \itemsep -0.5em \vspace{-0.5em} % Compress items in list together for aesthetics
+  }{%
+    \begin{list}{\rBulletSymbol}{\rBulletMargin} % \cdot used for bullets, no indentation
+     \itemsep -0.5em \vspace{-0.5em} % Compress items in list together for aesthetics
+     \ifthenelse{\boolean{inSubection}}{}{\vspace{1ex}}
+   }
+  }{
+  \end{list}
+  \ifthenelse{\rNumCols>1}{\end{multicols}}{}
+  \addtocounter{rBulletDepth}{-1}
+
+  %\vspace{0.5em} % Some space after the list of bullet points
+}
+
+\newenvironment{rExperienceBullets}[4]{ % 4 input arguments - company name, year(s) employed, job title and location
  {\bf #1} \hfill {\em #2} % Bold company name and italic date on the right
  \ifthenelse{\equal{#3}{}}{}{ % If the third argument is not specified, don't print the job title and location line
   \\
   {#3} \hfill {#4} % Job title and location
+
   }\smallskip
-  \begin{list}{$\cdot$}{\leftmargin=0em} % \cdot used for bullets, no indentation
-   \itemsep -0.5em \vspace{-0.5em} % Compress items in list together for aesthetics
+  \setboolean{inSubection}{true}
+  \begin{rBulletList}
   }{
-  \end{list}
-  %\vspace{0.5em} % Some space after the list of bullet points
+  \end{rBulletList}
+  \setboolean{inSubection}{false}
 }
 
 % The below commands define the whitespace after certain things in the document - they can be \smallskip, \medskip or \bigskip
 \def\namesize{\huge} % Size of the name at the top of the document
 \def\addressskip{\smallskip} % The space between the two address (or phone/email) lines
-\def\sectionlineskip{\medskip} % The space above the horizontal line for each section 
+\def\sectionlineskip{\medskip} % The space above the horizontal line for each section
 \def\nameskip{\bigskip} % The space after your name at the top
 \def\sectionskip{\medskip} % The space after the heading section
 
@@ -169,15 +227,16 @@
 %	FOOTER COMMNADS: PRINT THE MODIFIED DATE OF THE MAIN .TEX FILE
 %----------------------------------------------------------------------------------------
 
-\usepackage[left=0.75in,top=0.75in,right=0.75in,bottom=0.75in]{geometry} % Document margins
+\usepackage[left=1.0in,top=1.0in,right=1.0in,bottom=1.0in]{geometry} % Document margins
 \usepackage{filemod}
 \renewcommand{\thefilemoddate}[3]{#2/#3/#1}
 \usepackage{fancyhdr} %for adding a footer
 \pagestyle{fancy}
+\usepackage{lastpage} % For getting the last page number
 \renewcommand{\headrulewidth}{0pt}
 \lhead{}
 \chead{}
 \rhead{}
-\lfoot{}
-\cfoot{\tiny \textit{Revised \filemodprintdate{\jobname}}}
-\rfoot{}
+\lfoot{\scriptsize \@footername}
+\cfoot{\scriptsize \textit{Revised \filemodprintdate{\jobname}}}
+\rfoot{\scriptsize \ifthenelse{\pageref{LastPage}>2}{\thepage}{}}
