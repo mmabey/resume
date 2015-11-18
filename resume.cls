@@ -152,7 +152,7 @@
   \MakeUppercase{\bf #1} % Section title
   \sectionlineskip
   \hrule % Horizontal line
-}
+}{}
 
 %----------------------------------------------------------------------------------------
 %	PUBLICATIONS FORMATTING
@@ -162,6 +162,7 @@
 \newcommand{\mybibliography}[2]{
   \def \mybibsource {#1}
   \def \mybibtitle {#2}
+  % TODO: Find a way to insert a \vspace{-3.7ex} if arg 2 isn't supplied
   \begin{bibunit}
   \nocite{*}
   \vspace{-1.5ex}
@@ -202,7 +203,7 @@
   %\vspace{0.5em} % Some space after the list of bullet points
 }
 
-\newenvironment{rExperienceBullets}[4]{ % 4 input arguments - company name, year(s) employed, job title and location
+\newenvironment{rExperienceHeader}[4]{ % 4 input arguments - company name, year(s) employed, job title and location
  {\bf #1} \hfill {\em #2} % Bold company name and italic date on the right
  \ifthenelse{\equal{#3}{}}{}{ % If the third argument is not specified, don't print the job title and location line
   \\
@@ -210,10 +211,16 @@
 
   }\smallskip
   \setboolean{inSubection}{true}
+  }{
+  \setboolean{inSubection}{false}
+}
+
+\newenvironment{rExperienceBullets}[4]{ %
+  \begin{rExperienceHeader}{#1}{#2}{#3}{#4}
   \begin{rBulletList}
   }{
   \end{rBulletList}
-  \setboolean{inSubection}{false}
+  \end{rExperienceHeader}
 }
 
 % The below commands define the whitespace after certain things in the document - they can be \smallskip, \medskip or \bigskip
@@ -227,7 +234,7 @@
 %	FOOTER COMMNADS: PRINT THE MODIFIED DATE OF THE MAIN .TEX FILE
 %----------------------------------------------------------------------------------------
 
-\usepackage[left=1.0in,top=1.0in,right=1.0in,bottom=1.0in]{geometry} % Document margins
+\usepackage[left=0.75in,top=0.75in,right=0.75in,bottom=0.75in]{geometry} % Document margins
 \usepackage{filemod}
 \renewcommand{\thefilemoddate}[3]{#2/#3/#1}
 \usepackage{fancyhdr} %for adding a footer
