@@ -28,13 +28,10 @@
 % Set font to sans serif
 \renewcommand*{\familydefault}{\sfdefault}
 
-\usepackage{multicol} %columns for lists
 \usepackage{paralist} %lists without indentation
 \usepackage{hyperref} %links - http and mailto
 \hypersetup{hidelinks} %hide boxes around links
 %check out other hyperref options
-
-\usepackage{microtype}
 
 \setlength\multicolsep{0pt} %remove space before and after multicol
 
@@ -79,96 +76,79 @@ Utah State University $\mid$ GPA 3.25\hfill {Logan, UT}
 %\begin{rSubsection}{1: Company}{2: Dates}{3: Title}{4: Location}
 %\end{rSubsection}
 
-\begin{rSubsection}{Research Assistant~}{Nov 2009 -- Present}{\href{http://sefcom.asu.edu/}{Security Engineering for Future Computing (SEFCOM) Lab, ASU}}{Tempe, AZ\\{\textnormal{\textit{Advisor}: Prof. Gail-Joon Ahn\hfill \textit{Sponsors}: Department of Energy and National Science Foundation}}}
-	
+\begin{rExperienceBullets}{Research Assistant~}{Nov 2009 -- Present}{\href{http://sefcom.asu.edu/}{Security Engineering for Future Computing (SEFCOM) Lab, ASU}}{Tempe, AZ\\{\textnormal{\textit{Advisor}: Prof.\ Gail-Joon Ahn\hfill \textit{Sponsors}: Department of Energy and National Science Foundation}}}
+
 	\item Recipient of the Department of Defense Information Assurance Scholarship Program (IASP) for the 2012--2013, 2013--2014, and 2014--2015 school years.
-	
+
 	\item Researched forensic techniques for \textbf{Chrome~OS}/\textbf{Chromium~OS} by creating tools in \textbf{Python} and using \textbf{libvirt} to interface with \textbf{KVM/QEMU}. (Project in progress.)
-	
-	\item Developed a web email acquisition approach that reestablishes persistent cookie sessions stored by a browser, and automated the process using \textbf{Python} and \textbf{Selenium}~\cite{Paglierani2013}.
+
+	\item Developed a web email acquisition approach that reestablishes persistent cookie sessions stored by a browser, and automated the process using \textbf{Python} and \textbf{Selenium}.
 	%Wrote an accompanying \textbf{Python} script that used \textbf{Selenium} to then interact with the online email account.
-	
-	\item Designed and implemented the core components of a modular, highly scalable, collaboration-centric digital forensic framework built on the \textbf{OpenStack} cloud architecture. Functions of the components included distributed job scheduling, storage management, and concise evidence representation and transmission~\cite{Mabey2011a,Mabey2011}.
-	
+
+	\item Designed and implemented the core components of a modular, highly scalable, collaboration-centric digital forensic framework built on the \textbf{OpenStack} cloud architecture. Functions of the components included distributed job scheduling, storage management, and concise evidence representation and transmission.
+
 	\item Set up and maintained an \textbf{OpenVPN} installation for the SEFCOM lab.
-		
+
 	%\item Researched methods for performing forensic acquisition on \textbf{Android} devices.
-	
+
 	%\item Acted as a mentor for an undergraduate student that otherwise would not have pursued a master's degree and collaborated with him on the research for his thesis.
-	
-\end{rSubsection}
+
+\end{rExperienceBullets}
 
 %------------------------------------------------
 
-\begin{rSubsection}{Teaching Assistant}{Aug 2010 -- Present}{Arizona State University}{Tempe, AZ}
-	
-	\item[] \vspace{-1.6em}
-	\end{list}
-	
+\begin{rExperienceHeader}{Teaching Assistant}{Aug 2010 -- Present}{Arizona State University}{Tempe, AZ}
+
 	\emph{Instructor positions:}
-	\begin{list}{$\cdot$}{\leftmargin=0em} % \cdot used for bullets, no indentation
-		\itemsep -0.5em \vspace{-0.5em} % Compress items in list together for aesthetics
-	\item CSE 465 Information Assurance: Fall 2014.
-	\item FSE 100 Introduction to Engineering: Fall 2011, Spring 2012, Fall 2012, Spring 2013, and Fall 2013.
-	\end{list}
-	
-	\emph{Assistant positions:}
-	\begin{list}{$\cdot$}{\leftmargin=0em} % \cdot used for bullets, no indentation
-		\itemsep -0.5em \vspace{-0.5em} % Compress items in list together for aesthetics
-	\item CSE 469 Computer and Network Forensics with Dr. Gail-Joon Ahn: Spring 2015.
-	\item FSE 100 Introduction to Engineering with Dr. Ryan Meuth: Spring 2014.
-	\item CSE 423/424 Capstone I and CSE 485/486 Capstone II with Dr. Debra Calliss: Spring 2014.
-	\item CSE 467 Data \& Information Security with Dr. Gail-Joon Ahn: Spring 2011.
-	\item CSE 465 Information Assurance with Dr. Gail-Joon Ahn: Fall 2010.
-	
-	%\item Instructor for CSE 465 Information Assurance: Fall 2014
-	
-	%\item Instructor for FSE 100 Introduction to Engineering: Fall 2011, Spring \& Fall 2012, Spring \& Fall 2013.
+	\begin{rBulletList}
+		\item CSE 465 Information Assurance: Fall 2014.
+		\item FSE 100 Introduction to Engineering: Fall 2011, Spring 2012, Fall 2012, Spring 2013, and Fall 2013.
+	\end{rBulletList}
 
-	%\item Spring 2014: Assistant to Dr. Ryan Meuth for FSE 100 Introduction to Engineering.
-	
-	%\item Spring 2014: Assistant to Dr. Debra Calliss for CSE 423/424 Capstone I and CSE 485/486 Capstone II.
-	
-	%\item Spring 2011: Assistant to Dr. Gail-Joon Ahn for CSE 467 Data \& Information Security.
-	
-	%\item Fall 2010: Assistant to Dr. Gail-Joon Ahn for CSE 465 Information Assurance.
-	
-\end{rSubsection}
+	\emph{Assistant positions:}
+	\begin{rBulletList}
+		\item CSE 469 Computer and Network Forensics with Dr.\ Gail-Joon Ahn: Spring 2015.
+		\item FSE 100 Introduction to Engineering with Dr.\ Ryan Meuth: Spring 2014.
+		\item CSE 423/424 Capstone I and CSE 485/486 Capstone II with Dr.\ Debra Calliss: Spring 2014.
+		\item CSE 467 Data \& Information Security with Dr.\ Gail-Joon Ahn: Spring 2011.
+		\item CSE 465 Information Assurance with Dr.\ Gail-Joon Ahn: Fall 2010.
+	\end{rBulletList}
+
+\end{rExperienceHeader}
 
 %------------------------------------------------
 
-\begin{rSubsection}{Student Trainee}{Jun 2013 -- Aug 2013, Jun 2014 -- Aug 2014}{US Army}{Fort Meade, MD}
-
+\begin{rExperienceBullets}{Student Trainee}{Jun 2013 -- Aug 2013, Jun 2014 -- Aug 2014}{US Army}{Fort Meade, MD}
 
 	\item Summer internships in connection with DoD IASP scholarship.
 
-\end{rSubsection}
+\end{rExperienceBullets}
 
 %------------------------------------------------
 \clearpage
 
-\begin{rSubsection}{Graduate Student Summer Intern}{May 2011 -- Jul 2011}{Sandia National Laboratories}{Albuquerque, NM}
+\begin{rExperienceBullets}{Graduate Student Summer Intern}{May 2011 -- Jul 2011}{Sandia National Laboratories}{Albuquerque, NM}
 
 	\item Helped design a dynamic malware analysis framework built on \textbf{OpenStack}, allowing incident responders to define customizable analysis environments and use arbitrary analysis tools in triage or manual analysis mode.
-	
+
 	\item Wrote \textbf{Python} scripts to automate the setup process for using a SheevaPlug computer as a wireless intrusion detection agent running \textbf{Kismet}.
 
-\end{rSubsection}
+\end{rExperienceBullets}
 
 %------------------------------------------------
 
 %\begin{rSubsection}{Graduate Student Recruitment Specialist/Webmaster}{Jul 2006 -- Aug 2009}{Electrical \& Computer Engineering Department USU}{Logan, UT}
 %
 %	\item Primary responsibilities included maintaining and augmenting the department website using \textbf{PHP}, \textbf{MySQL}, and other basic web technologies like \textbf{CSS}, \textbf{JavaScript}, and an \textbf{SMTP} server.
-%	
+%
 %	\item Replaced a \textbf{MS Access} database by porting the old data to a \textbf{MySQL} server and creating a set of \textbf{Python} programs with the \textbf{Dabo} framework that interfaced with the database.
-%	
+%
 %	%\item Wrote \textbf{Python} scripts to convert tab-delimited and Excel formatted data to \textbf{SQL} entries.
-%	
+%
 %	%\item Created a testing environment using an \textbf{Apache} web server, \textbf{PHP}, \textbf{MySQL}, and \textbf{SVN}.
-%	
+%
 %	%\item Gathered statistics on web visitors, inquiries from students, and applicants' credentials for the purpose of improving graduate student recruitment processes for the department.
-%	
+%
 %	%\item Responded to inquiries from potential domestic and international graduate students.
 %
 %\end{rSubsection}
@@ -179,8 +159,10 @@ Utah State University $\mid$ GPA 3.25\hfill {Logan, UT}
 %	PUBLICATIONS SECTION
 %----------------------------------------------------------------------------------------
 
-\bibliographystyle{resumepubs}
-\mybibliography{mypapers}
+\begin{rSectionHeading}{Publications}
+\end{rSectionHeading}
+\vspace{-3.7ex}
+\mybibliography{mypapers}{}
 
 %----------------------------------------------------------------------------------------
 %	TECHNICAL STRENGTHS SECTION
@@ -195,7 +177,7 @@ Forensic Tools & FTK, Sleuth Kit \& Autopsy, dd, HxD, etc.\\
 Protocols \& APIs & JSON, XML, REST \\
 Network Administration/Security & OpenVPN, Wireshark \\
 Operating Systems & Windows, Linux, Chrome OS \\
-Databases & MySQL, SQLite 
+Databases & MySQL, SQLite
 \end{tabular}
 
 \end{rSection}
@@ -209,23 +191,23 @@ Databases & MySQL, SQLite
 %   \itemsep -0.5em
 %
 %	\item Implemented \textbf{Python} scripts that interpreted MBRs and boot sectors for FAT file systems.
-%	
+%
 %	\item Wrote a program in \textbf{Python} to scan \textbf{C} and \textbf{C++} source files for commonly used but insecure function calls, which then suggested to the user more secure yet equivalent library functions.
-%	
+%
 %	%\item Implemented a ``robot'' for the Google Wave platform that translated hex and binary to ASCII as well as interpreted MBRs and VBRs. See http://code.google.com/p/forensie/.
-%	
+%
 %	\item Created a web-based interactive learning module designed to teach basic principles of password strength and symmetrical encryption using \textbf{Python}, \textbf{JavaScript}, and \textbf{Ajax}. \href{http://csilm.usu.edu/~securityninja/}{http://csilm.usu.edu/\textasciitilde securityninja/}.
-%	
+%
 %	%\item Wrote a program in \textbf{C++} that accepted a file containing cipher text created with a symmetrical encryption algorithm and attempted to discover the original key and plain text.
-%	
+%
 %	%\item Demonstrated a buffer overflow attack on a \textbf{C++} program using \textbf{gdb}.
-%	
+%
 %	%\item Configured a \textbf{Linux} machine to be a \textbf{DNS} server, a \textbf{DHCP} server, and a web server that used \textbf{SSL} and authentication via \textbf{htaccess} rules.
-%	
+%
 %	%\item Set up a basic logging system in \textbf{Linux} with \textbf{Snort} and \textbf{syslog}.
-%	
+%
 %	%\item Created a map of local wireless networks by war-walking while running \textbf{NetStumbler}.
-%	
+%
 %	%\item Analyzed Internet Explorer vulnerabilities using Security Innovation's \textbf{Holodeck} program.
 %
 %\end{list}
@@ -238,20 +220,19 @@ Databases & MySQL, SQLite
 
 \begin{rSection}{Awards and Activities}
 
-\begin{list}{$\cdot$}{\leftmargin=0em} % \cdot used for bullets, no indentation
-   \itemsep -0.5em
-	
+	\begin{rBulletList}
+
 	\item DoD Information Assurance Scholarship Program (IASP) Recipient (3 years) \hfill 2012--2015
 
 	\item Inducted into Eta Kappa Nu (HKN) Engineering Honors Society \hfill Nov 2010
-	
+
 	\item Team Leader --- ASU team in the UCSB International CTF \hfill 2009, 2010, 2015
-	
+
 	\item Eagle Scout, Boy Scouts of America \hfill 2002
-	
+
 	\item Tallest Graduate Student at ASU \hfill (not an actual award)
 
-\end{list}
+	\end{rBulletList}
 
 \end{rSection}
 
