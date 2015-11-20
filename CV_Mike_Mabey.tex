@@ -1,0 +1,85 @@
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Medium Length Professional CV
+% LaTeX Template
+% Version 2.0 (8/5/13)
+%
+% This template has been downloaded from:
+% http://www.LaTeXTemplates.com
+%
+% Original author:
+% Trey Hunner (http://www.treyhunner.com/)
+%
+% Important note:
+% This template requires the resume.cls file to be in the same directory as the
+% .tex file. The resume.cls file provides the resume style used for structuring the
+% document.
+%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+%----------------------------------------------------------------------------------------
+%	PACKAGES AND OTHER DOCUMENT CONFIGURATIONS
+%----------------------------------------------------------------------------------------
+
+\documentclass{resume} % Use the custom resume.cls style
+
+% Set font to sans serif
+\renewcommand*{\familydefault}{\sfdefault}
+
+\usepackage{hyperref} %links - http and mailto
+\hypersetup{hidelinks} %hide boxes around links
+%check out other hyperref options
+
+\setlength\multicolsep{0pt} %remove space before and after multicol
+
+\def\sectionskip{\smallskip} % The space after the heading section
+\def\nameskip{\medskip} % The space after your name at the top
+\def\addressskip{} % The space between the two address (or phone/email) lines
+
+\name{Michael K. Mabey} % Your name
+\footername{Mabey}
+\address{(480)~788--3411 \\ \href{mailto:mmabey@asu.edu}{mmabey@asu.edu} \\ \href{http://mikemabey.com}{mikemabey.com}}
+% \address{699 S Mill Ave, Suite 469 \\ Tempe, AZ 85281}
+% \address{\href{http://mikemabey.com}{mikemabey.com}}
+
+\icon{0.5in}{figs/LinkedInQR2}
+
+\begin{document}
+
+\input{sections/education}
+
+\input{sections/research_experience}
+
+\input{sections/research_interests}
+
+%----------------------------------------------------------------------------------------
+%	PUBLICATIONS SECTION
+%----------------------------------------------------------------------------------------
+
+\begin{rSection}{Publications}
+  \mybibliography{pubs/journals}{Peer-Reviewed Book Chapters \& Journal Papers}
+  \mybibliography{pubs/conferences}{Conference Proceedings}
+  \mybibliography{pubs/posters}{Poster Presentations}
+  \mybibliography{pubs/blog_posts}{Blog Posts}
+	\input{sections/works_in_progress}
+	% \input{sections/works_submitted}
+\end{rSection}
+
+
+\input{sections/teaching_experience}
+
+\input{sections/teaching_interests}
+
+\input{sections/service}
+
+\input{sections/professional_experience}
+\clearpage
+\input{sections/honors_awards}
+
+\input{sections/professional_memberships}
+
+\input{sections/professional_development}
+
+\input{sections/references}
+
+
+\end{document}
