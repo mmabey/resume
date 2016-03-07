@@ -158,10 +158,14 @@
 %	PUBLICATIONS FORMATTING
 %----------------------------------------------------------------------------------------
 
+% Create a prefix for numbers in the bibliography, redefine bibliography label style
+\def \mycitationprefix{}
+\renewcommand\@biblabel[1]{[\mycitationprefix#1]}
 % Leverages the bibliography to print a list of publications
-\newcommand{\mybibliography}[2]{
+\newcommand{\mybibliography}[3]{
   \def \mybibsource {#1}
   \def \mybibtitle {#2}
+  \def \mycitationprefix{#3}
   % TODO: Find a way to insert a \vspace{-3.7ex} if arg 2 isn't supplied
   \begin{bibunit}
   \nocite{*}
