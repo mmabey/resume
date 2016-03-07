@@ -28,6 +28,9 @@
 \usepackage{hyperref} %links - http and mailto
 \hypersetup{hidelinks} %hide boxes around links
 %check out other hyperref options
+\usepackage{fontawesome}
+\let\orighref\href
+\renewcommand{\href}[2]{\orighref{#1}{#2\,{\tiny \faExternalLink}}}  % Add icon next to all links
 
 \setlength\multicolsep{0pt} %remove space before and after multicol
 
