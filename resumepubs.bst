@@ -1,5 +1,5 @@
 %%
-%% This is file `mikeresume.bst',
+%% This is file `resumepubs.bst',
 %% generated with the docstrip utility.
 %%
 %% The original source files were:
@@ -1578,7 +1578,7 @@ FUNCTION {begin.bib}
   write$ newline$
   "  \providecommand{\doi}[1]{DOI:\discretionary{}{}{}#1}\else"
   write$ newline$
-  "  \providecommand{\doi}{DOI:\discretionary{}{}{}\begingroup \urlstyle{rm}\Url}\fi"
+  "  \providecommand{\doi}{DOI:\discretionary{}{}{}\begingroup \urlstyle{same}\Url}\fi"
   write$ newline$
 }
 EXECUTE {begin.bib}
@@ -1591,4 +1591,4 @@ FUNCTION {end.bib}
 EXECUTE {end.bib}
 %% End of customized bst file
 %%
-%% End of file `mikeresume.bst'.
+%% End of file `resumepubs.bst'.
