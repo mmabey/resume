@@ -1,0 +1,19 @@
+
+% Define the fields for this entry
+\def\PositionTitle{}
+\def\PositionPeriod{} % Remember to use -- between dates
+\def\OrgName{}
+\def\OrgLocation{}
+
+
+\ifthenelse{\boolean{titleOnly}}{
+  \begin{rExperienceHeader}{\PositionTitle}{\PositionPeriod}{\OrgName}{\OrgLocation}
+  \end{rExperienceHeader}
+}{
+\begin{rExperienceBullets}{\PositionTitle}{\PositionPeriod}{\OrgName}{\OrgLocation}
+
+  \item []
+
+\end{rExperienceBullets}
+
+}

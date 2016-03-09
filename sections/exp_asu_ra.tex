@@ -1,0 +1,69 @@
+
+% Define the fields for this entry
+\def\PositionTitle{Research Assistant}
+\def\PositionPeriod{Nov 2009 -- Present}
+\def\OrgName{\href{http://sefcom.asu.edu/}{Security Engineering for Future Computing (SEFCOM) Lab}, ASU}
+\def\OrgLocation{Tempe, AZ}
+
+
+\ifthenelse{\boolean{titleOnly}}{
+  \begin{rExperienceHeader}{\PositionTitle}{\PositionPeriod}{\OrgName}{\OrgLocation}
+  \end{rExperienceHeader}
+}{
+\begin{rExperienceBullets}{\PositionTitle}{\PositionPeriod}{\OrgName}{\OrgLocation\\
+  {\textnormal{\textit{Lab Directors}: Gail-Joon Ahn, Adam Doup\'{e}%
+  \ifthenelse{\NOT\boolean{isCV}}{\\% CV lists sponsors down below
+  \textit{Sponsors}: Department of Energy, National Science Foundation}{}}}}
+
+  \ifthenelse{\boolean{isCV}}{ % CV gives a list of projects
+
+    \item Projects:
+
+      \begin{rBulletList}
+  }{ % Resume lists the IASP scholarship here, CV doesn't
+
+  % \item Recipient of the Department of Defense Information Assurance Scholarship Program (IASP) for the 2012--2013, 2013--2014, 2014--2015, and 2015--2016 school years.
+  \item Recipient of the Department of Defense Information Assurance Scholarship Program (IASP) from 2012--2016 (4 school years).
+
+  }
+
+
+        \item Researched forensic techniques for \textbf{Chrome~OS}/\textbf{Chromium~OS} by creating tools in \textbf{Python} and using \textbf{libvirt} to interface with a \textbf{KVM/QEMU} hypervisor. (In progress)\ifthenelse{\boolean{isCV}}{\\
+          \emph{Publications:} [P1]}{}
+
+        \item Developed a web email forensic acquisition approach that reestablishes persistent cookie sessions stored by a browser, and automated the process using \textbf{Python} and \textbf{Selenium}.\ifthenelse{\boolean{isCV}}{\\
+          \emph{Publications:} [C1]}{}
+
+        \item Designed and implemented the core components of a modular, highly scalable, collaboration-centric digital forensic framework built on the \textbf{OpenStack} cloud architecture. Functions of the components included distributed job scheduling, storage management, and concise evidence representation and transmission.\ifthenelse{\boolean{isCV}}{\\
+          \emph{Publications:} [C3], [J2], [P3]}{}
+
+
+  \ifthenelse{\NOT\boolean{isCV}}{ % Items to list that aren't projects to be listed on the CV
+
+  \item Set up and maintained an \textbf{OpenVPN} installation for the SEFCOM lab.
+
+  %\item Researched methods for performing forensic acquisition on \textbf{Android} devices.
+
+  %\item Acted as a mentor for an undergraduate student that otherwise would not have pursued a master's degree and collaborated with him on the research for his thesis.
+
+
+  }{ % While we're in a CV section, let's close the sublist and add the sponsors
+
+      \end{rBulletList}
+
+    \item Sponsors
+      \begin{rBulletList}[2]
+
+        % \item Department of Defense
+
+        \item Department of Energy
+
+        \item National Science Foundation
+
+      \end{rBulletList}
+
+  }
+
+  \end{rExperienceBullets}
+
+}

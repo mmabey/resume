@@ -25,26 +25,8 @@
 % Set font to sans serif
 \renewcommand*{\familydefault}{\sfdefault}
 
-\usepackage{hyperref} %links - http and mailto
-\hypersetup{hidelinks} %hide boxes around links
-%check out other hyperref options
-\usepackage{fontawesome}
-\let\orighref\href
-\renewcommand{\href}[2]{\orighref{#1}{#2\,{\tiny \faExternalLink}}}  % Add icon next to all links
 
-\setlength\multicolsep{0pt} %remove space before and after multicol
-
-\def\sectionskip{\smallskip} % The space after the heading section
-\def\nameskip{\medskip} % The space after your name at the top
-\def\addressskip{} % The space between the two address (or phone/email) lines
-
-\name{Michael K. Mabey} % Your name
-\footername{Mabey}
-\address{(480)\,788--3411 \\ \href{mailto:mmabey@asu.edu}{mmabey@asu.edu} \\ \href{http://mikemabey.com}{mikemabey.com}}
-% \address{699 S Mill Ave, Suite 469 \\ Tempe, AZ 85281}
-% \address{\href{http://mikemabey.com}{mikemabey.com}}
-
-\icon{0.5in}{figs/LinkedInQR2}
+\input{sections/contact_info}
 
 \begin{document}
 
@@ -54,9 +36,9 @@
 
 \input{sections/honors_awards}
 \clearpage
-\input{sections/research_experience}
-
 \input{sections/research_interests}
+
+\input{sections/research_experience}
 
 %----------------------------------------------------------------------------------------
 %	PUBLICATIONS SECTION
@@ -70,7 +52,6 @@
   % \input{sections/works_submitted}
 \end{rSection}
 
-\clearpage
 \input{sections/teaching_interests}
 
 \input{sections/teaching_experience}
@@ -83,6 +64,7 @@
 
 \input{sections/professional_development}
 
+\clearpage
 \input{sections/references}
 
 

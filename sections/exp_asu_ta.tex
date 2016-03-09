@@ -1,0 +1,28 @@
+
+% Define the fields for this entry
+\def\PositionTitle{Teaching Assistant}
+\def\PositionPeriod{Aug 2010 -- Dec 2015}
+\def\OrgName{Arizona State University}
+\def\OrgLocation{Tempe, AZ}
+
+
+\ifthenelse{\boolean{titleOnly}}{
+  \begin{rExperienceHeader}{\PositionTitle}{\PositionPeriod}{\OrgName}{\OrgLocation}
+  \end{rExperienceHeader}
+}{
+\begin{rExperienceBullets}{\PositionTitle}{\PositionPeriod}{\OrgName}{\OrgLocation}
+
+  %\item CSE 465 Information Assurance with Dr. Gail-Joon Ahn: Fall 2015, Fall 2010.
+  \item CSE 465 Information Assurance with Dr.\ Gail-Joon Ahn: Fall 2010, Fall 2015.
+
+  \item CSE 469 Computer and Network Forensics with Dr.\ Gail-Joon Ahn: Spring 2015.
+
+  \item FSE 100 Introduction to Engineering with Dr.\ Ryan Meuth: Spring 2014.
+
+  \item CSE 423/424 Capstone I and CSE 485/486 Capstone II with Dr.\ Debra Calliss: Spring 2014.
+
+  \item CSE 467 Data \& Information Security with Dr.\ Gail-Joon Ahn: Spring 2011.
+
+\end{rExperienceBullets}
+
+}

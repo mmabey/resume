@@ -32,11 +32,31 @@
 \usepackage{stix}  % Provides the "very small white circle" used as a bullet for sub-lists
 \usepackage{microtype}
 \usepackage{multicol} %columns for lists
+\setlength\multicolsep{0pt} %remove space before and after multicol
+
+\usepackage{hyperref} %links - http and mailto
+\hypersetup{hidelinks} %hide boxes around links
+%check out other hyperref options
+\usepackage{fontawesome}
+\let\orighref\href
+\renewcommand{\href}[2]{\orighref{#1}{#2\,{\tiny \faExternalLink}}}  % Add icon next to all links
+
+\def\sectionskip{\smallskip} % The space after the heading section
+\def\nameskip{\medskip} % The space after your name at the top
+\def\addressskip{} % The space between the two address (or phone/email) lines
 
 \usepackage{bibunits} % Allows for multiple bibliographies
 \defaultbibliographystyle{resumepubs}
 
 \pagestyle{empty} % Suppress page numbers
+
+% Flag for switching on/off content specific to CV (extended) format
+\newboolean{isCV}
+\setboolean{isCV}{true}
+
+% Flag for switching on/off "title only" content
+\newboolean{titleOnly}
+\setboolean{titleOnly}{false}
 
 %----------------------------------------------------------------------------------------
 %	HEADINGS COMMANDS: Commands for printing name and address

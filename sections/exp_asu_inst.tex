@@ -1,0 +1,23 @@
+
+% Define the fields for this entry
+\def\PositionTitle{Teaching Assistant (Instructor of Record)}
+\def\PositionPeriod{Aug 2011 -- Dec 2014} % Remember to use -- between dates
+\def\OrgName{Arizona State University}
+\def\OrgLocation{Tempe, AZ}
+
+
+\ifthenelse{\boolean{titleOnly}}{
+  \begin{rExperienceHeader}{\PositionTitle}{\PositionPeriod}{\OrgName}{\OrgLocation}
+  \end{rExperienceHeader}
+}{
+\begin{rExperienceBullets}{\PositionTitle}{\PositionPeriod}{\OrgName}{\OrgLocation}
+
+  \item CSE 465 Information Assurance: Fall 2014.
+
+  %\item FSE 100 Introduction to Engineering: Fall 2013, Spring 2013, Fall 2012, Spring 2012, and Fall 2011.
+  % \item FSE 100 Introduction to Engineering: Fall 2011, Spring 2012, Fall 2012, Spring 2013, and Fall 2013.
+  \item FSE 100 Introduction to Engineering: Fall 2011 -- Fall 2013 (5 semesters).
+
+\end{rExperienceBullets}
+
+}
