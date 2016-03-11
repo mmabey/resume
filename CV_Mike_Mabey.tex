@@ -22,11 +22,20 @@
 
 \documentclass{resume} % Use the custom resume.cls style
 
-% Set font to sans serif
+% Set font to Computer Modern Sans Serif
 \renewcommand*{\familydefault}{\sfdefault}
+\usepackage[T1]{fontenc}
 
 
 \input{sections/contact_info}
+
+
+% Add .bib files as resources for biblatex
+\addbibresource{pubs/conferences.bib}
+\addbibresource{pubs/journals.bib}
+\addbibresource{pubs/posters.bib}
+\addbibresource{pubs/blog_posts.bib}
+
 
 \begin{document}
 
@@ -45,9 +54,9 @@
 %----------------------------------------------------------------------------------------
 
 \begin{rSection}{Publications}
-  \mybibliography{pubs/conferences}{Peer-Reviewed Conference Proceedings}{C}
-  \mybibliography{pubs/journals}{Peer-Reviewed Book Chapters \& Journal Papers}{J}
-  \mybibliography{pubs/posters}{Poster Presentations}{P}
+  \mybibliography{Peer-Reviewed Conference Proceedings}{C}{conference}
+  \mybibliography{Peer-Reviewed Book Chapters \& Journal Papers}{J}{journal}
+  \mybibliography{Poster Presentations}{P}{poster}
   \input{sections/works_in_progress}
   % \input{sections/works_submitted}
 \end{rSection}

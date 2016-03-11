@@ -22,14 +22,23 @@
 
 \documentclass{resume} % Use the custom resume.cls style
 
-% Set font to sans serif
+% Set font to Computer Modern Sans Serif
 \renewcommand*{\familydefault}{\sfdefault}
+\usepackage[T1]{fontenc}
 
 
 % Flag for switching off content specific to CV (extended) format
 \setboolean{isCV}{false}
 
 \input{sections/contact_info}
+
+
+% Add .bib files as resources for biblatex
+\addbibresource{pubs/conferences.bib}
+\addbibresource{pubs/journals.bib}
+\addbibresource{pubs/posters.bib}
+\addbibresource{pubs/blog_posts.bib}
+
 
 \begin{document}
 
@@ -65,8 +74,7 @@
 
 \begin{rSectionHeading}{Publications}
 \end{rSectionHeading}
-\vspace{-3.7ex}
-\mybibliography{pubs/conferences,pubs/journals}{}{}
+\mybibliography{}{}{major}
 
 %----------------------------------------------------------------------------------------
 %	TECHNICAL STRENGTHS SECTION

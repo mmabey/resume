@@ -7,4 +7,6 @@
 *.fls
 *.fdb_latexmk
 *.bib.bak
+*.bcf
+*.run.xml
 sections/references.tex

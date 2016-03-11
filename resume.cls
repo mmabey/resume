@@ -45,8 +45,8 @@
 \def\nameskip{\medskip} % The space after your name at the top
 \def\addressskip{} % The space between the two address (or phone/email) lines
 
-\usepackage{bibunits} % Allows for multiple bibliographies
-\defaultbibliographystyle{resumepubs}
+% More sophisticated bibliography styling and printing. Looks for custom biblatex.cfg file in same directory.
+\usepackage[backend=biber]{biblatex}
 
 \pagestyle{empty} % Suppress page numbers
 
@@ -178,22 +178,14 @@
 %	PUBLICATIONS FORMATTING
 %----------------------------------------------------------------------------------------
 
-% Create a prefix for numbers in the bibliography, redefine bibliography label style
-\def \mycitationprefix{}
-\renewcommand\@biblabel[1]{[\mycitationprefix#1]}
+\def \mybibtitle{}
 % Leverages the bibliography to print a list of publications
 \newcommand{\mybibliography}[3]{
-  \def \mybibsource {#1}
-  \def \mybibtitle {#2}
-  \def \mycitationprefix{#3}
-  % TODO: Find a way to insert a \vspace{-3.7ex} if arg 2 isn't supplied
-  \begin{bibunit}
+  \def \mybibtitle {#1}
   \nocite{*}
-  \vspace{-1.5ex}
-  \putbib[\mybibsource]
-  \end{bibunit}
+  \printbibliography[prefixnumbers={#2},resetnumbers=1,omitnumbers=false,heading=mybibheading,keyword={#3}]
 }
-\renewcommand{\refname}{\normalfont\selectfont\normalsize \bf \mybibtitle \vspace{-2.5ex}}
+\defbibheading{mybibheading}[\mybibtitle]{\medbreak \smallskip \normalfont\selectfont\normalsize \bf \mybibtitle }
 
 %----------------------------------------------------------------------------------------
 %	WORK EXPERIENCE FORMATTING
