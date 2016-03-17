@@ -202,7 +202,6 @@
     \def \rBulletMargin{\leftmargin=0em}  }
   \def \rNumCols{#1}
   \ifthenelse{\rNumCols>1}{%
-    \vspace{1ex}
     \begin{multicols}{\rNumCols}
     \begin{list}{\rBulletSymbol}{\rBulletMargin} % \cdot used for bullets, no indentation
      \itemsep -0.5em \vspace{-0.5em} % Compress items in list together for aesthetics
