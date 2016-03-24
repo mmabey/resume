@@ -112,6 +112,7 @@
 
 % \printicon is used to place an icon in the top right corner
 \def \printicon {
+  \ifthenelse{\isundefined{\@icon}}{}{
 	\begingroup
 		\begin{wrapfigure}{r}{0.51in}
       \vspace{-2ex}
@@ -119,6 +120,7 @@
 		\end{wrapfigure}
 		{\tiny \color{white} .}
 	\endgroup
+  }
 }
 
 %----------------------------------------------------------------------------------------
