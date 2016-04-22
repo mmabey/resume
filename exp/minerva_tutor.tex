@@ -1,0 +1,19 @@
+
+% Define the fields for this entry
+\def\PositionTitle{SAT/ACT Instructor}
+\def\PositionPeriod{Sep 2015 -- Oct 2015} % Remember to use -- between dates
+\def\OrgName{Minerva Learning, LLC}
+\def\OrgLocation{Chandler, AZ}
+
+
+\ifthenelse{\boolean{titleOnly}}{
+  \begin{rExperienceHeader}{\PositionTitle}{\PositionPeriod}{\OrgName}{\OrgLocation}
+  \end{rExperienceHeader}
+}{
+\begin{rExperienceBullets}{\PositionTitle}{\PositionPeriod}{\OrgName}{\OrgLocation}
+
+  \item Individual tutor for a high school student preparing for the PSAT.
+
+\end{rExperienceBullets}
+
+}

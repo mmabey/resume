@@ -187,7 +187,7 @@
   \nocite{*}
   \printbibliography[prefixnumbers={#2},resetnumbers=1,omitnumbers=false,heading=mybibheading,keyword={#3}]
 }
-\defbibheading{mybibheading}[\mybibtitle]{\medbreak \smallskip \normalfont\selectfont\normalsize \bf \mybibtitle }
+\defbibheading{mybibheading}{\smallbreak \normalfont\selectfont\normalsize \bf \mybibtitle }
 
 %----------------------------------------------------------------------------------------
 %	WORK EXPERIENCE FORMATTING
@@ -199,9 +199,12 @@
   \ifthenelse{\isodd{\value{rBulletDepth}}}{% Change the symbol we use based on the depth
     \def \rBulletSymbol{$\cdot$}}{%
     \def \rBulletSymbol{$\vysmwhtcircle$}  }
-  \ifthenelse{\value{rBulletDepth}>1}{% Set margin to 0 if at the first level, do nothing otherwise
-    \def \rBulletMargin{}  }{%
-    \def \rBulletMargin{\leftmargin=0em}  }
+  % \ifthenelse{\value{rBulletDepth}>1}{% Set margin to 0 if at the first level, do nothing otherwise
+    % \def \rBulletMargin{}  }{%
+    % \def \rBulletMargin{\leftmargin=0em}  }
+    % \def \rBulletMargin{\leftmargin=1em}  }
+  % Set margin to the level of depth * em
+  \def \rBulletMargin{\leftmargin=\value{rBulletDepth}em}
   \def \rNumCols{#1}
   \ifthenelse{\rNumCols>1}{%
     \begin{multicols}{\rNumCols}
