@@ -65,9 +65,6 @@
 \def \name#1{\def\@name{#1}} % Defines the \name command to set name
 \def \@name {} % Sets \@name to empty by default
 
-\def \footername#1{\def\@footername{#1}} % Defines the \footername command to set footername
-\def \@footername {} % Sets \@footername to empty by default
-
 \def \addressSep {$\diamond$} % Set default address separator to a diamond
 
 % One, two or three address lines can be specified
@@ -199,10 +196,6 @@
   \ifthenelse{\isodd{\value{rBulletDepth}}}{% Change the symbol we use based on the depth
     \def \rBulletSymbol{$\cdot$}}{%
     \def \rBulletSymbol{$\vysmwhtcircle$}  }
-  % \ifthenelse{\value{rBulletDepth}>1}{% Set margin to 0 if at the first level, do nothing otherwise
-    % \def \rBulletMargin{}  }{%
-    % \def \rBulletMargin{\leftmargin=0em}  }
-    % \def \rBulletMargin{\leftmargin=1em}  }
   % Set margin to the level of depth * em
   \def \rBulletMargin{\leftmargin=\value{rBulletDepth}em}
   \def \rNumCols{#1}
@@ -261,9 +254,41 @@
 \pagestyle{fancy}
 \usepackage{lastpage} % For getting the last page number
 \renewcommand{\headrulewidth}{0pt}
+% Set the headers and the right and left footers to be empty
 \lhead{}
 \chead{}
 \rhead{}
-\lfoot{\scriptsize \@footername}
-\cfoot{\scriptsize \textit{Revised \filemodprintdate{\jobname}}}
-\rfoot{\scriptsize \ifthenelse{\pageref{LastPage}>2}{\thepage}{}}
+\lfoot{}
+\rfoot{}
+
+% Split up the footer values according to which ones are defined
+
+% Define the \footername command to set footername and set the default to be empty
+\newboolean{footerNameDefd}
+\setboolean{footerNameDefd}{FALSE}
+\def\footername#1{\def\@footername{#1} \setboolean{footerNameDefd}{TRUE}}
+\def\@footername{}
+
+% Define the command to set the threshold for showing the page number and set the default to 2
+\usepackage{xstring}  % Allows us to check that the parameter is an Integer
+\def\setShowPageThreshold#1{\IfInteger{#1}{\def\@showPageThreshold{#1}}{\def\@showPageThreshold{2}}}
+\def\@showPageThreshold{2}
+\def\@rPageVal{%
+  \ifthenelse{\pageref{LastPage}>\@showPageThreshold}{%
+    \hfill \thepage%
+    \ifthenelse{\boolean{footerNameDefd} \OR \boolean{showRevisedDate}}{}{\hfill}%
+  }{}%
+}
+
+% Define the command to hide the revised date
+\newboolean{showRevisedDate}
+\setboolean{showRevisedDate}{TRUE}
+\def \hideRevisedDate{\def \@rRevisedDate{} \setboolean{showRevisedDate}{FALSE}}
+\def \@rRevisedDate {\textit{Revised \filemodprintdate{\jobname}}}
+
+\cfoot{\scriptsize%
+  \ifthenelse{\boolean{footerNameDefd}}{\@footername}{}%
+  \ifthenelse{\boolean{footerNameDefd} \AND \boolean{showRevisedDate}}{\hfill}{}%
+  \ifthenelse{\boolean{showRevisedDate}}{\@rRevisedDate}{}%
+  \@rPageVal% The presence of \hfill commands is taken care of in the definition of \@rPageVal
+}
