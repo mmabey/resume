@@ -53,6 +53,7 @@
 % Flag for switching on/off content specific to CV (extended) format
 \newboolean{isCV}
 \setboolean{isCV}{true}
+\def\isCV{\boolean{isCV}}
 
 % Flag for switching on/off "title only" content
 \newboolean{titleOnly}
