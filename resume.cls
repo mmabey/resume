@@ -170,7 +170,7 @@
 
 \newenvironment{rSectionHeading}[1]{ % 1 input argument - section name
   \sectionskip
-  \needspace{2\baselineskip}
+  \needspace{7\baselineskip}
   \MakeUppercase{\bf #1} % Section title
   \sectionlineskip
   \hrule % Horizontal line
