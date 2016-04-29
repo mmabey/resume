@@ -262,8 +262,6 @@
 \lhead{}
 \chead{}
 \rhead{}
-\lfoot{}
-\rfoot{}
 
 % Split up the footer values according to which ones are defined
 
@@ -277,12 +275,11 @@
 \usepackage{xstring}  % Allows us to check that the parameter is an Integer
 \def\setShowPageThreshold#1{\IfInteger{#1}{\def\@showPageThreshold{#1}}{\def\@showPageThreshold{2}}}
 \def\@showPageThreshold{2}
-\def\@rPageVal{%
-  \ifthenelse{\pageref{LastPage}>\@showPageThreshold}{%
-    \hfill \thepage%
-    \ifthenelse{\boolean{footerNameDefd} \OR \boolean{showRevisedDate}}{}{\hfill}%
-  }{}%
-}
+\def\@rPageVal{\ifthenelse{\pageref{LastPage}>\@showPageThreshold}{\thepage}{}}
+\newboolean{showPage}
+\def\showPageNumbers{\setboolean{showPage}{TRUE}}
+\def\hidePageNumbers{\setboolean{showPage}{FALSE}}
+\ifthenelse{\isCV}{\showPageNumbers}{\hidePageNumbers} % Set default to be the same as \isCV
 
 % Define the command to hide the revised date
 \newboolean{showRevisedDate}
@@ -290,9 +287,55 @@
 \def \hideRevisedDate{\def \@rRevisedDate{} \setboolean{showRevisedDate}{FALSE}}
 \def \@rRevisedDate {\textit{Revised \filemodprintdate{\jobname}}}
 
-\cfoot{\scriptsize%
-  \ifthenelse{\boolean{footerNameDefd}}{\@footername}{}%
-  \ifthenelse{\boolean{footerNameDefd} \AND \boolean{showRevisedDate}}{\hfill}{}%
-  \ifthenelse{\boolean{showRevisedDate}}{\@rRevisedDate}{}%
-  \@rPageVal% The presence of \hfill commands is taken care of in the definition of \@rPageVal
+\def \@lfootval{%
+  \ifthenelse{\boolean{footerNameDefd} \AND \( \boolean{showRevisedDate} \OR \boolean{showPage} \)}{%
+    % Footer name is defined an either the revised date or the page number
+    \@footername%
+  }{%
+    \ifthenelse{\boolean{showRevisedDate} \AND \boolean{showPage}}{%
+      \@rRevisedDate%
+    }{}%
+  }%
 }
+
+\def \@cfootval{%
+  \ifthenelse{\boolean{showPage} \AND \NOT \( \boolean{footerNameDefd} \OR \boolean{showRevisedDate} \)}{%
+    % Only the page number is defined
+    \@rPageVal%
+  }{%
+  \ifthenelse{\boolean{footerNameDefd} \AND \NOT \( \boolean{showRevisedDate} \OR \boolean{showPage} \)}{%
+    % Only the footer name is defined
+    \@footername%
+  }{%
+  \ifthenelse{\boolean{showRevisedDate} \AND \(%
+        \( \boolean{footerNameDefd} \AND \boolean{showPage} \) \OR%
+        \( \NOT \( \boolean{footerNameDefd} \OR \boolean{showPage} \)\)\)}{%
+    \@rRevisedDate%
+  }{}%
+  }%
+  }%
+}
+
+\def \@rfootval{%
+  \ifthenelse{\boolean{showPage} \AND \( \boolean{footerNameDefd} \OR \boolean{showRevisedDate} \)}{%
+    % Page number is defined and either the footer name or the revised date
+    \@rPageVal%
+  }{%
+    \ifthenelse{\boolean{footerNameDefd} \AND \boolean{showRevisedDate}}{%
+      % Only the footer name and the revised date are defined
+      \@rRevisedDate%
+    }{}%
+  }%
+}
+
+
+% The simple way:
+% \lfoot{\scriptsize \@footername}%
+% \cfoot{\scriptsize \@rRevisedDate}%
+% \rfoot{\scriptsize \@rPageVal}%
+
+
+% The complex way:
+\lfoot{\scriptsize \@lfootval}
+\cfoot{\scriptsize \@cfootval}
+\rfoot{\scriptsize \@rfootval}
