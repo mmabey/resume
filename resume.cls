@@ -50,6 +50,8 @@
 
 \pagestyle{empty} % Suppress page numbers
 
+\usepackage{needspace} % Allows us to specify when a certain number of lines need to be on the same page
+
 % Flag for switching on/off content specific to CV (extended) format
 \newboolean{isCV}
 \setboolean{isCV}{true}
@@ -144,31 +146,31 @@
 
 % Defines the rSection environment for the large sections within the CV
 \newenvironment{rSection}[1]{ % 1 input argument - section name
-  \sectionskip
-  \MakeUppercase{\bf #1} % Section title
-  \sectionlineskip
-  \hrule % Horizontal line
-  \begin{list}{}{ % List for each individual item in the section
-    \setlength{\leftmargin}{1.5em} % Margin within the section
-  }
-  \item[]
+  \begin{rSectionHeading}{#1}
+    \begin{list}{}{ % List for each individual item in the section
+      \setlength{\leftmargin}{1.5em} % Margin within the section
+    }
+    \item[]
 }{
-  \end{list}
+    \end{list}
+  \end{rSectionHeading}
 }
 
-\newboolean{inSubection}
+\newboolean{inSubsection}
 \newenvironment{rSubsection}[1]{
   \sectionskip
+  \needspace{2\baselineskip}
   {\bf #1}
-  \setboolean{inSubection}{true}
+  \setboolean{inSubsection}{true}
   \begin{rBulletList}
 }{
   \end{rBulletList}
-  \setboolean{inSubection}{false}
+  \setboolean{inSubsection}{false}
 }
 
 \newenvironment{rSectionHeading}[1]{ % 1 input argument - section name
   \sectionskip
+  \needspace{2\baselineskip}
   \MakeUppercase{\bf #1} % Section title
   \sectionlineskip
   \hrule % Horizontal line
@@ -185,7 +187,7 @@
   \nocite{*}
   \printbibliography[prefixnumbers={#2},resetnumbers=1,omitnumbers=false,heading=mybibheading,keyword={#3}]
 }
-\defbibheading{mybibheading}{\smallbreak \normalfont\selectfont\normalsize \bf \mybibtitle }
+\defbibheading{mybibheading}{\smallbreak \needspace{2\baselineskip} \normalfont\selectfont\normalsize \bf \mybibtitle }
 
 %----------------------------------------------------------------------------------------
 %	WORK EXPERIENCE FORMATTING
@@ -207,7 +209,7 @@
   }{%
     \begin{list}{\rBulletSymbol}{\rBulletMargin} % \cdot used for bullets, no indentation
      \itemsep -0.5em \vspace{-0.5em} % Compress items in list together for aesthetics
-     \ifthenelse{\boolean{inSubection}}{}{\vspace{1ex}}
+     \ifthenelse{\boolean{inSubsection}}{}{\vspace{1ex}}
    }
   }{
   \end{list}
@@ -218,15 +220,16 @@
 }
 
 \newenvironment{rExperienceHeader}[4]{ % 4 input arguments - company name, year(s) employed, job title and location
+  \needspace{3\baselineskip}
  {\bf #1} \hfill {\em #2} % Bold company name and italic date on the right
  \ifthenelse{\equal{#3}{}}{}{ % If the third argument is not specified, don't print the job title and location line
   \\
   {#3} \hfill {#4} % Job title and location
 
   }\smallskip
-  \setboolean{inSubection}{true}
+  \setboolean{inSubsection}{true}
   }{
-  \setboolean{inSubection}{false}
+  \setboolean{inSubsection}{false}
 }
 
 \newenvironment{rExperienceBullets}[4]{ %
