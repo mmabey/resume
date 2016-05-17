@@ -1,0 +1,19 @@
+
+% Define the fields for this entry
+\def\PositionTitle{Civilian Reserve/Intern}
+\def\PositionPeriod{May 2015 -- Present} % Remember to use -- between dates
+\def\OrgName{Arizona Department of Public Safety}
+\def\OrgLocation{Phoenix, AZ}
+
+
+\ifthenelse{\boolean{titleOnly}}{
+  \begin{rExperienceHeader}{\PositionTitle}{\PositionPeriod}{\OrgName}{\OrgLocation}
+  \end{rExperienceHeader}
+}{
+\begin{rExperienceBullets}{\PositionTitle}{\PositionPeriod}{\OrgName}{\OrgLocation}
+
+  \item []
+
+\end{rExperienceBullets}
+
+}
