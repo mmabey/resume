@@ -22,7 +22,12 @@
 
 \LoadClass[11pt,letterpaper]{article} % Font size and paper type
 
-\usepackage[parfill]{parskip} % Remove paragraph indentation
+\setlength{\parindent}{0pt}
+\setlength{\parskip}{6.8pt plus 2.0pt}
+\setlength{\parsep}{6.8pt plus 2.0pt}
+\setlength{\topsep}{0pt}
+\setlength{\itemsep}{0pt}
+\setlength{\partopsep}{0pt}
 \usepackage{array} % Required for boldface (\bf and \bfseries) tabular columns
 \usepackage{ifthen} % Required for ifthenelse statements
 
@@ -51,6 +56,12 @@
 \pagestyle{empty} % Suppress page numbers
 
 \usepackage{needspace} % Allows us to specify when a certain number of lines need to be on the same page
+\def\bibSpace{3\baselineskip}
+\def\subsecSpace{2\baselineskip}
+\def\secHeadSpace{7\baselineskip}
+\def\expHeaderSpace{3\baselineskip}
+
+\usepackage{scrextend} % Allows us to specify custom margins for whole blocks of code
 
 % Flag for switching on/off content specific to CV (extended) format
 \newboolean{isCV}
@@ -138,6 +149,7 @@
     \printaddress{\@addresstwo}}
      \@ifundefined{@addressthree}{}{ % Print the third address if specified
     \printaddress{\@addressthree}}
+  \noindent
 }
 
 %----------------------------------------------------------------------------------------
@@ -147,89 +159,97 @@
 % Defines the rSection environment for the large sections within the CV
 \newenvironment{rSection}[1]{ % 1 input argument - section name
   \begin{rSectionHeading}{#1}
-    \begin{list}{}{ % List for each individual item in the section
-      \setlength{\leftmargin}{1.5em} % Margin within the section
-    }
-    \item[]
+    \begin{addmargin}[1.5em]{0pt} % Margin within the section
 }{
-    \end{list}
+    \end{addmargin}
   \end{rSectionHeading}
 }
 
-\newboolean{inSubsection}
-\newenvironment{rSubsection}[1]{
-  \sectionskip
-  \needspace{2\baselineskip}
+\newenvironment{rBulletSubsection}[1]{
+  \needspace{\subsecSpace}
   {\bf #1}
-  \setboolean{inSubsection}{true}
   \begin{rBulletList}
 }{
   \end{rBulletList}
-  \setboolean{inSubsection}{false}
 }
 
 \newenvironment{rSectionHeading}[1]{ % 1 input argument - section name
   \sectionskip
-  \needspace{7\baselineskip}
+  \needspace{\secHeadSpace}
   \MakeUppercase{\bf #1} % Section title
   \sectionlineskip
   \hrule % Horizontal line
 }{}
 
+\newenvironment{rBulletSection}[2][1]{
+  \setboolean{addListSkip}{true}
+  \begin{rSection}{#2}
+    \begin{rBulletList}[#1]
+}{
+    \end{rBulletList}
+  \end{rSection}
+}
+
 %----------------------------------------------------------------------------------------
 %	PUBLICATIONS FORMATTING
 %----------------------------------------------------------------------------------------
 
-\def \mybibtitle{}
 % Leverages the bibliography to print a list of publications
 \newcommand{\mybibliography}[3]{
-  \def \mybibtitle {#1}
   \nocite{*}
-  \printbibliography[prefixnumbers={#2},resetnumbers=1,omitnumbers=false,heading=mybibheading,keyword={#3}]
+  % Note: The "keyword" parameter is conjunctive if specified multiple times, not disjunctive.
+  \printbibliography[prefixnumbers={#2},resetnumbers=1,omitnumbers=false,heading=mybibheading,keyword={#3},title=#1]%
 }
-\defbibheading{mybibheading}{\smallbreak \needspace{2\baselineskip} \normalfont\selectfont\normalsize \bf \mybibtitle }
+\defbibheading{mybibheading}{ \needspace{\bibSpace} \normalfont\selectfont\normalsize \bf #1 \vspace{-\parskip} }
 
 %----------------------------------------------------------------------------------------
 %	WORK EXPERIENCE FORMATTING
 %----------------------------------------------------------------------------------------
 
 \newcounter{rBulletDepth}  % Keep track of how deep we are nested
+% The difference between the vertical space before a regular list (0pt) and a multicol environment containing a list is a 3 pt length, or a single \smallskip. If a multicol list comes right after a header, it needs one \smallskip to have the same spacing as other content, which means a normal list needs two \smallskip, or one \medskip.
+\newboolean{addListSkip}
+\setboolean{addListSkip}{false}
+
 \newenvironment{rBulletList}[1][1]{%
   \stepcounter{rBulletDepth}
   \ifthenelse{\isodd{\value{rBulletDepth}}}{% Change the symbol we use based on the depth
     \def \rBulletSymbol{$\cdot$}}{%
     \def \rBulletSymbol{$\vysmwhtcircle$}  }
   % Set margin to the level of depth * em
-  \def \rBulletMargin{\leftmargin=\value{rBulletDepth}em}
+  \def \@rBulletSettings{
+    \setlength{\leftmargin}{\value{rBulletDepth}em}
+    \setlength{\parskip}{0pt}
+    \setlength{\topsep}{0pt}
+    \setlength{\parsep}{0pt}
+    \setlength{\itemsep}{0pt}
+    \setlength{\partopsep}{0pt}
+    \setlength{\labelwidth}{0.5em} % Keeps left edge of item paragraphs aligned (when wrapping) because it is wider than either of the symbols used as bullets
+  }
   \def \rNumCols{#1}
   \ifthenelse{\rNumCols>1}{%
+    \ifthenelse{\boolean{addListSkip}}{\smallskip\setboolean{addListSkip}{false}}{}
     \begin{multicols}{\rNumCols}
-    \begin{list}{\rBulletSymbol}{\rBulletMargin} % \cdot used for bullets, no indentation
-     \itemsep -0.5em \vspace{-0.5em} % Compress items in list together for aesthetics
+    \begin{list}{\rBulletSymbol}{\@rBulletSettings}
   }{%
-    \begin{list}{\rBulletSymbol}{\rBulletMargin} % \cdot used for bullets, no indentation
-     \itemsep -0.5em \vspace{-0.5em} % Compress items in list together for aesthetics
-     \ifthenelse{\boolean{inSubsection}}{}{\vspace{1ex}}
+    \ifthenelse{\boolean{addListSkip}}{\medskip\setboolean{addListSkip}{false}}{}
+    \begin{list}{\rBulletSymbol}{\@rBulletSettings}
    }
   }{
   \end{list}
   \ifthenelse{\rNumCols>1}{\end{multicols}}{}
   \addtocounter{rBulletDepth}{-1}
-
-  %\vspace{0.5em} % Some space after the list of bullet points
 }
 
 \newenvironment{rExperienceHeader}[4]{ % 4 input arguments - company name, year(s) employed, job title and location
-  \needspace{3\baselineskip}
+  \needspace{\expHeaderSpace}
  {\bf #1} \hfill {\em #2} % Bold company name and italic date on the right
  \ifthenelse{\equal{#3}{}}{}{ % If the third argument is not specified, don't print the job title and location line
   \\
   {#3} \hfill {#4} % Job title and location
 
   }\smallskip
-  \setboolean{inSubsection}{true}
   }{
-  \setboolean{inSubsection}{false}
 }
 
 \newenvironment{rExperienceBullets}[4]{ %
@@ -339,3 +359,12 @@
 \lfoot{\scriptsize \@lfootval}
 \cfoot{\scriptsize \@cfootval}
 \rfoot{\scriptsize \@rfootval}
+
+
+%----------------------------------------------------------------------------------------
+%	Other custom stuff
+%----------------------------------------------------------------------------------------
+
+\newenvironment{rQuote}
+  {\begin{quote} \vspace{-2\parskip}}
+  {\vspace{-\parskip} \end{quote}}
