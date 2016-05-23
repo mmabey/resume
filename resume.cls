@@ -269,6 +269,13 @@
   \end{rExperienceHeader}
 }
 
+\NewEnviron{CVonly}{\ifthenelse{\boolean{isCV}}{\BODY}{}}
+\newcommand{\rCVonly}[1]{\ifthenelse{\boolean{isCV}}{#1}{}}
+
+\NewEnviron{ResumeOnly}{\ifthenelse{\boolean{isCV}}{}{\BODY}}
+\newcommand{\rResumeOnly}[1]{\ifthenelse{\boolean{isCV}}{}{#1}}
+
+
 % The below commands define the whitespace after certain things in the document - they can be \smallskip, \medskip or \bigskip
 \def\namesize{\huge} % Size of the name at the top of the document
 \def\addressskip{\smallskip} % The space between the two address (or phone/email) lines

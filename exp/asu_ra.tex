@@ -8,15 +8,17 @@
 
 \begin{rExperience}{\PositionTitle}{\PositionPeriod}{\OrgName}{\OrgLocation\\
   {\textnormal{\textit{Lab Directors}: Gail-Joon Ahn, Adam Doup\'{e}%
-  \ifthenelse{\NOT\boolean{isCV}}{\\% CV lists sponsors down below
-  \textit{Sponsors}: Department of Energy, National Science Foundation}{}}}}
+  \rResumeOnly{\\ \textit{Sponsors}: Department of Energy, National Science Foundation}% CV lists sponsors down below
+  }}}
 
-  \ifthenelse{\boolean{isCV}}{ % CV gives a list of projects
+  \rCVonly{ % CV gives a list of projects
 
     \item Projects:
 
       \begin{rBulletList}
-  }{ % Resume lists the IASP scholarship here, CV doesn't
+  }
+
+  \rResumeOnly{ % Resume lists the IASP scholarship here, CV doesn't
 
   \item Recipient of the Department of Defense Information Assurance Scholarship Program (IASP) from 2012--2016 (4 school years).
 
@@ -33,7 +35,7 @@
           \emph{Publications:}~\cite{Mabey2011},~\cite{Mabey2013},~\cite{IAWS_Mabey2012}}{}
 
 
-  \ifthenelse{\NOT\boolean{isCV}}{ % Items to list that aren't projects to be listed on the CV
+  \rResumeOnly{ % Items to list that aren't projects to be listed on the CV
 
   % \item Set up and maintained an \textbf{OpenVPN} installation for the SEFCOM lab.
 
@@ -42,7 +44,9 @@
   %\item Acted as a mentor for an undergraduate student that otherwise would not have pursued a master's degree and collaborated with him on the research for his thesis.
 
 
-  }{ % While we're in a CV section, let's close the sublist and add the sponsors
+  }
+
+  \rCVonly{ % While we're in a CV section, let's close the sublist and add the sponsors
 
       \end{rBulletList}
 
