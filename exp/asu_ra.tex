@@ -6,11 +6,7 @@
 \def\OrgLocation{Tempe, AZ}
 
 
-\ifthenelse{\boolean{titleOnly}}{
-  \begin{rExperienceHeader}{\PositionTitle}{\PositionPeriod}{\OrgName}{\OrgLocation}
-  \end{rExperienceHeader}
-}{
-\begin{rExperienceBullets}{\PositionTitle}{\PositionPeriod}{\OrgName}{\OrgLocation\\
+\begin{rExperience}{\PositionTitle}{\PositionPeriod}{\OrgName}{\OrgLocation\\
   {\textnormal{\textit{Lab Directors}: Gail-Joon Ahn, Adam Doup\'{e}%
   \ifthenelse{\NOT\boolean{isCV}}{\\% CV lists sponsors down below
   \textit{Sponsors}: Department of Energy, National Science Foundation}{}}}}
@@ -63,6 +59,4 @@
 
   }
 
-  \end{rExperienceBullets}
-
-}
+\end{rExperience}

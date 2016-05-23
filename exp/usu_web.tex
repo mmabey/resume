@@ -6,11 +6,7 @@
 \def\OrgLocation{Logan, UT}
 
 
-\ifthenelse{\boolean{titleOnly}}{
-  \begin{rExperienceHeader}{\PositionTitle}{\PositionPeriod}{\OrgName}{\OrgLocation}
-  \end{rExperienceHeader}
-}{
-\begin{rExperienceBullets}{\PositionTitle}{\PositionPeriod}{\OrgName}{\OrgLocation}
+\begin{rExperience}{\PositionTitle}{\PositionPeriod}{\OrgName}{\OrgLocation}
 
   \item Primary responsibilities included maintaining and augmenting the department website using \textbf{PHP}, \textbf{MySQL}, and other basic web technologies like \textbf{CSS}, \textbf{JavaScript}, and an \textbf{SMTP} server.
 
@@ -26,6 +22,4 @@
 %
 %	%\item Responded to inquiries from potential domestic and international graduate students.
 
-\end{rExperienceBullets}
-
-}
+\end{rExperience}

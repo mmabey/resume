@@ -6,11 +6,7 @@
 \def\OrgLocation{Tempe, AZ}
 
 
-\ifthenelse{\boolean{titleOnly}}{
-  \begin{rExperienceHeader}{\PositionTitle}{\PositionPeriod}{\OrgName}{\OrgLocation}
-  \end{rExperienceHeader}
-}{
-\begin{rExperienceBullets}{\PositionTitle}{\PositionPeriod}{\OrgName}{\OrgLocation}
+\begin{rExperience}{\PositionTitle}{\PositionPeriod}{\OrgName}{\OrgLocation}
 
   %\item CSE 465 Information Assurance with Dr. Gail-Joon Ahn: Fall 2015, Fall 2010.
   \item CSE 465 Information Assurance with Dr.\ Gail-Joon Ahn: Fall 2010, Fall 2015.
@@ -23,6 +19,4 @@
 
   \item CSE 467 Data \& Information Security with Dr.\ Gail-Joon Ahn: Spring 2011.
 
-\end{rExperienceBullets}
-
-}
+\end{rExperience}

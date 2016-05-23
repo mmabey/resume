@@ -6,16 +6,10 @@
 \def\OrgLocation{Albuquerque, NM}
 
 
-\ifthenelse{\boolean{titleOnly}}{
-  \begin{rExperienceHeader}{\PositionTitle}{\PositionPeriod}{\OrgName}{\OrgLocation}
-  \end{rExperienceHeader}
-}{
-\begin{rExperienceBullets}{\PositionTitle}{\PositionPeriod}{\OrgName}{\OrgLocation}
+\begin{rExperience}{\PositionTitle}{\PositionPeriod}{\OrgName}{\OrgLocation}
 
   \item Helped design a dynamic malware analysis framework built on \textbf{OpenStack}, allowing incident responders to define customizable analysis environments and use arbitrary analysis tools in triage or manual analysis mode.
 
   \item Wrote \textbf{Python} scripts to automate the setup process for using a SheevaPlug computer as a wireless intrusion detection agent running \textbf{Kismet}.
 
-\end{rExperienceBullets}
-
-}
+\end{rExperience}

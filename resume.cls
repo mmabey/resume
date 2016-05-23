@@ -38,6 +38,7 @@
 \usepackage{microtype}
 \usepackage{multicol} %columns for lists
 \setlength\multicolsep{0pt} %remove space before and after multicol
+\usepackage{environ} % Allows for the \NewEnviron command
 
 \usepackage{hyperref} %links - http and mailto
 \hypersetup{hidelinks} %hide boxes around links
@@ -241,6 +242,15 @@
   \addtocounter{rBulletDepth}{-1}
 }
 
+\NewEnviron{rExperience}[4]{
+  \ifthenelse{\boolean{titleOnly}}{
+    \begin{rExperienceHeader}{#1}{#2}{#3}{#4} \end{rExperienceHeader}
+  }{
+  \begin{rExperienceBullets}{#1}{#2}{#3}{#4}
+    \BODY
+  }
+}[\ifthenelse{\boolean{titleOnly}}{}{\end{rExperienceBullets}}]
+
 \newenvironment{rExperienceHeader}[4]{ % 4 input arguments - company name, year(s) employed, job title and location
   \needspace{\expHeaderSpace}
  {\bf #1} \hfill {\em #2} % Bold company name and italic date on the right
@@ -249,13 +259,12 @@
   {#3} \hfill {#4} % Job title and location
 
   }\smallskip
-  }{
-}
+}{}
 
 \newenvironment{rExperienceBullets}[4]{ %
   \begin{rExperienceHeader}{#1}{#2}{#3}{#4}
   \begin{rBulletList}
-  }{
+}{
   \end{rBulletList}
   \end{rExperienceHeader}
 }
