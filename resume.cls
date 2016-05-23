@@ -200,8 +200,9 @@
   \nocite{*}
   % Note: The "keyword" parameter is conjunctive if specified multiple times, not disjunctive.
   \printbibliography[prefixnumbers={#2},resetnumbers=1,omitnumbers=false,heading=mybibheading,keyword={#3},title=#1]%
+  \vspace{-\parskip}
 }
-\defbibheading{mybibheading}{ \needspace{\bibSpace} \normalfont\selectfont\normalsize \bf #1 \vspace{-\parskip} }
+\defbibheading{mybibheading}{ \needspace{\bibSpace} \normalfont\selectfont\normalsize \bf #1 \vspace{-2\parskip} }
 
 %----------------------------------------------------------------------------------------
 %	WORK EXPERIENCE FORMATTING
