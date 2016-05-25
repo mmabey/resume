@@ -33,20 +33,21 @@
 
 \usepackage{wrapfig}
 \usepackage{graphicx}
-\usepackage{color}
 \usepackage{stix}  % Provides the "very small white circle" used as a bullet for sub-lists
-\usepackage{microtype}
+\usepackage{microtype} % Helps things fit better horizontally
 \usepackage{multicol} %columns for lists
 \setlength\multicolsep{0pt} %remove space before and after multicol
 \usepackage{environ} % Allows for the \NewEnviron command
+\usepackage{xkeyval} % Processes keyword arguments
 
 \usepackage{hyperref} %links - http and mailto
 \hypersetup{hidelinks} %hide boxes around links
 %check out other hyperref options
-\usepackage{fontawesome}
-\let\orighref\href
+\usepackage{fontawesome} % Required for new definition of \href
+\let\orighref\href % Store the original \href command
 \renewcommand{\href}[2]{\orighref{#1}{#2\,{\tiny \faExternalLink}}}  % Add icon next to all links
 
+% Some pre-defined skips for different document locations
 \def\sectionskip{\smallskip} % The space after the heading section
 \def\nameskip{\medskip} % The space after your name at the top
 \def\addressskip{} % The space between the two address (or phone/email) lines
@@ -129,8 +130,7 @@
 		\begin{wrapfigure}{r}{0.51in}
       \vspace{-2ex}
 			\includegraphics[width=\@iconwidth]{\@icon}
-		\end{wrapfigure}
-		{\tiny \color{white} .}
+		\end{wrapfigure}~ % Without the ~, the icon goes to the end of the document
 	\endgroup
   }
 }
@@ -157,13 +157,22 @@
 %	SECTION FORMATTING
 %----------------------------------------------------------------------------------------
 
+\define@boolkey{rSectionFlags}{titleOnly}[true]{}
+
 % Defines the rSection environment for the large sections within the CV
-\newenvironment{rSection}[1]{ % 1 input argument - section name
-  \begin{rSectionHeading}{#1}
+\newenvironment{rSection}[2][titleOnly=false]{ % 2 input arguments - titleOnly flag and section name
+  \setkeys{rSectionFlags}{#1} % Process the titleOnly flag
+  % Determine whether or not to set the global flag of titleOnly on or not
+  \ifKV@rSectionFlags@titleOnly
+  \setboolean{titleOnly}{true}
+  \fi
+  % Start the section
+  \begin{rSectionHeading}{#2}
     \begin{addmargin}[1.5em]{0pt} % Margin within the section
 }{
     \end{addmargin}
   \end{rSectionHeading}
+  \setboolean{titleOnly}{false}
 }
 
 \newenvironment{rBulletSubsection}[1]{
