@@ -50,8 +50,12 @@
 \usepackage{quoting} % Equivalent to the quote environment without the spacing before and after
 \quotingsetup{vskip=0pt}
 
+
+\def\namesize{\huge} % Size of the name at the top of the document
 % Some pre-defined skips for different document locations
+% The below commands define the whitespace after certain things in the document - they can be \smallskip, \medskip or \bigskip
 \def\sectionskip{\smallskip} % The space after the heading section
+\def\sectionlineskip{\medskip} % The space above the horizontal line for each section
 \def\nameskip{\medskip} % The space after your name at the top
 \def\addressskip{} % The space between the two address (or phone/email) lines
 
@@ -151,9 +155,10 @@
     \printaddress{\@addressone}}
   \@ifundefined{@addresstwo}{}{ % Print the second address if specified
     \printaddress{\@addresstwo}}
-     \@ifundefined{@addressthree}{}{ % Print the third address if specified
+  \@ifundefined{@addressthree}{}{ % Print the third address if specified
     \printaddress{\@addressthree}}
   \noindent
+  \vspace{-2\parskip} % Remove some of the space before the first section
 }
 
 %----------------------------------------------------------------------------------------
@@ -288,13 +293,6 @@
 \NewEnviron{ResumeOnly}{\ifthenelse{\boolean{isCV}}{}{\BODY}}
 \newcommand{\rResumeOnly}[1]{\ifthenelse{\boolean{isCV}}{}{#1}}
 
-
-% The below commands define the whitespace after certain things in the document - they can be \smallskip, \medskip or \bigskip
-\def\namesize{\huge} % Size of the name at the top of the document
-\def\addressskip{\smallskip} % The space between the two address (or phone/email) lines
-\def\sectionlineskip{\medskip} % The space above the horizontal line for each section
-\def\nameskip{\bigskip} % The space after your name at the top
-\def\sectionskip{\medskip} % The space after the heading section
 
 %----------------------------------------------------------------------------------------
 %	FOOTER COMMNADS: PRINT THE MODIFIED DATE OF THE MAIN .TEX FILE
