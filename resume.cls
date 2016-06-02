@@ -230,11 +230,14 @@
 \newboolean{addListSkip}
 \setboolean{addListSkip}{false}
 
+\def\rBulletSymbolOdd{$\cdot$}
+\def\rBulletSymbolEven{$\vysmwhtcircle$}
+
 \newenvironment{rBulletList}[1][1]{%
   \stepcounter{rBulletDepth}
   \ifthenelse{\isodd{\value{rBulletDepth}}}{% Change the symbol we use based on the depth
-    \def \rBulletSymbol{$\cdot$}}{%
-    \def \rBulletSymbol{$\vysmwhtcircle$}  }
+    \def \@rBulletSymbol{\rBulletSymbolOdd}}{%
+    \def \@rBulletSymbol{\rBulletSymbolEven}  }
   % Set margin to the level of depth * em
   \def \@rBulletSettings{
     \setlength{\leftmargin}{\value{rBulletDepth}em}
@@ -245,18 +248,18 @@
     \setlength{\partopsep}{0pt}
     \setlength{\labelwidth}{0.5em} % Keeps left edge of item paragraphs aligned (when wrapping) because it is wider than either of the symbols used as bullets
   }
-  \def \rNumCols{#1}
-  \ifthenelse{\rNumCols>1}{%
+  \def \@rNumCols{#1}
+  \ifthenelse{\@rNumCols>1}{%
     \ifthenelse{\boolean{addListSkip}}{\smallskip\setboolean{addListSkip}{false}}{}
-    \begin{multicols}{\rNumCols}
-    \begin{list}{\rBulletSymbol}{\@rBulletSettings}
+    \begin{multicols}{\@rNumCols}
+    \begin{list}{\@rBulletSymbol}{\@rBulletSettings}
   }{%
     \ifthenelse{\boolean{addListSkip}}{\medskip\setboolean{addListSkip}{false}}{}
-    \begin{list}{\rBulletSymbol}{\@rBulletSettings}
+    \begin{list}{\@rBulletSymbol}{\@rBulletSettings}
    }
   }{
   \end{list}
-  \ifthenelse{\rNumCols>1}{\end{multicols}}{}
+  \ifthenelse{\@rNumCols>1}{\end{multicols}}{}
   \addtocounter{rBulletDepth}{-1}
 }
 
