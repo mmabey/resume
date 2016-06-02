@@ -47,6 +47,9 @@
 \let\orighref\href % Store the original \href command
 \renewcommand{\href}[2]{\orighref{#1}{#2\,{\tiny \faExternalLink}}}  % Add icon next to all links
 
+\usepackage{quoting} % Equivalent to the quote environment without the spacing before and after
+\quotingsetup{vskip=0pt}
+
 % Some pre-defined skips for different document locations
 \def\sectionskip{\smallskip} % The space after the heading section
 \def\nameskip{\medskip} % The space after your name at the top
@@ -263,8 +266,8 @@
 
 \newenvironment{rExperienceHeader}[4]{ % 4 input arguments - company name, year(s) employed, job title and location
   \needspace{\expHeaderSpace}
- {\bf #1} \hfill {\em #2} % Bold company name and italic date on the right
- \ifthenelse{\equal{#3}{}}{}{ % If the third argument is not specified, don't print the job title and location line
+  {\bf #1} \hfill {\em #2} % Bold company name and italic date on the right
+  \ifthenelse{\equal{#3}{}}{}{ % If the third argument is not specified, don't print the job title and location line
   \\
   {#3} \hfill {#4} % Job title and location
 
@@ -374,14 +377,6 @@
   }%
 }
 
-
-% The simple way:
-% \lfoot{\scriptsize \@footername}%
-% \cfoot{\scriptsize \@rRevisedDate}%
-% \rfoot{\scriptsize \@rPageVal}%
-
-
-% The complex way:
 \lfoot{\scriptsize \@lfootval}
 \cfoot{\scriptsize \@cfootval}
 \rfoot{\scriptsize \@rfootval}
@@ -390,7 +385,3 @@
 %----------------------------------------------------------------------------------------
 %	Other custom stuff
 %----------------------------------------------------------------------------------------
-
-\newenvironment{rQuote}
-  {\begin{quote} \vspace{-2\parskip}}
-  {\vspace{-\parskip} \end{quote}}
