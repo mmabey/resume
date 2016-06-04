@@ -76,6 +76,10 @@
 \newboolean{isCV}
 \setboolean{isCV}{true}
 \def\isCV{\boolean{isCV}}
+\def\setNotCV{%
+  \setboolean{isCV}{false}%
+  \hidePageNumbers{}%
+}
 
 % Flag for switching on/off "title only" content
 \newboolean{titleOnly}
@@ -321,6 +325,8 @@
 \setboolean{footerNameDefd}{FALSE}
 \def\footername#1{\def\@footername{#1} \setboolean{footerNameDefd}{TRUE}}
 \def\@footername{}
+\usepackage{suffix}
+\WithSuffix\def\footername*#1{\ifthenelse{\isCV}{\footername{#1}}{}}
 
 % Define the command to set the threshold for showing the page number and set the default to 2
 \usepackage{xstring}  % Allows us to check that the parameter is an Integer
@@ -328,9 +334,9 @@
 \def\@showPageThreshold{2}
 \def\@rPageVal{\ifthenelse{\pageref{LastPage}>\@showPageThreshold}{\thepage}{}}
 \newboolean{showPage}
+\setboolean{showPage}{TRUE} % Default to showing page numbers
 \def\showPageNumbers{\setboolean{showPage}{TRUE}}
 \def\hidePageNumbers{\setboolean{showPage}{FALSE}}
-\ifthenelse{\isCV}{\showPageNumbers}{\hidePageNumbers} % Set default to be the same as \isCV
 
 % Define the command to hide the revised date
 \newboolean{showRevisedDate}
