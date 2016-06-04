@@ -87,6 +87,7 @@
 
 \def \name#1{\def\@name{#1}} % Defines the \name command to set name
 \def \@name {} % Sets \@name to empty by default
+\def \MyLastName {}
 
 \def \addressSep {$\diamond$} % Set default address separator to a diamond
 
@@ -216,10 +217,10 @@
 \newcommand{\mybibliography}[3]{
   \nocite{*}
   % Note: The "keyword" parameter is conjunctive if specified multiple times, not disjunctive.
-  \printbibliography[prefixnumbers={#2},resetnumbers=1,omitnumbers=false,heading=mybibheading,keyword={#3},title=#1]%
-  \vspace{-\parskip}
+  \printbibliography[prefixnumbers={#2}, resetnumbers=1, omitnumbers=false, heading=mybibheading, keyword={#3}, title=#1, postnote=remove_post_vspace]%
 }
 \defbibheading{mybibheading}{ \needspace{\bibSpace} \normalfont\selectfont\normalsize \bf #1 \vspace{-2\parskip} }
+\defbibnote{remove_post_vspace}{\vspace{-4\parskip}}
 
 %----------------------------------------------------------------------------------------
 %	WORK EXPERIENCE FORMATTING
