@@ -19,6 +19,8 @@ modifications to the original template include:
   amount of work necessary to keep the two current with each other.
 * So much more!
 
+Table of Contents:
+
 [TOC]
 
 ## Getting Started
@@ -41,7 +43,7 @@ goes without saying that I don't give my permission to copy the *content* to you
 I've found that it's helpful to have all of the content of my resume and CV in distinct files so I can reference (with
 `\input{}`) each of them separately as needed. This allows me to update the content once and have it reflected in both
 documents (resume and CV). Hence, I have both a `CV_*.tex` file and a `Resume_*.tex` file. (I discuss how to switch
-content on and off for the two types of documents below under [Flags](#flags).)
+content on and off for the two types of documents below under [Flags](#markdown-header-flags).)
 
 Taking this a step further, I also created different layouts for when I need a CV with a different emphasis (order of
 sections).
@@ -75,8 +77,9 @@ The above renders as:
 
 ![Example heading][headingExample]
 
-For detailed information about each of these commands, see the [Document Heading Commands](#document-heading-commands)
-and [Changing the Footers](#changing-the-footers) sections.
+For detailed information about each of these commands, see the [Document Heading
+Commands](#markdown-header-document-heading-commands) and [Changing the Footers](#markdown-header-changing-the-footers)
+sections.
 
 
 If you plan to add a set of publications to your document, there's one final thing you should do in the preamble: add
@@ -88,7 +91,7 @@ the `.bib` file as a bibliography resource, like this:
 
 This is one way that BibLaTeX differs from BibTeX, which is that you are required to declare the bibliography resource
 files in the preamble (before the `\begin{document}` command). I discuss some other differences under [Creating a
-Bibliography](#creating-a-bibliography).
+Bibliography](#markdown-header-creating-a-bibliography).
 
 
 At this point, you can now add the `\begin{document}` command and start declaring different environments as explained in
@@ -399,11 +402,11 @@ environment does exactly what the `rExperienceBullets` environment does, but wit
 
 ### `CVonly`
 
-See [Flags](#flags) below.
+See [Flags](#markdown-header-flags) below.
 
 ### `ResumeOnly`
 
-See [Flags](#flags) below.
+See [Flags](#markdown-header-flags) below.
 
 
 
@@ -414,9 +417,9 @@ See [Flags](#flags) below.
 
 ### `titleOnly`
 
-As mentioned previously, the [`rSection`](#rsection) environment uses a global flag called `titleOnly` to determine when
-to skip displaying the body of the `rSection` environment. You shouldn't ever have to access or modify this flag
-directly, but if you need to, you can do so like this:
+As mentioned previously, the [`rSection`](#markdown-header-rsection) environment uses a global flag called `titleOnly`
+to determine when to skip displaying the body of the `rSection` environment. You shouldn't ever have to access or modify
+this flag directly, but if you need to, you can do so like this:
 ```
 #!latex
 \ifthenelse{\boolean{titleOnly}}{do this if true}{do this if false}
@@ -494,8 +497,10 @@ syntax structure for switching the content on and off. Here are the equivalent v
 
 #### `\name`
 
-As shown in [Getting Started](#getting-started), setting `\name{}` will display your name at the top center of the
-document with a font size of [`\huge{}`](https://en.wikibooks.org/wiki/LaTeX/Fonts#Sizing_text). If you want to change the size of your name, change the definition of the `\namesize` macro. If you want to change anything else about how your name appears, redefine the `\printname` macro.
+As shown in [Getting Started](#markdown-header-getting-started), setting `\name{}` will display your name at the top
+center of the document with a font size of [`\huge{}`](https://en.wikibooks.org/wiki/LaTeX/Fonts#Sizing_text). If you
+want to change the size of your name, change the definition of the `\namesize` macro. If you want to change anything
+else about how your name appears, redefine the `\printname` macro.
 
 
 #### `\namesize`
@@ -527,9 +532,9 @@ you dislike some aspect of how the name is displayed. Here is the original defin
 #### `\address`
 
 The `\address{}` sets your contact information so it can be displayed after your name. The `\\` macro has been redefined
-for addresses to be a diamond-shaped separator (see [`\addressSep`](#addresssep) for more detail). Everything inside the
-`\address{}` command will appear on the same line. To add another line, use an additional `\address{}` command. You can
-have up to three lines using this method.
+for addresses to be a diamond-shaped separator (see [`\addressSep`](#markdown-header-addresssep) for more detail).
+Everything inside the `\address{}` command will appear on the same line. To add another line, use an additional
+`\address{}` command. You can have up to three lines using this method.
 
 
 #### `\printaddress`
@@ -654,8 +659,8 @@ If you want to customize/change the appearance of the bibliography, the two plac
 definition of the `\mybibliography` command, and (2) in the `biblatex.cfg` file. Consult the documentation on
 [BibLaTeX](http://mirror.ox.ac.uk/sites/ctan.org/macros/latex/contrib/biblatex/doc/biblatex.pdf) for details.
 
-**Note**: As discussed in the [Basic Setup](#basic-setup) section, you need to include a call to `\addbibresource`in the
-preamble, i.e. before you call `\begin{document}`.
+**Note**: As discussed in the [Basic Setup](#markdown-header-basic-setup) section, you need to include a call to
+`\addbibresource`in the preamble, i.e. before you call `\begin{document}`.
 
 
 ### `\mybibliography`
@@ -670,7 +675,6 @@ The third argument, the keyword, must match exactly the entries you want to appe
 `.bib` file, use the `Keywords` field for this. The following example has the "conference" and "major" keywords properly
 added:
 ```
-#!latex
 @InProceedings{Paglierani2013,
   Title                    = {Towards Comprehensive and Collaborative Forensics on Email Evidence},
   Author                   = {Paglierani, Justin and Mike Mabey and Ahn, Gail-Joon},
