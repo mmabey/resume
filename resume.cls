@@ -58,6 +58,8 @@
 \def\sectionlineskip{\medskip} % The space above the horizontal line for each section
 \def\nameskip{\medskip} % The space after your name at the top
 \def\addressskip{} % The space between the two address (or phone/email) lines
+\def\bibheadingskip{\vspace{-2\parskip}} % The space after the bib heading and before the first entry
+\def\bibpostskip{\vspace{-4\parskip}} % The space at the end of the bibliography before any other content
 
 % More sophisticated bibliography styling and printing. Looks for custom biblatex.cfg file in same directory.
 \usepackage[backend=biber]{biblatex}
@@ -139,7 +141,7 @@
 \def \printicon {
   \ifthenelse{\isundefined{\@icon}}{}{
 	\begingroup
-		\begin{wrapfigure}{r}{0.51in}
+		\begin{wrapfigure}{r}{\@iconwidth}
       \vspace{-2ex}
 			\includegraphics[width=\@iconwidth]{\@icon}
 		\end{wrapfigure}~ % Without the ~, the icon goes to the end of the document
@@ -223,8 +225,8 @@
   % Note: The "keyword" parameter is conjunctive if specified multiple times, not disjunctive.
   \printbibliography[prefixnumbers={#2}, resetnumbers=1, omitnumbers=false, heading=mybibheading, keyword={#3}, title=#1, postnote=remove_post_vspace]%
 }
-\defbibheading{mybibheading}{ \needspace{\bibSpace} \normalfont\selectfont\normalsize \bf #1 \vspace{-2\parskip} }
-\defbibnote{remove_post_vspace}{\vspace{-4\parskip}}
+\defbibheading{mybibheading}{ \needspace{\bibSpace} \normalfont\selectfont\normalsize \bf #1 \bibheadingskip }
+\defbibnote{remove_post_vspace}{\bibpostskip}
 
 %----------------------------------------------------------------------------------------
 %	WORK EXPERIENCE FORMATTING
