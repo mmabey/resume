@@ -281,6 +281,32 @@ The above renders as:
 
 ### `rExperience`
 
+The `rExperience` environment displays the four key pieces of information related to job experience:
+
+1. The job title
+2. The organization the job was with
+3. The month and year the job started and ended
+4. The location of the organization
+
+You can specify this information in two different ways. The first way is to pass all four fields in as parameters as
+shown in the examples a little lower down. The second way is to set the fields before beginning the `rExperience`
+environment so you don't have to pass them as arguments (see #14). Here's an example of the second way:
+```
+#!latex
+\expPosTitle{Head Boss of Everyone}
+\expPosPeriod{Jan 1999 -- Dec 1999} % Start and end dates
+\expOrgName{Santa's Workshop}
+\expOrgLoc{North Pole, AK}
+
+\begin{rExperience}
+  \item Experience description goes here
+\end{rExperience}
+```
+
+When LaTeX prints the environment, it will pull from the variables set by the `\expPos...` and `\expOrg...` commands to
+fill in the necessary information. See the section on the [`rExperienceHeader`](#markdown-header-rexperienceheader) for
+more information.
+
 The `rExperience` environment intelligently switches between showing the `rExperienceHeader` and `rExperienceBullets`
 environments based on the status of the `titleOnly` flag. If the flag is true, a `rExperienceHeader` is shown with no
 body text. If it is false, a `rExperienceBullets` environment is shown along with all the text inside the

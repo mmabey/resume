@@ -39,6 +39,7 @@
 \setlength\multicolsep{0pt} %remove space before and after multicol
 \usepackage{environ} % Allows for the \NewEnviron command
 \usepackage{xkeyval} % Processes keyword arguments
+\usepackage{xparse} % Advanced environment declarations (multiple optional arguments)
 
 \usepackage{hyperref} %links - http and mailto
 \hypersetup{hidelinks} %hide boxes around links
@@ -270,7 +271,25 @@
   \addtocounter{rBulletDepth}{-1}
 }
 
-\NewEnviron{rExperience}[4]{
+
+% rExperience field variables
+\newcommand{\expPosTitle}[1]{\def \@exp@pos{#1}}
+\newcommand{\expPosPeriod}[1]{\def \@exp@dates{#1}}
+\newcommand{\expOrgName}[1]{\def \@exp@org{#1}}
+\newcommand{\expOrgLoc}[1]{\def \@exp@loc{#1}}
+\def \@exp@pos{}
+\def \@exp@dates{}
+\def \@exp@org{}
+\def \@exp@loc{}
+\long\def \@exp@body{}
+\long\def \@exp@collect@body#1{\def \@exp@body{#1}}
+
+\NewDocumentEnvironment{rExperience}{ G{\@exp@pos} G{\@exp@dates} G{\@exp@org} G{\@exp@loc} }
+  {\Collect@Body\@exp@collect@body}% Get everything up until the \end{rExperience} command
+  {\begin{rExperienceSwitcher}{#1}{#2}{#3}{#4}\@exp@body\end{rExperienceSwitcher}}% Put that all into a switcher env
+
+
+\NewEnviron{rExperienceSwitcher}[4]{
   \ifthenelse{\boolean{titleOnly}}{
     \begin{rExperienceHeader}{#1}{#2}{#3}{#4} \end{rExperienceHeader}
   }{
