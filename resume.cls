@@ -30,6 +30,7 @@
 \setlength{\partopsep}{0pt}
 \usepackage{array} % Required for boldface (\bf and \bfseries) tabular columns
 \usepackage{ifthen} % Required for ifthenelse statements
+\usepackage{etoolbox}
 
 \usepackage{wrapfig}
 \usepackage{graphicx}
@@ -76,11 +77,10 @@
 \usepackage{scrextend} % Allows us to specify custom margins for whole blocks of code
 
 % Flag for switching on/off content specific to CV (extended) format
-\newboolean{isCV}
-\setboolean{isCV}{true}
-\def\isCV{\boolean{isCV}}
+\newtoggle{isCV}
+\toggletrue{isCV}
 \def\setNotCV{%
-  \setboolean{isCV}{false}%
+  \togglefalse{isCV}%
   \hidePageNumbers{}%
 }
 
@@ -167,6 +167,7 @@
     \printaddress{\@addressthree}}
   \noindent
   \vspace{-2\parskip} % Remove some of the space before the first section
+  \@clear@exp@vars{}% Reset the experience fields back to empty
 }
 
 %----------------------------------------------------------------------------------------
@@ -273,30 +274,69 @@
 
 
 % rExperience field variables
-\newcommand{\expPosTitle}[1]{\def \@exp@pos{#1}}
-\newcommand{\expPosPeriod}[1]{\def \@exp@dates{#1}}
-\newcommand{\expOrgName}[1]{\def \@exp@org{#1}}
-\newcommand{\expOrgLoc}[1]{\def \@exp@loc{#1}}
-\def \@exp@pos{}
-\def \@exp@dates{}
-\def \@exp@org{}
-\def \@exp@loc{}
-\long\def \@exp@body{}
+\NewDocumentCommand \expPosTitle { G{} }{\global\long\def \@exp@pos{#1}}
+\NewDocumentCommand \expPosPeriod { G{} }{\global\long\def \@exp@dates{#1}}
+\NewDocumentCommand \expOrgName { G{} }{\global\long\def \@exp@org{#1}}
+\NewDocumentCommand \expOrgLoc { G{} }{\global\long\def \@exp@loc{#1}}
+\NewDocumentCommand \expExtra { G{} }{\global\long\def \@exp@extra{#1}}
+\long\def \@exp@pos{}
+\long\def \@exp@dates{}
+\long\def \@exp@org{}
+\long\def \@exp@loc{}
+\long\def \@exp@extra{}
+\def\@clear@exp@vars{
+  \expPosTitle
+  \expPosPeriod
+  \expOrgName
+  \expOrgLoc
+  \expExtra
+}
 \long\def \@exp@collect@body#1{\def \@exp@body{#1}}
 
-\NewDocumentEnvironment{rExperience}{ G{\@exp@pos} G{\@exp@dates} G{\@exp@org} G{\@exp@loc} }
+
+
+\NewDocumentCommand \setExpOrder { G{tpnl} }{%
+  \ifthenelse{\equal{#1}{tpnl}}{% Title, period, org name, location
+    \long\def \@exp@TL{\@exp@pos}%
+    \long\def \@exp@TR{\@exp@dates}%
+    \long\def \@exp@BL{\@exp@org}%
+    \long\def \@exp@BR{\@exp@loc}%
+  }{ \ifthenelse{\equal{#1}{nltp}}{% Org name, location, title, period
+    \long\def \@exp@TL{\@exp@org}%
+    \long\def \@exp@TR{\@exp@loc}%
+    \long\def \@exp@BL{\@exp@pos}%
+    \long\def \@exp@BR{\@exp@dates}%
+  }{ \ifthenelse{\equal{#1}{nptl}}{% Org name, period, title, location -- Trey Hunner's order
+    \long\def \@exp@TL{\@exp@org}%
+    \long\def \@exp@TR{\@exp@dates}%
+    \long\def \@exp@BL{\@exp@pos}%
+    \long\def \@exp@BR{\@exp@loc}%
+  }{% Default to tpnl if something unsupported was given
+    \long\def \@exp@TL{\@exp@pos}%
+    \long\def \@exp@TR{\@exp@dates}%
+    \long\def \@exp@BL{\@exp@org}%
+    \long\def \@exp@BR{\@exp@loc}%
+  }}}%
+}
+\setExpOrder
+
+
+% Collects field variables, sets to default values if not given when called
+\NewDocumentEnvironment{rExperience}{ G{\@exp@TL} G{\@exp@TR} G{\@exp@BL} G{\@exp@BR} G{\@exp@extra} }
   {\Collect@Body\@exp@collect@body}% Get everything up until the \end{rExperience} command
-  {\begin{rExperienceSwitcher}{#1}{#2}{#3}{#4}\@exp@body\end{rExperienceSwitcher}}% Put that all into a switcher env
-
-
-\NewEnviron{rExperienceSwitcher}[4]{
-  \ifthenelse{\boolean{titleOnly}}{
-    \begin{rExperienceHeader}{#1}{#2}{#3}{#4} \end{rExperienceHeader}
-  }{
-  \begin{rExperienceBullets}{#1}{#2}{#3}{#4}
-    \BODY
+  {
+    \ifthenelse{\equal{\@exp@extra}{}}
+      {\def\@last@arg{#4}}
+      {\def\@last@arg{#4\\#5}}
+    \ifthenelse{\boolean{titleOnly}}{
+      \begin{rExperienceHeader}{#1}{#2}{#3}{\@last@arg} \end{rExperienceHeader}
+    }{
+      \begin{rExperienceBullets}{#1}{#2}{#3}{\@last@arg}
+        \@exp@body
+      \end{rExperienceBullets}
+    }
+    \@clear@exp@vars{}% Reset the fields back to empty
   }
-}[\ifthenelse{\boolean{titleOnly}}{}{\end{rExperienceBullets}}]
 
 \newenvironment{rExperienceHeader}[4]{ % 4 input arguments - company name, year(s) employed, job title and location
   \needspace{\expHeaderSpace}
@@ -316,11 +356,11 @@
   \end{rExperienceHeader}
 }
 
-\NewEnviron{CVonly}{\ifthenelse{\boolean{isCV}}{\BODY}{}}
-\newcommand{\rCVonly}[1]{\ifthenelse{\boolean{isCV}}{#1}{}}
+\NewEnviron{CVonly}{\iftoggle{isCV}{\BODY}{}}
+\newcommand{\rCVonly}[1]{\iftoggle{isCV}{#1}{}}
 
-\NewEnviron{ResumeOnly}{\ifthenelse{\boolean{isCV}}{}{\BODY}}
-\newcommand{\rResumeOnly}[1]{\ifthenelse{\boolean{isCV}}{}{#1}}
+\NewEnviron{ResumeOnly}{\iftoggle{isCV}{}{\BODY}}
+\newcommand{\rResumeOnly}[1]{\iftoggle{isCV}{}{#1}}
 
 
 %----------------------------------------------------------------------------------------
@@ -347,7 +387,7 @@
 \def\footername#1{\def\@footername{#1} \setboolean{footerNameDefd}{TRUE}}
 \def\@footername{}
 \usepackage{suffix}
-\WithSuffix\def\footername*#1{\ifthenelse{\isCV}{\footername{#1}}{}}
+\WithSuffix\def\footername*#1{\iftoggle{isCV}{\footername{#1}}{}}
 
 % Define the command to set the threshold for showing the page number and set the default to 2
 \usepackage{xstring}  % Allows us to check that the parameter is an Integer

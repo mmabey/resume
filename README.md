@@ -19,7 +19,7 @@ modifications to the original template include:
   amount of work necessary to keep the two current with each other.
 * So much more!
 
-Table of Contents:
+**Table of Contents:**
 
 [TOC]
 
@@ -144,6 +144,8 @@ instead of this:
   \setboolean{titleOnly}{false}
 \end{rSection}
 ```
+
+See the section on the [`rExperience`](#markdown-header-rexperience) environment for more examples using this flag.
 
 
 
@@ -288,8 +290,10 @@ The `rExperience` environment displays the four key pieces of information relate
 3. The month and year the job started and ended
 4. The location of the organization
 
-You can specify this information in two different ways. The first way is to pass all four fields in as parameters as
-shown in the examples a little lower down. The second way is to set the fields before beginning the `rExperience`
+#### Specifying the Fields
+
+You can specify experience information in two different ways. The first way is to pass all four fields in as parameters
+as shown in the examples a little lower down. The second way is to set the fields before beginning the `rExperience`
 environment so you don't have to pass them as arguments (see #14). Here's an example of the second way:
 ```
 #!latex
@@ -304,8 +308,50 @@ environment so you don't have to pass them as arguments (see #14). Here's an exa
 ```
 
 When LaTeX prints the environment, it will pull from the variables set by the `\expPos...` and `\expOrg...` commands to
-fill in the necessary information. See the section on the [`rExperienceHeader`](#markdown-header-rexperienceheader) for
-more information.
+fill in the necessary information. This is simply provided as a convenience (and to enable forward-compatibility with
+the fix for issue #13). You can still give the four parameters directly to the command in the order you want them to
+appear (see issue #12). In other words, the first field you pass to the `\begin{rExperience}` command will go in the
+top-left position, the next will go in the top-right position, and so on.
+
+#### Adding Extra Content
+
+You can also add more information to the experience header by calling the `\expExtra{}` command with the content that
+should appear after the four standard headers. For example:
+```
+#!latex
+\expPosTitle{Research Assistant}
+\expPosPeriod{Nov 2009 -- Present}
+\expOrgName{SEFCOM}
+\expOrgLoc{Tempe, AZ}
+\expExtra{\textit{Lab Directors}: Gail-Joon Ahn, Adam Doup\'{e}\\
+  \textit{Sponsors}: Department of Energy, National Science Foundation}
+
+\begin{rExperienceHeader}
+\end{rExperienceHeader}
+```
+The above renders as:
+
+![Example of adding extra content that appears after the usual `rExperience` fields][rExperienceHeaderExample]
+
+#### Customizing the Fields
+
+You can customize the order that the four fields appear, to a limited degree (issue #12). To do this, add a line like
+the following to the document's preamble:
+```
+#!latex
+\setExpOrder{tpnl}
+```
+
+The letters passed to the command refer to the four fields displayed by the experience header. The available options for
+the `\setExpOrder{}` command are:
+
+* `tpnl`: Job title, period of the experience, organization's name, organization's location *(Default)*
+* `nltp`
+* `nptl`: This is the order that was used in Trey Hunner's original template
+
+Once issue #13 is resolved, you'll also be able to customize the style used on each field (e.g. bold, italic, normal).
+
+#### Switching Content with `titleOnly`
 
 The `rExperience` environment intelligently switches between showing the `rExperienceHeader` and `rExperienceBullets`
 environments based on the status of the `titleOnly` flag. If the flag is true, a `rExperienceHeader` is shown with no
@@ -375,26 +421,6 @@ The `rExperienceHeader` environment displays the four key pieces of information 
 2. The organization the job was with
 3. The month and year the job started and ended
 4. The location of the organization
-
-Until issues #12, #13, and #14 are resolved, the only way to customize how these fields are displayed is to edit the
-class source code.
-
-It's possible to add more information to the header by adding the extra content to the last field, the organization's
-location. As shown in the following example, you can do this without disrupting the typical formatting by ending the
-current line (with `\\`) and then the extra content:
-
-```
-#!latex
-
-\begin{rExperienceHeader}{Research Assistant}{Nov 2009 -- Present}{SEFCOM}{Tempe, AZ\\
-  {\textnormal{\textit{Lab Directors}: Gail-Joon Ahn, Adam Doup\'{e}\\
-  \textit{Sponsors}: Department of Energy, National Science Foundation
-  }}}
-\end{rExperienceHeader}
-```
-The above renders as:
-
-![Example of adding extra lines after the usual `rExperienceHeader` fields][rExperienceHeaderExample]
 
 **Note**: You typically won't need to use the `rExperienceHeader` environment directly, since the `rExperience`
 environment does exactly what the `rExperienceHeader` environment does, but with the ability to switch between
