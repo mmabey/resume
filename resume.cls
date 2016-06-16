@@ -321,13 +321,24 @@
 \setExpOrder
 
 
+% Field formatting options
+\let\@expsty@TL \bf
+\let\@expsty@TR \em
+\let\@expsty@BL \textnormal
+\let\@expsty@BR \textnormal
+\NewDocumentCommand \setExpStyleTL { G{\bf} }{\let\@expsty@TR #1}
+\NewDocumentCommand \setExpStyleTR { G{\em} }{\let\@expsty@TL #1}
+\NewDocumentCommand \setExpStyleBL { G{\textnormal} }{\let\@expsty@BR #1}
+\NewDocumentCommand \setExpStyleBR { G{\textnormal} }{\let\@expsty@BL #1}
+
+
 % Collects field variables, sets to default values if not given when called
 \NewDocumentEnvironment{rExperience}{ G{\@exp@TL} G{\@exp@TR} G{\@exp@BL} G{\@exp@BR} G{\@exp@extra} }
   {\Collect@Body\@exp@collect@body}% Get everything up until the \end{rExperience} command
   {
     \ifthenelse{\equal{\@exp@extra}{}}
       {\def\@last@arg{#4}}
-      {\def\@last@arg{#4\\#5}}
+      {\def\@last@arg{#4\\\textnormal{#5}}}
     \ifthenelse{\boolean{titleOnly}}{
       \begin{rExperienceHeader}{#1}{#2}{#3}{\@last@arg} \end{rExperienceHeader}
     }{
@@ -340,10 +351,10 @@
 
 \newenvironment{rExperienceHeader}[4]{ % 4 input arguments - company name, year(s) employed, job title and location
   \needspace{\expHeaderSpace}
-  {\bf #1} \hfill {\em #2} % Bold company name and italic date on the right
+  {\@expsty@TL #1} \hfill {\@expsty@TR #2} % Bold company name and italic date on the right
   \ifthenelse{\equal{#3}{}}{}{ % If the third argument is not specified, don't print the job title and location line
   \\
-  {#3} \hfill {#4} % Job title and location
+  {\@expsty@BL #3} \hfill {\@expsty@BR #4} % Job title and location
 
   }\smallskip
 }{}

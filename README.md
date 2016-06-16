@@ -349,7 +349,36 @@ the `\setExpOrder{}` command are:
 * `nltp`
 * `nptl`: This is the order that was used in Trey Hunner's original template
 
-Once issue #13 is resolved, you'll also be able to customize the style used on each field (e.g. bold, italic, normal).
+You can also customize the style used on each field (e.g. bold, italic, normal) according to the field's position
+(top-left, bottom-right, etc.). The default styles are:
+
+* **Top-Left**: Bold, using the `\bf` command
+* **Top-Right**: Italic, using the `\em` command
+* **Bottom-Left**: Plain, using the `\textnormal` command
+* **Bottom-Right**: Plain, using the `\textnormal` command
+
+To change these, call the following commands, passing the format command as a parameter:
+
+* `\setExpStyleTL{}`: Changes the top-left field's style
+* `\setExpStyleTR{}`: Changes the top-right field's style
+* `\setExpStyleBL{}`: Changes the bottom-left field's style
+* `\setExpStyleBR{}`: Changes the bottom-right field's style
+
+The defaults are set with calls equivalent to the following:
+```
+#!latex
+\setExpStyleTL{\bf}
+\setExpStyleTR{\em}
+\setExpStyleBL{\textnormal}
+\setExpStyleBR{\textnormal}
+```
+
+If you're interested in more technical details, the parameter you pass when setting a new style must be a command or
+macro that requires no arguments (rather than an environment) because the style is ultimately stored by using TeX's
+`\let` command, which essentially makes a copy of a command at the point where `\let` is called. For more information on
+`\let`, I recommend [this post on
+StackExchange](http://tex.stackexchange.com/questions/258/what-is-the-difference-between-let-and-def).
+
 
 #### Switching Content with `titleOnly`
 
