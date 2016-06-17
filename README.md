@@ -346,8 +346,9 @@ The letters passed to the command refer to the four fields displayed by the expe
 the `\setExpOrder{}` command are:
 
 * `tpnl`: Job title, period of the experience, organization's name, organization's location *(Default)*
-* `nltp`
-* `nptl`: This is the order that was used in Trey Hunner's original template
+* `tlnp`: Job title, location, organization's name, period of the experience
+* `nltp`: Organization's name, location, job title, period of the experience
+* `nptl`: Organization's name, period of the experience, job title, location. This is the order that was used in Trey Hunner's original template
 
 You can also customize the style used on each field (e.g. bold, italic, normal) according to the field's position
 (top-left, bottom-right, etc.). The default styles are:

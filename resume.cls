@@ -301,6 +301,11 @@
     \long\def \@exp@TR{\@exp@dates}%
     \long\def \@exp@BL{\@exp@org}%
     \long\def \@exp@BR{\@exp@loc}%
+  }{ \ifthenelse{\equal{#1}{tlnp}}{% Title, location, org name, period
+    \long\def \@exp@TL{\@exp@pos}%
+    \long\def \@exp@TR{\@exp@loc}%
+    \long\def \@exp@BL{\@exp@org}%
+    \long\def \@exp@BR{\@exp@dates}%
   }{ \ifthenelse{\equal{#1}{nltp}}{% Org name, location, title, period
     \long\def \@exp@TL{\@exp@org}%
     \long\def \@exp@TR{\@exp@loc}%
@@ -316,7 +321,7 @@
     \long\def \@exp@TR{\@exp@dates}%
     \long\def \@exp@BL{\@exp@org}%
     \long\def \@exp@BR{\@exp@loc}%
-  }}}%
+  }}}}%
 }
 \setExpOrder
 
