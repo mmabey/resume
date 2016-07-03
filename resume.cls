@@ -22,6 +22,13 @@
 
 \usepackage{xkeyval} % Processes keyword arguments
 
+% cvmode=true/false
+\usepackage{etoolbox}
+\newtoggle{isCV}
+\DeclareOptionX{cvmode}[true]{
+  \ifstrequal{\MakeUppercase{#1}}{FALSE}{\togglefalse{isCV}\csname setNotCV \endcsname}{\toggletrue{isCV}}
+}
+
 % margins % For uniform margins on all four sides
 \DeclareOptionX{margins}[0.75in]{
   \PassOptionsToPackage{left=#1,top=#1,right=#1,bottom=#1}{geometry}
@@ -39,7 +46,7 @@
 
 
 % Execute all the default options
-\ExecuteOptionsX{margins=0.75in}
+\ExecuteOptionsX{margins=0.75in,cvmode=true}
 
 % Process the given options
 \ProcessOptionsX\relax
@@ -57,7 +64,6 @@
 \setlength{\partopsep}{0pt}
 \usepackage{array} % Required for boldface (\bf and \bfseries) tabular columns
 \usepackage{ifthen} % Required for ifthenelse statements
-\usepackage{etoolbox}
 
 \usepackage{wrapfig}
 \usepackage{graphicx}
@@ -102,9 +108,7 @@
 
 \usepackage{scrextend} % Allows us to specify custom margins for whole blocks of code
 
-% Flag for switching on/off content specific to CV (extended) format
-\newtoggle{isCV}
-\toggletrue{isCV}
+% Macro for switching on/off content specific to CV (extended) format
 \def\setNotCV{%
   \togglefalse{isCV}%
   \hidePageNumbers{}%

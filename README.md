@@ -133,6 +133,20 @@ These set a vertical margin of `0.5in` and a horizontal margin of `1in`. The def
 the [`margins`](#markdown-header-margins) option.
 
 
+#### `cvmode`
+
+The `cvmode` option can be set with a value of either `true` or `false` (case insensitive). Actually, anything other
+than `false` will evaluate to `true`. This may be a more convenient way of switching between [resume and CV
+modes](#markdown-header-resume-vs-cv). Below is an example of how to use this class option:
+
+```
+#!latex
+\documentclass[cvmode=FALSE]{resume}
+```
+
+The default for `cvmode` is `true`.
+
+
 
 
 ## Environments
