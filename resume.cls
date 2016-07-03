@@ -18,9 +18,36 @@
 %
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-\ProvidesClass{resume}[2010/07/10 v0.9 Resume class]
+\ProvidesClass{resume}[2016/07/02 v0.9.1.0 Resume class (Mabey)]
+
+\usepackage{xkeyval} % Processes keyword arguments
+
+% margins % For uniform margins on all four sides
+\DeclareOptionX{margins}[0.75in]{
+  \PassOptionsToPackage{left=#1,top=#1,right=#1,bottom=#1}{geometry}
+}
+
+% vmargins % Margins for top and bottom (vertical)
+\DeclareOptionX{vmargins}[0.75in]{
+  \PassOptionsToPackage{top=#1,bottom=#1}{geometry}
+}
+
+% hmargins % Margins for left and right (horizontal)
+\DeclareOptionX{hmargins}[0.75in]{
+  \PassOptionsToPackage{left=#1,right=#1}{geometry}
+}
+
+
+% Execute all the default options
+\ExecuteOptionsX{margins=0.75in}
+
+% Process the given options
+\ProcessOptionsX\relax
 
 \LoadClass[11pt,letterpaper]{article} % Font size and paper type
+
+
+\usepackage{geometry} % Document margins
 
 \setlength{\parindent}{0pt}
 \setlength{\parskip}{6.8pt plus 2.0pt}
@@ -39,7 +66,6 @@
 \usepackage{multicol} %columns for lists
 \setlength\multicolsep{0pt} %remove space before and after multicol
 \usepackage{environ} % Allows for the \NewEnviron command
-\usepackage{xkeyval} % Processes keyword arguments
 \usepackage{xparse} % Advanced environment declarations (multiple optional arguments)
 
 \usepackage{hyperref} %links - http and mailto
@@ -383,7 +409,6 @@
 %	FOOTER COMMNADS: PRINT THE MODIFIED DATE OF THE MAIN .TEX FILE
 %----------------------------------------------------------------------------------------
 
-\usepackage[left=0.75in,top=0.75in,right=0.75in,bottom=0.75in]{geometry} % Document margins
 \usepackage{filemod}
 \renewcommand{\thefilemoddate}[3]{#2/#3/#1}
 \usepackage{fancyhdr} %for adding a footer
@@ -470,3 +495,6 @@
 %----------------------------------------------------------------------------------------
 %	Other custom stuff
 %----------------------------------------------------------------------------------------
+
+
+\endinput

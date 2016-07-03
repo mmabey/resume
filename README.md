@@ -94,8 +94,43 @@ files in the preamble (before the `\begin{document}` command). I discuss some ot
 Bibliography](#markdown-header-creating-a-bibliography).
 
 
-At this point, you can now add the `\begin{document}` command and start declaring different environments as explained in
-the next section.
+At this point, you can now add the `\begin{document}` command and start declaring different environments as explained
+[below](#markdown-header-environments).
+
+
+### Class Options
+
+When you call the `resume` document class, you can specify a number of options as described below. All of these options
+can be combined, except where they would obviously conflict (because they change the same element(s) of the document.)
+
+#### `margins`
+
+Giving the `margins` option sets the margins on all four sides of the documents. If you show content in the
+[footer](#markdown-header-changing-the-footers), be careful that you don't make the margins so small that the content
+pushes the footer off the page. Below is an example of how to use this class option:
+
+```
+#!latex
+\documentclass[margins=0.75in]{resume}
+```
+
+The default for all margins is `0.75in`.
+
+
+#### `vmargins` and `hmargins`
+
+The `vmargins` and `hmargins` options set the vertical and horizontal margins, respectively. If you show content in the
+[footer](#markdown-header-changing-the-footers), be careful that you don't make the margins so small that the content
+pushes the footer off the page. Below are examples of how to use these class options:
+
+```
+#!latex
+\documentclass[vmargins=0.5in]{resume}
+\documentclass[hmargins=1in]{resume}
+```
+
+These set a vertical margin of `0.5in` and a horizontal margin of `1in`. The default for all margins is `0.75in`, set by
+the [`margins`](#markdown-header-margins) option.
 
 
 
