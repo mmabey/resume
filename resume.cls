@@ -18,16 +18,22 @@
 %
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-\ProvidesClass{resume}[2016/07/02 v0.9.1.0 Resume class (Mabey)]
+\ProvidesClass{resume}[2016/07/08 v0.9.1.1 Resume class (Mabey)]
 
+% Pre-options Section - all imports and variable declarations must go here, before the first \DeclareOptionX
 \usepackage{xkeyval} % Processes keyword arguments
-
-% cvmode=true/false
 \usepackage{etoolbox}
 \newtoggle{isCV}
+\newcommand\@fontselection{doesntexist}
+% End of Pre-options Section
+
+% cvmode=true/false
 \DeclareOptionX{cvmode}[true]{
   \ifstrequal{\MakeUppercase{#1}}{FALSE}{\togglefalse{isCV}\csname setNotCV \endcsname}{\toggletrue{isCV}}
 }
+
+% font=name
+\DeclareOptionX{font}{\renewcommand\@fontselection{#1}}
 
 % margins % For uniform margins on all four sides
 \DeclareOptionX{margins}[0.75in]{
@@ -46,12 +52,32 @@
 
 
 % Execute all the default options
-\ExecuteOptionsX{margins=0.75in,cvmode=true}
+\ExecuteOptionsX{margins=0.75in,cvmode=true,font=computermodern}
 
 % Process the given options
 \ProcessOptionsX\relax
 
 \LoadClass[11pt,letterpaper]{article} % Font size and paper type
+
+
+\usepackage[T1]{fontenc}
+\usepackage{expl3}
+\ExplSyntaxOn
+\newcommand*{\loadfont}[1]{%
+  % Shout out to Christian Hupfer whose examples at http://tex.stackexchange.com/questions/314302/good-examples-of-tl-casenntf-and-str-casenntf helped me make sense of \str_case
+  \str_case_x:nnTF{#1} {%
+    {berasans}{\usepackage[]{berasans}\renewcommand*\familydefault{\sfdefault}}%
+    {cantarell}{\usepackage[default, scale=0.95]{cantarell}}%
+    {computermodern}{\renewcommand*{\familydefault}{\sfdefault}}%
+    {lato}{\usepackage[default, scale=0.95]{lato}}%
+    {quattrocento}{\usepackage[sfdefault]{quattrocento}}%
+    {sourcesanspro}{\usepackage[default,semibold]{sourcesanspro}}%
+    {none}{}%
+  }{}{\ClassWarningNoLine{resume}{Invalid~font~option~given,\space falling~back~to~default:~computermodern}
+      \renewcommand*{\familydefault}{\sfdefault}}%
+}
+\ExplSyntaxOff
+\loadfont{\@fontselection} % \@fontselection must NOT have trailing {} or it won't match the strings above
 
 
 \usepackage{geometry} % Document margins

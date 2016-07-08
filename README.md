@@ -133,6 +133,25 @@ These set a vertical margin of `0.5in` and a horizontal margin of `1in`. The def
 the [`margins`](#markdown-header-margins) option.
 
 
+#### `font`
+
+Use the `font` option to specify which font you want the document to have. The following fonts are currently supported:
+
+* [Bera Sans](http://www.tug.dk/FontCatalogue/berasans/) - Use: `[font=berasans]`
+* [Cantarell](http://www.tug.dk/FontCatalogue/cantarell/) - Use: `[font=cantarell]`
+* [Computer Modern](http://www.tug.dk/FontCatalogue/computermodernsansserif/) - Use: `[font=computermodern]` --- this is the default font if no other valid option is provided
+* [Lato](http://www.tug.dk/FontCatalogue/lato/) - Use: `[font=lato]`
+* [Quattrocento Sans](http://www.tug.dk/FontCatalogue/quattrocentosans/) - Use: `[font=quattrocento]`
+* [Source Sans Pro](http://www.tug.dk/FontCatalogue/sourcesanspro/) - Use: `[font=sourcesanspro]`
+
+These are the fonts from the [LaTeX Font Catalogue](http://www.tug.dk/FontCatalogue/) that I found professional-looking
+and were in the Sans Serif family. The latter criterion was important to me because I wanted my resume/CV to be more
+tailored for screen viewing.
+
+If you want to use a font *NOT* listed above, use the option `[font=none]`, and not even the default font will load,
+allowing you to set up your own font from the catalogue.
+
+
 #### `cvmode`
 
 The `cvmode` option can be set with a value of either `true` or `false` (case insensitive). Actually, anything other
