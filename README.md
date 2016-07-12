@@ -182,6 +182,13 @@ Here's an example of a URL with the icon:
 ![Example of `linkicon` set to false][linkicon_falseExample]
 
 
+#### `pagethreshold`
+
+The value passed to the `pagethreshold` option determines when page numbers appear in the document footer. The default
+value is 2, which means that there must be *more* than 2 pages in the document to have numbered pages. Hopefully it also
+goes without saying that the value must be an integer. If not, the default value will be used.
+
+
 
 
 ## Environments

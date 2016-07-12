@@ -18,7 +18,7 @@
 %
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-\ProvidesClass{resume}[2016/07/12 v0.9.1.2 Resume class (Mabey)]
+\ProvidesClass{resume}[2016/07/12 v0.9.1.3 Resume class (Mabey)]
 
 %%%%%%%%%%%%%%%%%%%%%%%%%% Pre-options Section - all imports and variable declarations must go here, before the first \DeclareOptionX
 \usepackage{xkeyval} % Processes keyword arguments
@@ -27,6 +27,9 @@
 \newtoggle{isCV}
 % font
 \newcommand\@fontselection{doesntexist}
+% pagethreshold
+\usepackage{xstring}  % Allows us to check that the parameter is an Integer
+\newcommand\@defaultPageThreshold{}
 % show link icon
 \newif\iflink@icon
 \link@icontrue
@@ -36,18 +39,26 @@
 \DeclareOptionX{cvmode}[true]{
   \ifstrequal{#1}{false}{\togglefalse{isCV}}{
   \ifstrequal{#1}{true}{\toggletrue{isCV}}{
-    \ClassWarningNoLine{resume}{Invalid~value~for~option~'cvmode':~#1}
+    \ClassWarningNoLine{resume}{Invalid\space value\space for\space option\space 'cvmode':\space #1}
   }}
 }
 
 % font=name
 \DeclareOptionX{font}{\renewcommand\@fontselection{#1}}
 
+% pagethreshold=#
+\DeclareOptionX{pagethreshold}{
+  \IfInteger{#1}{\renewcommand\@defaultPageThreshold{#1}}{
+    \ClassWarningNoLine{resume}{Invalid\space value\space for\space option\space 'pagethreshold':\space #1
+      \MessageBreak Must\space be\space an\space Integer!}
+  }
+}
+
 % linkicon=true/false
 \DeclareOptionX{linkicon}[true]{
   \ifstrequal{#1}{false}{\link@iconfalse}{
   \ifstrequal{#1}{true}{\link@icontrue}{
-    \ClassWarningNoLine{resume}{Invalid~value~for~option~'linkicon':~#1}
+    \ClassWarningNoLine{resume}{Invalid\space value\space for\space option\space 'linkicon':\space #1}
   }}
 }
 
@@ -68,10 +79,14 @@
 
 
 % Execute all the default options
-\ExecuteOptionsX{margins=0.75in,cvmode=true,font=computermodern,linkicon}
+\ExecuteOptionsX{margins=0.75in,cvmode=true,font=computermodern,linkicon,pagethreshold=2}
 
 % Process the given options
 \ProcessOptionsX\relax
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%  End of option processing  %%%%%%%%%%%%%%%%%%%%%%%%%%
+
 
 \LoadClass[11pt,letterpaper]{article} % Font size and paper type
 
@@ -482,9 +497,8 @@
 \WithSuffix\def\footername*#1{\iftoggle{isCV}{\footername{#1}}{}}
 
 % Define the command to set the threshold for showing the page number and set the default to 2
-\usepackage{xstring}  % Allows us to check that the parameter is an Integer
-\def\setShowPageThreshold#1{\IfInteger{#1}{\def\@showPageThreshold{#1}}{\def\@showPageThreshold{2}}}
-\def\@showPageThreshold{2}
+\def\setShowPageThreshold#1{\IfInteger{#1}{\def\@showPageThreshold{#1}}{\def\@showPageThreshold{\@defaultPageThreshold}}}
+\def\@showPageThreshold{\@defaultPageThreshold}
 \def\@rPageVal{\ifthenelse{\pageref{LastPage}>\@showPageThreshold}{\thepage}{}}
 \newboolean{showPage}
 \setboolean{showPage}{TRUE} % Default to showing page numbers
