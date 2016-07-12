@@ -17,14 +17,8 @@
 %	PACKAGES AND OTHER DOCUMENT CONFIGURATIONS
 %----------------------------------------------------------------------------------------
 
-\documentclass{resume} % Use the custom resume.cls style
+\documentclass[cvmode=false,font=cantarell]{resume} % Use the custom resume.cls style
 
-% Set font
-\input{font}
-
-
-% Command for switching off content specific to CV (extended) format
-\setNotCV{}
 
 \input{sections/contact_info}
 
@@ -32,6 +26,10 @@
 % Add .bib files as resources for biblatex
 \addbibresource{pubs_mike_mabey.bib}
 
+
+%----------------------------------------------------------------------------------------
+%	START OF DOCUMENT
+%----------------------------------------------------------------------------------------
 
 \begin{document}
 
@@ -60,7 +58,7 @@
 
   \input{exp/sandia}
 
-  % \input{sections/exp_usu_web}
+  \input{exp/usu_web}
 
 
 \end{rSection}
