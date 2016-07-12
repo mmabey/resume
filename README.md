@@ -166,6 +166,22 @@ The `cvmode` option can be set with a value of either `true` or `false` (case se
 The default for `cvmode` is `true`.
 
 
+#### `linkicon`
+
+The `linkicon` option can be set with a value of either `true` or `false` (case sensitive). Actually, anything other
+than `false` will evaluate to `true`, including just `[linkicon]`. Setting it to `true` adds a small icon next to any
+links in the document created with the `\href{}{}` command (from the `hyperref` package). This just gives the reader a
+visual cue that the text is click-able, when they otherwise might not know it was a link.
+
+Here's an example of a URL with the icon:
+
+![Example of `linkicon` set to true][linkicon_trueExample]
+
+... and another without the icon:
+
+![Example of `linkicon` set to false][linkicon_falseExample]
+
+
 
 
 ## Environments
@@ -941,3 +957,5 @@ As the sophistication of the class increased, so did the number of additional pa
 [rExperienceBulletsExample]: docs/rExperienceBulletsExample.png
 [headingExample]: docs/headingExample.png
 [mybibExample]: docs/mybibExample.png
+[linkicon_trueExample]: docs/linkicon_trueExample.png
+[linkicon_falseExample]: docs/linkicon_falseExample.png

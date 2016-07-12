@@ -20,12 +20,17 @@
 
 \ProvidesClass{resume}[2016/07/12 v0.9.1.2 Resume class (Mabey)]
 
-% Pre-options Section - all imports and variable declarations must go here, before the first \DeclareOptionX
+%%%%%%%%%%%%%%%%%%%%%%%%%% Pre-options Section - all imports and variable declarations must go here, before the first \DeclareOptionX
 \usepackage{xkeyval} % Processes keyword arguments
 \usepackage{etoolbox}
+% cvmode
 \newtoggle{isCV}
+% font
 \newcommand\@fontselection{doesntexist}
-% End of Pre-options Section
+% show link icon
+\newif\iflink@icon
+\link@icontrue
+%%%%%%%%%%%%%%%%%%%%%%%%%% End of Pre-options Section
 
 % cvmode=true/false
 \DeclareOptionX{cvmode}[true]{
@@ -37,6 +42,14 @@
 
 % font=name
 \DeclareOptionX{font}{\renewcommand\@fontselection{#1}}
+
+% linkicon=true/false
+\DeclareOptionX{linkicon}[true]{
+  \ifstrequal{#1}{false}{\link@iconfalse}{
+  \ifstrequal{#1}{true}{\link@icontrue}{
+    \ClassWarningNoLine{resume}{Invalid~value~for~option~'linkicon':~#1}
+  }}
+}
 
 % margins % For uniform margins on all four sides
 \DeclareOptionX{margins}[0.75in]{
@@ -55,7 +68,7 @@
 
 
 % Execute all the default options
-\ExecuteOptionsX{margins=0.75in,cvmode=true,font=computermodern}
+\ExecuteOptionsX{margins=0.75in,cvmode=true,font=computermodern,linkicon}
 
 % Process the given options
 \ProcessOptionsX\relax
@@ -64,7 +77,7 @@
 
 
 \usepackage[T1]{fontenc}
-\usepackage{expl3}
+\usepackage{expl3} % For LaTeX3 commands
 \ExplSyntaxOn
 \newcommand*{\loadfont}[1]{%
   % Shout out to Christian Hupfer whose examples at http://tex.stackexchange.com/questions/314302/good-examples-of-tl-casenntf-and-str-casenntf helped me make sense of \str_case
@@ -106,9 +119,11 @@
 \usepackage{hyperref} %links - http and mailto
 \hypersetup{hidelinks} %hide boxes around links
 %check out other hyperref options
-\usepackage{fontawesome} % Required for new definition of \href
-\let\orighref\href % Store the original \href command
-\renewcommand{\href}[2]{\orighref{#1}{#2\,{\tiny \faExternalLink}}}  % Add icon next to all links
+\iflink@icon
+  \usepackage{fontawesome} % Required for new definition of \href
+  \let\orighref\href % Store the original \href command
+  \renewcommand{\href}[2]{\orighref{#1}{#2\,{\tiny \faExternalLink}}}  % Add icon next to all links
+\fi
 
 \usepackage{quoting} % Equivalent to the quote environment without the spacing before and after
 \quotingsetup{vskip=0pt}
@@ -451,7 +466,7 @@
 \pagestyle{fancy}
 \usepackage{lastpage} % For getting the last page number
 \renewcommand{\headrulewidth}{0pt}
-% Set the headers and the right and left footers to be empty
+% Set the headers to be empty
 \lhead{}
 \chead{}
 \rhead{}
