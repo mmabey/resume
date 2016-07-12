@@ -18,7 +18,7 @@
 %
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-\ProvidesClass{resume}[2016/07/08 v0.9.1.1 Resume class (Mabey)]
+\ProvidesClass{resume}[2016/07/12 v0.9.1.2 Resume class (Mabey)]
 
 % Pre-options Section - all imports and variable declarations must go here, before the first \DeclareOptionX
 \usepackage{xkeyval} % Processes keyword arguments
@@ -29,7 +29,10 @@
 
 % cvmode=true/false
 \DeclareOptionX{cvmode}[true]{
-  \ifstrequal{\MakeUppercase{#1}}{FALSE}{\togglefalse{isCV}\csname setNotCV \endcsname}{\toggletrue{isCV}}
+  \ifstrequal{#1}{false}{\togglefalse{isCV}}{
+  \ifstrequal{#1}{true}{\toggletrue{isCV}}{
+    \ClassWarningNoLine{resume}{Invalid~value~for~option~'cvmode':~#1}
+  }}
 }
 
 % font=name
@@ -119,6 +122,7 @@
 \def\nameskip{\medskip} % The space after your name at the top
 \def\addressskip{} % The space between the two address (or phone/email) lines
 \def\bibheadingskip{\vspace{-2\parskip}} % The space after the bib heading and before the first entry
+\def\emptybibheadingskip{\vspace{-\parskip}} % The space before the first bib entry when there is no heading
 \def\bibpostskip{\vspace{-4\parskip}} % The space at the end of the bibliography before any other content
 
 % More sophisticated bibliography styling and printing. Looks for custom biblatex.cfg file in same directory.
@@ -137,7 +141,7 @@
 % Macro for switching on/off content specific to CV (extended) format
 \def\setNotCV{%
   \togglefalse{isCV}%
-  \hidePageNumbers{}%
+  \hidePageNumbers%
 }
 
 % Flag for switching on/off "title only" content
@@ -278,12 +282,14 @@
 %----------------------------------------------------------------------------------------
 
 % Leverages the bibliography to print a list of publications
+\newcommand{\@mybibtitle}{}
 \newcommand{\mybibliography}[3]{
+  \renewcommand{\@mybibtitle}{#1}
   \nocite{*}
   % Note: The "keyword" parameter is conjunctive if specified multiple times, not disjunctive.
-  \printbibliography[prefixnumbers={#2}, resetnumbers=1, omitnumbers=false, heading=mybibheading, keyword={#3}, title=#1, postnote=remove_post_vspace]%
+  \printbibliography[prefixnumbers={#2}, resetnumbers=1, omitnumbers=false, heading=mybibheading, keyword={#3}, postnote=remove_post_vspace]%
 }
-\defbibheading{mybibheading}{ \needspace{\bibSpace} \normalfont\selectfont\normalsize \bf #1 \bibheadingskip }
+\defbibheading{mybibheading}{ \needspace{\bibSpace} \normalfont\selectfont\normalsize \bf \@mybibtitle \ifthenelse{\equal{\@mybibtitle}{}}{\emptybibheadingskip}{\bibheadingskip} }
 \defbibnote{remove_post_vspace}{\bibpostskip}
 
 %----------------------------------------------------------------------------------------
@@ -469,6 +475,7 @@
 \setboolean{showPage}{TRUE} % Default to showing page numbers
 \def\showPageNumbers{\setboolean{showPage}{TRUE}}
 \def\hidePageNumbers{\setboolean{showPage}{FALSE}}
+\newcommand{\@checkPageVal}{\ifthenelse{\pageref{LastPage}>\@showPageThreshold}{\showPageNumbers}{\hidePageNumbers}}
 
 % Define the command to hide the revised date
 \newboolean{showRevisedDate}
@@ -477,6 +484,7 @@
 \def \@rRevisedDate {\textit{Revised \filemodprintdate{\jobname}}}
 
 \def \@lfootval{%
+  \@checkPageVal%
   \ifthenelse{\boolean{footerNameDefd} \AND \( \boolean{showRevisedDate} \OR \boolean{showPage} \)}{%
     % Footer name is defined an either the revised date or the page number
     \@footername%
@@ -488,6 +496,7 @@
 }
 
 \def \@cfootval{%
+  \@checkPageVal%
   \ifthenelse{\boolean{showPage} \AND \NOT \( \boolean{footerNameDefd} \OR \boolean{showRevisedDate} \)}{%
     % Only the page number is defined
     \@rPageVal%
@@ -506,6 +515,7 @@
 }
 
 \def \@rfootval{%
+  \@checkPageVal%
   \ifthenelse{\boolean{showPage} \AND \( \boolean{footerNameDefd} \OR \boolean{showRevisedDate} \)}{%
     % Page number is defined and either the footer name or the revised date
     \@rPageVal%

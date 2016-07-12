@@ -154,9 +154,9 @@ allowing you to set up your own font from the catalogue.
 
 #### `cvmode`
 
-The `cvmode` option can be set with a value of either `true` or `false` (case insensitive). Actually, anything other
-than `false` will evaluate to `true`. This may be a more convenient way of switching between [resume and CV
-modes](#markdown-header-resume-vs-cv). Below is an example of how to use this class option:
+The `cvmode` option can be set with a value of either `true` or `false` (case sensitive). Actually, anything other than
+`false` will evaluate to `true`, including just `[cvmode]`. This may be a more convenient way of switching between
+[resume and CV modes](#markdown-header-resume-vs-cv). Below is an example of how to use this class option:
 
 ```
 #!latex
