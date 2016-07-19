@@ -927,22 +927,26 @@ As the sophistication of the class increased, so did the number of additional pa
 * array
 * biblatex
 * environ
+* etoolbox
+* expl3
 * fancyhdr
 * filemod
 * fontawesome
+* fontenc
 * geometry
 * graphicx
 * hyperref
-* ifthen
-* lastpage
 * microtype
 * multicol
 * needspace
+* pageslts
 * quoting
 * scrextend
 * stix
+* suffix
 * wrapfig
 * xkeyval
+* xparse
 * xstring
 
 

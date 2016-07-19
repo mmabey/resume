@@ -18,7 +18,7 @@
 %
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-\ProvidesClass{resume}[2016/07/12 v0.9.1.3 Resume class (Mabey)]
+\ProvidesClass{resume}[2016/07/19 v0.9.1.4 Resume class (Mabey)]
 
 %%%%%%%%%%%%%%%%%%%%%%%%%% Pre-options Section - all imports and variable declarations must go here, before the first \DeclareOptionX
 \usepackage{xkeyval} % Processes keyword arguments
@@ -120,7 +120,6 @@
 \setlength{\itemsep}{0pt}
 \setlength{\partopsep}{0pt}
 \usepackage{array} % Required for boldface (\bf and \bfseries) tabular columns
-\usepackage{ifthen} % Required for ifthenelse statements
 
 \usepackage{wrapfig}
 \usepackage{graphicx}
@@ -175,8 +174,8 @@
 }
 
 % Flag for switching on/off "title only" content
-\newboolean{titleOnly}
-\setboolean{titleOnly}{false}
+\newbool{titleOnly}
+\setbool{titleOnly}{false}
 
 %----------------------------------------------------------------------------------------
 %	HEADINGS COMMANDS: Commands for printing name and address
@@ -230,7 +229,7 @@
 
 % \printicon is used to place an icon in the top right corner
 \def \printicon {
-  \ifthenelse{\isundefined{\@icon}}{}{
+  \ifundef{\@icon}{}{
 	\begingroup
 		\begin{wrapfigure}{r}{\@iconwidth}
       \vspace{-2ex}
@@ -247,6 +246,7 @@
 \let\ori@document=\document
 \renewcommand{\document}{
   \ori@document  % Begin document
+  \pagenumbering{arabic} % Needed by the pageslts package to get the last page number
   \printicon
   \printname % Print the name specified with \name
   \@ifundefined{@addressone}{}{ % Print the first address if specified
@@ -271,7 +271,7 @@
   \setkeys{rSectionFlags}{#1} % Process the titleOnly flag
   % Determine whether or not to set the global flag of titleOnly on or not
   \ifKV@rSectionFlags@titleOnly
-  \setboolean{titleOnly}{true}
+  \setbool{titleOnly}{true}
   \fi
   % Start the section
   \begin{rSectionHeading}{#2}
@@ -279,7 +279,7 @@
 }{
     \end{addmargin}
   \end{rSectionHeading}
-  \setboolean{titleOnly}{false}
+  \setbool{titleOnly}{false}
 }
 
 \newenvironment{rBulletSubsection}[1]{
@@ -299,7 +299,7 @@
 }{}
 
 \newenvironment{rBulletSection}[2][1]{
-  \setboolean{addListSkip}{true}
+  \setbool{addListSkip}{true}
   \begin{rSection}{#2}
     \begin{rBulletList}[#1]
 }{
@@ -319,7 +319,7 @@
   % Note: The "keyword" parameter is conjunctive if specified multiple times, not disjunctive.
   \printbibliography[prefixnumbers={#2}, resetnumbers=1, omitnumbers=false, heading=mybibheading, keyword={#3}, postnote=remove_post_vspace]%
 }
-\defbibheading{mybibheading}{ \needspace{\bibSpace} \normalfont\selectfont\normalsize \bf \@mybibtitle \ifthenelse{\equal{\@mybibtitle}{}}{\emptybibheadingskip}{\bibheadingskip} }
+\defbibheading{mybibheading}{ \needspace{\bibSpace} \normalfont\selectfont\normalsize \bf \@mybibtitle \ifdefempty{\@mybibtitle}{\emptybibheadingskip}{\bibheadingskip} }
 \defbibnote{remove_post_vspace}{\bibpostskip}
 
 %----------------------------------------------------------------------------------------
@@ -328,17 +328,17 @@
 
 \newcounter{rBulletDepth}  % Keep track of how deep we are nested
 % The difference between the vertical space before a regular list (0pt) and a multicol environment containing a list is a 3 pt length, or a single \smallskip. If a multicol list comes right after a header, it needs one \smallskip to have the same spacing as other content, which means a normal list needs two \smallskip, or one \medskip.
-\newboolean{addListSkip}
-\setboolean{addListSkip}{false}
+\newbool{addListSkip}
+\setbool{addListSkip}{false}
 
 \def\rBulletSymbolOdd{$\cdot$}
 \def\rBulletSymbolEven{$\vysmwhtcircle$}
 
 \newenvironment{rBulletList}[1][1]{%
   \stepcounter{rBulletDepth}
-  \ifthenelse{\isodd{\value{rBulletDepth}}}{% Change the symbol we use based on the depth
+  \ifnumodd{\value{rBulletDepth}}{% Change the symbol we use based on the depth
     \def \@rBulletSymbol{\rBulletSymbolOdd}}{%
-    \def \@rBulletSymbol{\rBulletSymbolEven}  }
+    \def \@rBulletSymbol{\rBulletSymbolEven}}
   % Set margin to the level of depth * em
   \def \@rBulletSettings{
     \setlength{\leftmargin}{\value{rBulletDepth}em}
@@ -350,17 +350,17 @@
     \setlength{\labelwidth}{0.5em} % Keeps left edge of item paragraphs aligned (when wrapping) because it is wider than either of the symbols used as bullets
   }
   \def \@rNumCols{#1}
-  \ifthenelse{\@rNumCols>1}{%
-    \ifthenelse{\boolean{addListSkip}}{\smallskip\setboolean{addListSkip}{false}}{}
+  \ifnumgreater{\@rNumCols}{1}{%
+    \ifbool{addListSkip}{\smallskip\setbool{addListSkip}{false}}{}
     \begin{multicols}{\@rNumCols}
     \begin{list}{\@rBulletSymbol}{\@rBulletSettings}
   }{%
-    \ifthenelse{\boolean{addListSkip}}{\medskip\setboolean{addListSkip}{false}}{}
+    \ifbool{addListSkip}{\medskip\setbool{addListSkip}{false}}{}
     \begin{list}{\@rBulletSymbol}{\@rBulletSettings}
    }
   }{
   \end{list}
-  \ifthenelse{\@rNumCols>1}{\end{multicols}}{}
+  \ifnumgreater{\@rNumCols}{1}{\end{multicols}}{}
   \addtocounter{rBulletDepth}{-1}
 }
 
@@ -388,22 +388,22 @@
 
 
 \NewDocumentCommand \setExpOrder { G{tpnl} }{%
-  \ifthenelse{\equal{#1}{tpnl}}{% Title, period, org name, location
+  \ifstrequal{#1}{tpnl}{% Title, period, org name, location
     \long\def \@exp@TL{\@exp@pos}%
     \long\def \@exp@TR{\@exp@dates}%
     \long\def \@exp@BL{\@exp@org}%
     \long\def \@exp@BR{\@exp@loc}%
-  }{ \ifthenelse{\equal{#1}{tlnp}}{% Title, location, org name, period
+  }{ \ifstrequal{#1}{tlnp}{% Title, location, org name, period
     \long\def \@exp@TL{\@exp@pos}%
     \long\def \@exp@TR{\@exp@loc}%
     \long\def \@exp@BL{\@exp@org}%
     \long\def \@exp@BR{\@exp@dates}%
-  }{ \ifthenelse{\equal{#1}{nltp}}{% Org name, location, title, period
+  }{ \ifstrequal{#1}{nltp}{% Org name, location, title, period
     \long\def \@exp@TL{\@exp@org}%
     \long\def \@exp@TR{\@exp@loc}%
     \long\def \@exp@BL{\@exp@pos}%
     \long\def \@exp@BR{\@exp@dates}%
-  }{ \ifthenelse{\equal{#1}{nptl}}{% Org name, period, title, location -- Trey Hunner's order
+  }{ \ifstrequal{#1}{nptl}{% Org name, period, title, location -- Trey Hunner's order
     \long\def \@exp@TL{\@exp@org}%
     \long\def \@exp@TR{\@exp@dates}%
     \long\def \@exp@BL{\@exp@pos}%
@@ -433,10 +433,10 @@
 \NewDocumentEnvironment{rExperience}{ G{\@exp@TL} G{\@exp@TR} G{\@exp@BL} G{\@exp@BR} G{\@exp@extra} }
   {\Collect@Body\@exp@collect@body}% Get everything up until the \end{rExperience} command
   {
-    \ifthenelse{\equal{\@exp@extra}{}}
+    \ifdefempty{\@exp@extra}
       {\def\@last@arg{#4}}
       {\def\@last@arg{#4\\\textnormal{#5}}}
-    \ifthenelse{\boolean{titleOnly}}{
+    \ifbool{titleOnly}{
       \begin{rExperienceHeader}{#1}{#2}{#3}{\@last@arg} \end{rExperienceHeader}
     }{
       \begin{rExperienceBullets}{#1}{#2}{#3}{\@last@arg}
@@ -449,7 +449,7 @@
 \newenvironment{rExperienceHeader}[4]{ % 4 input arguments - company name, year(s) employed, job title and location
   \needspace{\expHeaderSpace}
   {\@expsty@TL #1} \hfill {\@expsty@TR #2} % Bold company name and italic date on the right
-  \ifthenelse{\equal{#3}{}}{}{ % If the third argument is not specified, don't print the job title and location line
+  \ifblank{#3}{}{ % If the third argument is not specified, don't print the job title and location line
   \\
   {\@expsty@BL #3} \hfill {\@expsty@BR #4} % Job title and location
 
@@ -479,7 +479,7 @@
 \renewcommand{\thefilemoddate}[3]{#2/#3/#1}
 \usepackage{fancyhdr} %for adding a footer
 \pagestyle{fancy}
-\usepackage{lastpage} % For getting the last page number
+\usepackage{pageslts} % For getting the last page number
 \renewcommand{\headrulewidth}{0pt}
 % Set the headers to be empty
 \lhead{}
@@ -489,9 +489,9 @@
 % Split up the footer values according to which ones are defined
 
 % Define the \footername command to set footername and set the default to be empty
-\newboolean{footerNameDefd}
-\setboolean{footerNameDefd}{FALSE}
-\def\footername#1{\def\@footername{#1} \setboolean{footerNameDefd}{TRUE}}
+\newbool{footerNameDefd}
+\setbool{footerNameDefd}{false}
+\def\footername#1{\def\@footername{#1} \setbool{footerNameDefd}{true}}
 \def\@footername{}
 \usepackage{suffix}
 \WithSuffix\def\footername*#1{\iftoggle{isCV}{\footername{#1}}{}}
@@ -499,26 +499,26 @@
 % Define the command to set the threshold for showing the page number and set the default to 2
 \def\setShowPageThreshold#1{\IfInteger{#1}{\def\@showPageThreshold{#1}}{\def\@showPageThreshold{\@defaultPageThreshold}}}
 \def\@showPageThreshold{\@defaultPageThreshold}
-\def\@rPageVal{\ifthenelse{\pageref{LastPage}>\@showPageThreshold}{\thepage}{}}
-\newboolean{showPage}
-\setboolean{showPage}{TRUE} % Default to showing page numbers
-\def\showPageNumbers{\setboolean{showPage}{TRUE}}
-\def\hidePageNumbers{\setboolean{showPage}{FALSE}}
-\newcommand{\@checkPageVal}{\ifthenelse{\pageref{LastPage}>\@showPageThreshold}{\showPageNumbers}{\hidePageNumbers}}
+\def\@rPageVal{\ifnumgreater{\value{pagesLTS.pagenr}}{\@showPageThreshold}{\thepage}{}}
+\newbool{showPage}
+\setbool{showPage}{true} % Default to showing page numbers
+\def\showPageNumbers{\setbool{showPage}{true}}
+\def\hidePageNumbers{\setbool{showPage}{false}}
+\newcommand{\@checkPageVal}{\ifnumgreater{\value{pagesLTS.pagenr}}{\@showPageThreshold}{\showPageNumbers}{\hidePageNumbers}}
 
 % Define the command to hide the revised date
-\newboolean{showRevisedDate}
-\setboolean{showRevisedDate}{TRUE}
-\def \hideRevisedDate{\def \@rRevisedDate{} \setboolean{showRevisedDate}{FALSE}}
+\newbool{showRevisedDate}
+\setbool{showRevisedDate}{true}
+\def \hideRevisedDate{\def \@rRevisedDate{} \setbool{showRevisedDate}{false}}
 \def \@rRevisedDate {\textit{Revised \filemodprintdate{\jobname}}}
 
 \def \@lfootval{%
   \@checkPageVal%
-  \ifthenelse{\boolean{footerNameDefd} \AND \( \boolean{showRevisedDate} \OR \boolean{showPage} \)}{%
+  \ifboolexpr{bool{footerNameDefd} and ( bool{showRevisedDate} or bool{showPage} )}{%
     % Footer name is defined an either the revised date or the page number
     \@footername%
   }{%
-    \ifthenelse{\boolean{showRevisedDate} \AND \boolean{showPage}}{%
+    \ifboolexpr{ bool{showRevisedDate} and bool{showPage}}{%
       \@rRevisedDate%
     }{}%
   }%
@@ -526,17 +526,17 @@
 
 \def \@cfootval{%
   \@checkPageVal%
-  \ifthenelse{\boolean{showPage} \AND \NOT \( \boolean{footerNameDefd} \OR \boolean{showRevisedDate} \)}{%
+  \ifboolexpr{bool{showPage} and not ( bool{footerNameDefd} or bool{showRevisedDate} )}{%
     % Only the page number is defined
     \@rPageVal%
   }{%
-  \ifthenelse{\boolean{footerNameDefd} \AND \NOT \( \boolean{showRevisedDate} \OR \boolean{showPage} \)}{%
+  \ifboolexpr{bool{footerNameDefd} and not ( bool{showRevisedDate} or bool{showPage} )}{%
     % Only the footer name is defined
     \@footername%
   }{%
-  \ifthenelse{\boolean{showRevisedDate} \AND \(%
-        \( \boolean{footerNameDefd} \AND \boolean{showPage} \) \OR%
-        \( \NOT \( \boolean{footerNameDefd} \OR \boolean{showPage} \)\)\)}{%
+  \ifboolexpr{bool{showRevisedDate} and (%
+        ( bool{footerNameDefd} and bool{showPage} ) or%
+        ( not ( bool{footerNameDefd} or bool{showPage} )))}{%
     \@rRevisedDate%
   }{}%
   }%
@@ -545,11 +545,11 @@
 
 \def \@rfootval{%
   \@checkPageVal%
-  \ifthenelse{\boolean{showPage} \AND \( \boolean{footerNameDefd} \OR \boolean{showRevisedDate} \)}{%
+  \ifboolexpr{bool{showPage} and ( bool{footerNameDefd} or bool{showRevisedDate} )}{%
     % Page number is defined and either the footer name or the revised date
     \@rPageVal%
   }{%
-    \ifthenelse{\boolean{footerNameDefd} \AND \boolean{showRevisedDate}}{%
+    \ifboolexpr{bool{footerNameDefd} and bool{showRevisedDate}}{%
       % Only the footer name and the revised date are defined
       \@rRevisedDate%
     }{}%
