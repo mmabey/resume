@@ -189,6 +189,20 @@ value is 2, which means that there must be *more* than 2 pages in the document t
 goes without saying that the value must be an integer. If not, the default value will be used.
 
 
+#### `icon` and `iconsize`
+
+As an alternate to the `\icon` macro (see the section on [that command](#markdown-header-icon)), you can specify the
+icon file and its size as options to the document class. Here's an example of how you might use them:
+
+```
+#!latex
+\documentclass[icon=figs/icon.png, iconsize=0.5in]{resume}
+```
+
+Attempting to compile with only one of these options and not both will result in an error. Also, the value for
+`iconsize` **must** be a dimension, not just a number.
+
+
 
 
 ## Environments

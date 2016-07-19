@@ -27,6 +27,13 @@
 \newtoggle{isCV}
 % font
 \newcommand\@fontselection{doesntexist}
+% icon
+\newbool{icon@tf@fn}
+\setbool{icon@tf@fn}{false}
+\def\icon@val@fn{}
+\newbool{icon@tf@sz}
+\setbool{icon@tf@sz}{false}
+\newdimen\icon@val@sz
 % pagethreshold
 \usepackage{xstring}  % Allows us to check that the parameter is an Integer
 \newcommand\@defaultPageThreshold{}
@@ -45,6 +52,12 @@
 
 % font=name
 \DeclareOptionX{font}{\renewcommand\@fontselection{#1}}
+
+% icon=filename
+\DeclareOptionX{icon}{\renewcommand{\icon@val@fn}{#1}\setbool{icon@tf@fn}{true}}
+
+% iconsize=size
+\DeclareOptionX{iconsize}{\setlength{\icon@val@sz}{#1}\setbool{icon@tf@sz}{true}}
 
 % pagethreshold=#
 \DeclareOptionX{pagethreshold}{
@@ -225,17 +238,29 @@
   \endgroup
 }
 
-\def \icon#1#2{\def\@icon{#2} \def\@iconwidth{#1}}
+\def \icon#1#2{%
+  \IfFileExists{#2}
+    {\def\icon@val@fn{#2} \setlength{\icon@val@sz}{#1} \setbool{icon@tf@fn}{true} \setbool{icon@tf@sz}{true}}
+    {\ClassError{resume}{%
+      Bad\space filename:\space #2
+    }{%
+      Please\space only\space make\space me\space try\space to\space open\space icon\space files\space that\space actually\space exist...
+    }}
+}
 
 % \printicon is used to place an icon in the top right corner
 \def \printicon {
-  \ifundef{\@icon}{}{
+  \ifboolexpr{bool{icon@tf@fn} and bool{icon@tf@sz}}{
 	\begingroup
-		\begin{wrapfigure}{r}{\@iconwidth}
+		\begin{wrapfigure}{r}{\icon@val@sz}
       \vspace{-2ex}
-			\includegraphics[width=\@iconwidth]{\@icon}
+			\includegraphics[width=\icon@val@sz]{\icon@val@fn}
 		\end{wrapfigure}~ % Without the ~, the icon goes to the end of the document
 	\endgroup
+  }{
+    \ifboolexpr{bool{icon@tf@fn} or bool{icon@tf@sz}}
+      {\ClassError{resume}{You\space must\space give\space a\space filename\space *and*\space a\space size\space to\space use\space the\space icon\space option.}
+      {If\space you\space did\space provide\space both,\space try\space making\space sure\space the\space size\space is\space a\space dimension.}}{}
   }
 }
 
