@@ -18,7 +18,7 @@
 %
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-\ProvidesClass{resume}[2016/07/19 v0.9.1.4 Resume class (Mabey)]
+\ProvidesClass{resume}[2016/07/20 v0.9.1.5 Resume class (Mabey)]
 
 %%%%%%%%%%%%%%%%%%%%%%%%%% Pre-options Section - all imports and variable declarations must go here, before the first \DeclareOptionX
 \usepackage{xkeyval} % Processes keyword arguments
@@ -238,15 +238,7 @@
   \endgroup
 }
 
-\def \icon#1#2{%
-  \IfFileExists{#2}
-    {\def\icon@val@fn{#2} \setlength{\icon@val@sz}{#1} \setbool{icon@tf@fn}{true} \setbool{icon@tf@sz}{true}}
-    {\ClassError{resume}{%
-      Bad\space filename:\space #2
-    }{%
-      Please\space only\space make\space me\space try\space to\space open\space icon\space files\space that\space actually\space exist...
-    }}
-}
+\def \icon#1#2{\def\icon@val@fn{#2} \setlength{\icon@val@sz}{#1} \setbool{icon@tf@fn}{true} \setbool{icon@tf@sz}{true}}
 
 % \printicon is used to place an icon in the top right corner
 \def \printicon {

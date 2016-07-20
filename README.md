@@ -33,8 +33,10 @@ To use the template, the only files you really need are:
   **Note**: BibLaTeX is very different from [BibTeX](https://en.wikipedia.org/wiki/BibTeX), which is the default on most
   LaTeX installations, so if you haven't used it before it might do you some good to read up on the
   [documentation](http://mirror.ox.ac.uk/sites/ctan.org/macros/latex/contrib/biblatex/doc/biblatex.pdf).
-* [Makefile](Makefile): While not strictly required, running `make clean` should remove all the files that LaTeX creates
-  when compiling your document. It cannot compile documents.
+* [Makefile](Makefile): While not strictly required, the functions it has may be useful, particularly the `resume`,
+  `cv`, and `clean` targets. The first two will compile files matching `Resume_*.tex` and `CV_*.tex`, respectively. The
+  `clean` target should remove all the files that LaTeX creates when compiling your document. To run the targets on the
+  command line, run `make cv`, `make resume`, or `make clean`. You'll need to have `make` installed.
 
 
 Beyond that, you're welcome to use or not use any of the files as a guide for bringing everything together. I hope it
