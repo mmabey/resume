@@ -25,6 +25,18 @@ modifications to the original template include:
 
 ## Getting Started
 
+I recommend cloning only the `template` branch by using git's `--single-branch` option:
+
+```
+git clone git@bitbucket.org:mmabey/resume.git --single-branch --branch template
+```
+
+Or, for HTTP cloning:
+
+```
+git clone https://mmabey@bitbucket.org/mmabey/resume.git --single-branch --branch template
+```
+
 To use the template, the only files you really need are:
 
 * [resume.cls](resume.cls): Provides the `resume` document type so you can do `\documentclass{resume}`.
