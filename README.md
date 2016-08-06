@@ -218,6 +218,13 @@ Attempting to compile with only one of these options and not both will result in
 `iconsize` **must** be a dimension, not just a number.
 
 
+#### `showreviseddate`
+
+If you want to explicitly set whether the "Revised" date appears in the footer (see the section on
+[footers](#markdown-header-changing-the-footers) for more information), you can call this class option, setting it to
+`true` or `false`. If no `true`/`false` parameter is given, it will default to `true`, showing the date.
+
+
 
 
 ## Environments
@@ -943,7 +950,7 @@ To explicitly turn on or off page numbers, use the `\showPageNumbers` and `\hide
 `isCV` is set, page numbers will only be displayed if there are at least 2 pages in the document. To change this
 threshold, use the `\setShowPageThreshold{}` macro.
 
-The revised date is always on by default. To turn it on, make a call to the `\hideRevisedDate` macro.
+The revised date is always on by default. To turn it off, make a call to the `\hideRevisedDate` macro.
 
 
 
