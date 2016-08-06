@@ -18,7 +18,7 @@
 %
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-\ProvidesClass{resume}[2016/07/20 v0.9.1.5 Resume class (Mabey)]
+\ProvidesClass{resume}[2016/08/06 v0.9.1.6 Resume class (Mabey)]
 
 %%%%%%%%%%%%%%%%%%%%%%%%%% Pre-options Section - all imports and variable declarations must go here, before the first \DeclareOptionX
 \usepackage{xkeyval} % Processes keyword arguments
@@ -35,6 +35,8 @@
 \newbool{icon@tf@sz}
 \setbool{icon@tf@sz}{false}
 \newdimen\icon@val@sz
+% showreviseddate
+\newbool{showRevisedDate}
 % pagethreshold
 \usepackage{xstring}  % Allows us to check that the parameter is an Integer
 \newcommand\@defaultPageThreshold{}
@@ -59,6 +61,15 @@
 
 % iconsize=size
 \DeclareOptionX{iconsize}{\setlength{\icon@val@sz}{#1}\setbool{icon@tf@sz}{true}}
+
+% showreviseddate=true/false
+\DeclareOptionX{showreviseddate}[true]{
+  \ifstrequal{#1}{false}{}{
+  \ifstrequal{#1}{true}{\setbool{showRevisedDate}{true}}{
+    \ClassWarningNoLine{resume}{Invalid\space value\space for\space option\space 'showreviseddate':\space #1\MessageBreak Using\space default:\space true}
+    \setbool{showRevisedDate}{true}%else
+  }}
+}
 
 % pagethreshold=#
 \DeclareOptionX{pagethreshold}{
@@ -93,7 +104,7 @@
 
 
 % Execute all the default options
-\ExecuteOptionsX{margins=0.75in,cvmode=true,font=computermodern,linkicon,pagethreshold=2}
+\ExecuteOptionsX{margins=0.75in,cvmode=true,font=computermodern,linkicon,pagethreshold=2,showreviseddate}
 
 % Process the given options
 \ProcessOptionsX\relax
@@ -524,8 +535,6 @@
 \newcommand{\@checkPageVal}{\ifnumgreater{\value{pagesLTS.pagenr}}{\@showPageThreshold}{\showPageNumbers}{\hidePageNumbers}}
 
 % Define the command to hide the revised date
-\newbool{showRevisedDate}
-\setbool{showRevisedDate}{true}
 \def \hideRevisedDate{\def \@rRevisedDate{} \setbool{showRevisedDate}{false}}
 \def \@rRevisedDate {\textit{Revised \filemodprintdate{\jobname}}}
 
