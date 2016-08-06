@@ -22,6 +22,7 @@
 
 %%%%%%%%%%%%%%%%%%%%%%%%%% Pre-options Section - all imports and variable declarations must go here, before the first \DeclareOptionX
 \usepackage{xkeyval} % Processes keyword arguments
+\usepackage{pageslts} % For getting the last page number
 \usepackage{etoolbox}
 % cvmode
 \newtoggle{isCV}
@@ -496,7 +497,6 @@
 \renewcommand{\thefilemoddate}[3]{#2/#3/#1}
 \usepackage{fancyhdr} %for adding a footer
 \pagestyle{fancy}
-\usepackage{pageslts} % For getting the last page number
 \renewcommand{\headrulewidth}{0pt}
 % Set the headers to be empty
 \lhead{}
