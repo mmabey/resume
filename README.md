@@ -75,8 +75,9 @@ Just like any other LaTeX document, you must first set up the class of the docum
 \documentclass{resume}
 ```
 
-Here's where you want to do any other package importing using the `\usepackage{}` command. This includes setting up the
-font you want (see the [LaTeX Font Catalogue](http://www.tug.dk/FontCatalogue/) for options).
+Here's where you want to do any other package importing using the `\usepackage{}` command. If you don't use the [`font`
+option](#markdown-header-font), this is also where you'll want to set up the font you want (see the [LaTeX Font
+Catalogue](http://www.tug.dk/FontCatalogue/) for options).
 
 The next thing you want to do is set up the document heading to display your name, contact info, etc. Here's how I set
 this up:
