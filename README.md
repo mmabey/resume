@@ -225,6 +225,24 @@ If you want to explicitly set whether the "Revised" date appears in the footer (
 `true` or `false`. If no `true`/`false` parameter is given, it will default to `true`, showing the date.
 
 
+#### `lastname`
+
+If you want to set your last name for matching entries in bibliographies using the class options instead of the other
+command (see the section on the [`\MyLastName` command](#markdown-header-mylastname) for more information), use the
+`lastname` option, setting it to your last name.
+
+**Note**: If you just call this option without a value, it will have no effect.
+
+
+#### `footername`
+
+If you want to set the name that appears in the footer by using the class options instead of the other command (see the
+section on [Changing the Footers](#markdown-header-changing-the-footers) for more information), use the `footername`
+option, setting it to the value you want.
+
+**Note**: If you just call this option without a value, it will have no effect.
+
+
 
 
 ## Environments
