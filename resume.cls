@@ -43,6 +43,12 @@
 % show link icon
 \newif\iflink@icon
 \link@icontrue
+% footer name
+\newbool{footerNameDefd}
+\setbool{footerNameDefd}{false}
+\def\@footername{}
+% last name (for matching names in bib)
+\def\MyLastName{}
 %%%%%%%%%%%%%%%%%%%%%%%%%% End of Pre-options Section
 
 % cvmode=true/false
@@ -85,6 +91,21 @@
   \ifstrequal{#1}{true}{\link@icontrue}{
     \ClassWarningNoLine{resume}{Invalid\space value\space for\space option\space 'linkicon':\space #1}
   }}
+}
+
+% footername=
+\DeclareOptionX{footername}[]{
+  \ifblank{#1}{}{ % Check that length is non-zero
+    \setbool{footerNameDefd}{true}
+    \renewcommand\@footername{#1}
+  }
+}
+
+% lastname= % For \MyLastName
+\DeclareOptionX{lastname}[]{
+  \ifblank{#1}{}{ % Check that length is non-zero
+    \renewcommand\MyLastName{#1}
+  }
 }
 
 % margins % For uniform margins on all four sides
@@ -208,7 +229,6 @@
 
 \def \name#1{\def\@name{#1}} % Defines the \name command to set name
 \def \@name {} % Sets \@name to empty by default
-\def \MyLastName {}
 
 \def \addressSep {$\diamond$} % Set default address separator to a diamond
 
@@ -517,10 +537,7 @@
 % Split up the footer values according to which ones are defined
 
 % Define the \footername command to set footername and set the default to be empty
-\newbool{footerNameDefd}
-\setbool{footerNameDefd}{false}
 \def\footername#1{\def\@footername{#1} \setbool{footerNameDefd}{true}}
-\def\@footername{}
 \usepackage{suffix}
 \WithSuffix\def\footername*#1{\iftoggle{isCV}{\footername{#1}}{}}
 
