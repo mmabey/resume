@@ -18,7 +18,7 @@
 %
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-\ProvidesClass{resume}[2016/08/06 v0.9.1.6 Resume class (Mabey)]
+\ProvidesClass{resume}[2016/08/15 v0.9.1.7 Resume class (Mabey)]
 
 %%%%%%%%%%%%%%%%%%%%%%%%%% Pre-options Section - all imports and variable declarations must go here, before the first \DeclareOptionX
 \usepackage{xkeyval} % Processes keyword arguments
@@ -137,18 +137,63 @@
 \LoadClass[11pt,letterpaper]{article} % Font size and paper type
 
 
-\usepackage[T1]{fontenc}
+\usepackage{stix}  % Provides the "very small white circle" used as a bullet for sub-lists
 \usepackage{expl3} % For LaTeX3 commands
 \ExplSyntaxOn
 \newcommand*{\loadfont}[1]{%
   % Shout out to Christian Hupfer whose examples at http://tex.stackexchange.com/questions/314302/good-examples-of-tl-casenntf-and-str-casenntf helped me make sense of \str_case
   \str_case_x:nnTF{#1} {%
-    {berasans}{\usepackage[]{berasans}\renewcommand*\familydefault{\sfdefault}}%
-    {cantarell}{\usepackage[default, scale=0.95]{cantarell}}%
-    {computermodern}{\renewcommand*{\familydefault}{\sfdefault}}%
-    {lato}{\usepackage[default, scale=0.95]{lato}}%
-    {quattrocento}{\usepackage[sfdefault]{quattrocento}}%
-    {sourcesanspro}{\usepackage[default,semibold]{sourcesanspro}}%
+    {berasans}{\usepackage[T1]{fontenc}\usepackage[]{berasans}\renewcommand*\familydefault{\sfdefault}}%
+    {cantarell}{\usepackage[T1]{fontenc}\usepackage[default, scale=0.95]{cantarell}}%
+    {computermodern}{\usepackage[T1]{fontenc}\renewcommand*{\familydefault}{\sfdefault}}%
+    {lato}{\usepackage[T1]{fontenc}\usepackage[default, scale=0.95]{lato}}%
+    {quattrocento}{\usepackage[T1]{fontenc}\usepackage[sfdefault]{quattrocento}}%
+    {sourcesanspro}{\usepackage[T1]{fontenc}\usepackage[default,semibold]{sourcesanspro}}%
+    % I can't recommend any of these fonts, but they'll work
+    {alegreya}{\usepackage[T1]{fontenc}\usepackage[sfdefault]{AlegreyaSans}}%
+    {alegreyablack}{\usepackage[T1]{fontenc}\usepackage[sfdefault,black]{AlegreyaSans}}%
+    {biolinum}{\usepackage[T1]{fontenc}\usepackage{libertine}\renewcommand*\familydefault{\sfdefault}}%
+    {cabin}{\usepackage[T1]{fontenc}\usepackage[sfdefault]{cabin}}%
+    {cabinc}{\usepackage[T1]{fontenc}\usepackage[sfdefault,condensed]{cabin}}%
+    {comfortaa}{\usepackage[T1]{fontenc}\usepackage[default]{comfortaa}}%
+    {cmbright}{\usepackage[T1]{fontenc}\usepackage{cmbright}}%
+    {dejavusans}{\usepackage[T1]{fontenc}\usepackage{DejaVuSans}\renewcommand*\familydefault{\sfdefault}}%
+    {dejavuc}{\usepackage[T1]{fontenc}\usepackage{DejaVuSansCondensed}\renewcommand*\familydefault{\sfdefault}}%
+    {droidsans}{\usepackage[T1]{fontenc}\usepackage[defaultsans]{droidsans}\renewcommand*\familydefault{\sfdefault}}%
+    {firasans}{\usepackage[T1]{fontenc}\usepackage[sfdefault]{FiraSans}}%
+    {gfsneohellenic}{\usepackage[default]{gfsneohellenic}\usepackage[LGR,T1]{fontenc}}%
+    {gillius}{\usepackage[T1]{fontenc}\usepackage[default]{gillius}}%
+    {iwona}{\usepackage[math]{iwona}\usepackage[T1]{fontenc}}%
+    {iwonac}{\usepackage[condensed,math]{iwona}\usepackage[T1]{fontenc}}%
+    {iwonal}{\usepackage[light,math]{iwona}\usepackage[T1]{fontenc}}%
+    {iwonalc}{\usepackage[light,condensed,math]{iwona}\usepackage[T1]{fontenc}}%
+    {kurier}{\usepackage[math]{kurier}\usepackage[T1]{fontenc}}%
+    {kurierc}{\usepackage[condensed,math]{kurier}\usepackage[T1]{fontenc}}%
+    {kurierl}{\usepackage[light,math]{kurier}\usepackage[T1]{fontenc}}%
+    {kurierlc}{\usepackage[light,condensed,math]{kurier}\usepackage[T1]{fontenc}}%
+    {lmodern}{\usepackage{lmodern}\renewcommand*\familydefault{\sfdefault}\usepackage[T1]{fontenc}}%
+    {lmodernex}{\renewcommand*\sfdefault{lmssq}\renewcommand*\familydefault{\sfdefault}\usepackage[T1]{fontenc}}%
+    {libris}{\usepackage{libris}\renewcommand*\familydefault{\sfdefault}\usepackage[T1]{fontenc}}%
+    {lxfonts}{\usepackage[T1]{fontenc}\usepackage{lxfonts}}%
+    {merriweather}{\usepackage[T1]{fontenc}\usepackage[sfdefault]{merriweather}}%
+    {merriweatherl}{\usepackage[T1]{fontenc}\usepackage[sfdefault,light]{merriweather}}%
+    {mintspirit}{\usepackage[T1]{fontenc}\usepackage[default]{mintspirit}}%
+    {opensans}{\usepackage[default,osfigures,scale=0.95]{opensans}\usepackage[T1]{fontenc}}%
+    {paratype}{\usepackage{paratype}\renewcommand*\familydefault{\sfdefault}\usepackage[T1]{fontenc}}%
+    {paratypecap}{\usepackage{PTSansCaption}\renewcommand*\familydefault{\sfdefault}\usepackage[T1]{fontenc}}%
+    {paratypen}{\usepackage{PTSansNarrow}\renewcommand*\familydefault{\sfdefault}\usepackage[T1]{fontenc}}%
+    {raleway}{\usepackage[T1]{fontenc}\usepackage[default]{raleway}}%
+    {roboto}{\usepackage[sfdefault]{roboto}\usepackage[T1]{fontenc}}%
+    {robotoc}{\usepackage[sfdefault,condensed]{roboto}\usepackage[T1]{fontenc}}%
+    {robotol}{\usepackage[sfdefault,light]{roboto}\usepackage[T1]{fontenc}}%
+    {robotolc}{\usepackage[sfdefault,light,condensed]{roboto}\usepackage[T1]{fontenc}}%
+    {robotot}{\usepackage[sfdefault,thin]{roboto}\usepackage[T1]{fontenc}}%
+    {tgadventor}{\usepackage{tgadventor}\renewcommand*\familydefault{\sfdefault}\usepackage[T1]{fontenc}}%
+    {tgheros}{\usepackage{tgheros}\renewcommand*\familydefault{\sfdefault}\usepackage[T1]{fontenc}}%
+    {universal}{\usepackage[default]{uni}\usepackage[OT1]{fontenc}}%
+    {urwgothic}{\usepackage{avant}\renewcommand*\familydefault{\sfdefault}}%
+    {urwnimbus}{\usepackage[scaled]{helvet}\renewcommand*\familydefault{\sfdefault}\usepackage[T1]{fontenc}}%
+    {venturis}{\usepackage[lf]{venturis}\renewcommand*\familydefault{\sfdefault}\usepackage[T1]{fontenc}}%
     {none}{}%
   }{}{\ClassWarningNoLine{resume}{Invalid~font~option~given,\space falling~back~to~default:~computermodern}
       \renewcommand*{\familydefault}{\sfdefault}}%
@@ -169,7 +214,6 @@
 
 \usepackage{wrapfig}
 \usepackage{graphicx}
-\usepackage{stix}  % Provides the "very small white circle" used as a bullet for sub-lists
 \usepackage{microtype} % Helps things fit better horizontally
 \usepackage{multicol} %columns for lists
 \setlength\multicolsep{0pt} %remove space before and after multicol

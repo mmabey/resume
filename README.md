@@ -163,8 +163,66 @@ These are the fonts from the [LaTeX Font Catalogue](http://www.tug.dk/FontCatalo
 and were in the Sans Serif family. The latter criterion was important to me because I wanted my resume/CV to be more
 tailored for screen viewing.
 
+Other supported (but not necessarily recommended) fonts:
+
+* [Alegreya Sans](http://www.tug.dk/FontCatalogue/alegreyasans/) - Use: `[font=alegreya]`
+* [Alegreya Sans Black](http://www.tug.dk/FontCatalogue/alegreyasans/) - Use: `[font=alegreyablack]`
+* [Biolinum](http://www.tug.dk/FontCatalogue/biolinum/) - Use: `[font=biolinum]`
+* [Cabin](http://www.tug.dk/FontCatalogue/cabin/) - Use: `[font=cabin]`
+* [Cabin Condensed](http://www.tug.dk/FontCatalogue/cabincondensed/) - Use: `[font=cabinc]`
+* [Comfortaa](http://www.tug.dk/FontCatalogue/comfortaa/) - Use: `[font=comfortaa]`
+* [Computer Modern Bright](http://www.tug.dk/FontCatalogue/computermodernbright/) - Use: `[font=cmbright]`
+* [DejaVu Sans](http://www.tug.dk/FontCatalogue/dejavusans/) - Use: `[font=dejavusans]`
+* [DejaVu Sans Condensed](http://www.tug.dk/FontCatalogue/dejavusanscondensed/) - Use: `[font=dejavuc]`
+* [Droid Sans](http://www.tug.dk/FontCatalogue/droidsans/) - Use: `[font=droidsans]`
+* [Fira Sans](http://www.tug.dk/FontCatalogue/firasans/) - Use: `[font=firasans]`
+* [GFS Neohellenic](http://www.tug.dk/FontCatalogue/gfsneohellenic/) - Use: `[font=gfsneohellenic]`
+* [Gillius](http://www.tug.dk/FontCatalogue/gillius/) - Use: `[font=gillius]`
+* [Iwona](http://www.tug.dk/FontCatalogue/iwona/) - Use: `[font=iwona]`
+* [Iwona Condensed](http://www.tug.dk/FontCatalogue/iwonacondensed/) - Use: `[font=iwonac]`
+* [Iwona Light](http://www.tug.dk/FontCatalogue/iwonalight/) - Use: `[font=iwonal]`
+* [Iwona Light Condensed](http://www.tug.dk/FontCatalogue/iwonalightcondensed/) - Use: `[font=iwonalc]`
+* [Kurier](http://www.tug.dk/FontCatalogue/kurier/) - Use: `[font=kurier]`
+* [Kurier Condensed](http://www.tug.dk/FontCatalogue/kuriercondensed/) - Use: `[font=kurierc]`
+* [Kurier Light](http://www.tug.dk/FontCatalogue/kurierlight/) - Use: `[font=kurierl]`
+* [Kurier Light Condensed](http://www.tug.dk/FontCatalogue/kurierlightcondensed/) - Use: `[font=kurierlc]`
+* [Latin Modern Sans](http://www.tug.dk/FontCatalogue/latinmodernsans/) - Use: `[font=lmodern]`
+* [Latin Modern Sans Extended](http://www.tug.dk/FontCatalogue/latinmodernsansextended/) - Use: `[font=lmodernex]`
+* [Libris ADF](http://www.tug.dk/FontCatalogue/librisadf/) - Use: `[font=libris]`
+* [LX Fonts](http://www.tug.dk/FontCatalogue/lxfonts/) - Use: `[font=lxfonts]`
+* [Merriweather Sans](http://www.tug.dk/FontCatalogue/merriweathersans/) - Use: `[font=merriweather]`
+* [Merriweather Sans Light](http://www.tug.dk/FontCatalogue/merriweathersanslight/) - Use: `[font=merriweatherl]`
+* [Mintspirit](http://www.tug.dk/FontCatalogue/mintspirit/) - Use: `[font=mintspirit]`
+* [Open Sans](http://www.tug.dk/FontCatalogue/opensans/) - Use: `[font=opensans]`
+* [Paratype Sans](http://www.tug.dk/FontCatalogue/paratypesans/) - Use: `[font=paratype]`
+* [Paratype Sans Caption](http://www.tug.dk/FontCatalogue/paratypesanscaption/) - Use: `[font=paratypecap]`
+* [Paratype Sans Narrow](http://www.tug.dk/FontCatalogue/paratypesansnarrow/) - Use: `[font=paratypen]`
+* [Raleway](http://www.tug.dk/FontCatalogue/raleway/) - Use: `[font=raleway]`
+* [Roboto](http://www.tug.dk/FontCatalogue/roboto/) - Use: `[font=roboto]`
+* [Roboto Condensed](http://www.tug.dk/FontCatalogue/robotocondensed/) - Use: `[font=robotoc]`
+* [Roboto Light](http://www.tug.dk/FontCatalogue/robotolight/) - Use: `[font=robotol]`
+* [Roboto Light Condensed](http://www.tug.dk/FontCatalogue/robotolightcondensed/) - Use: `[font=robotolc]`
+* [Roboto Thin](http://www.tug.dk/FontCatalogue/robotothin/) - Use: `[font=robotot]`
+* [TeX Gyre Adventor](http://www.tug.dk/FontCatalogue/texgyreadventor/) - Use: `[font=tgadventor]`
+* [TeX Gyre Heros](http://www.tug.dk/FontCatalogue/texgyreheros/) - Use: `[font=tgheros]`
+* [Universal](http://www.tug.dk/FontCatalogue/universal/) - Use: `[font=universal]`
+* [URW Gothic](http://www.tug.dk/FontCatalogue/urwgothic/) - Use: `[font=urwgothic]`
+* [URW Nimbus Sans](http://www.tug.dk/FontCatalogue/urwnimbussans/) - Use: `[font=urwnimbus]`
+* [Venturis ADF Sans](http://www.tug.dk/FontCatalogue/venturisadfsans/) - Use: `[font=venturis]`
+
 If you want to use a font *NOT* listed above, use the option `[font=none]`, and not even the default font will load,
 allowing you to set up your own font from the catalogue.
+
+Fonts that have some kind of conflict or issue:
+
+* Arev -> conflicts with the STIX package
+* Epigrafica -> conflicts with the STIX package
+* GNU Freefont Sans -> incompatible with pdflatex, must use either the XeTeX or LuaTeX typesetting engine
+* KP Sans-Serif -> error compiling: `No room for a new \mathgroup`
+* Libertinus Sans -> error compiling: `No room for a new \mathgroup`
+* Nimbus 15 Sans -> error compiling: `No room for a new \mathgroup`
+* Noto Sans -> error compiling: `No room for a new \mathgroup`
+* Tapir -> error compiling: `No room for a new \mathgroup`
 
 
 #### `cvmode`
