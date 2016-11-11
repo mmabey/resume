@@ -19,13 +19,20 @@ modifications to the original template include:
   amount of work necessary to keep the two current with each other.
 * So much more!
 
+***NOTE***: You must have version >=3.4 of the `biblatex` package installed. There were significant deprecations with
+that release that aren't backwards compatible.
+
+
 **Table of Contents:**
 
 [TOC]
 
 ## Getting Started
 
-I recommend cloning only the `template` branch by using git's `--single-branch` option:
+I recommend downloading just the `template` branch ([zip](https://bitbucket.org/mmabey/resume/get/template.zip),
+[gz](https://bitbucket.org/mmabey/resume/get/template.tar.gz), or
+[bz2](https://bitbucket.org/mmabey/resume/get/template.tar.bz2)) and start your own repository. If you want to still get
+template updates using git, then I recommend cloning only the `template` branch by using git's `--single-branch` option:
 
 ```
 git clone git@bitbucket.org:mmabey/resume.git --single-branch --branch template

@@ -137,7 +137,6 @@
 \LoadClass[11pt,letterpaper]{article} % Font size and paper type
 
 
-\usepackage{stix}  % Provides the "very small white circle" used as a bullet for sub-lists
 \usepackage{expl3} % For LaTeX3 commands
 \ExplSyntaxOn
 \newcommand*{\loadfont}[1]{%
@@ -407,10 +406,11 @@
 % Leverages the bibliography to print a list of publications
 \newcommand{\@mybibtitle}{}
 \newcommand{\mybibliography}[3]{
+  \newrefcontext[labelprefix={#2}] % Required for biblatex >=3.4, released 2016-05-10
   \renewcommand{\@mybibtitle}{#1}
   \nocite{*}
   % Note: The "keyword" parameter is conjunctive if specified multiple times, not disjunctive.
-  \printbibliography[prefixnumbers={#2}, resetnumbers=1, omitnumbers=false, heading=mybibheading, keyword={#3}, postnote=remove_post_vspace]%
+  \printbibliography[resetnumbers=1, omitnumbers=false, heading=mybibheading, keyword={#3}, postnote=remove_post_vspace]%
 }
 \defbibheading{mybibheading}{ \needspace{\bibSpace} \normalfont\selectfont\normalsize \bf \@mybibtitle \ifdefempty{\@mybibtitle}{\emptybibheadingskip}{\bibheadingskip} }
 \defbibnote{remove_post_vspace}{\bibpostskip}
@@ -424,8 +424,13 @@
 \newbool{addListSkip}
 \setbool{addListSkip}{false}
 
+% Allows smaller text (the bullet below) to be centered vertically with the rest of the line
+\newsavebox{\rbulletbox}
+\newcommand*{\mlap}[1]{\sbox{\rbulletbox}{#1}\raisebox{0.5\ht\rbulletbox}{\usebox{\rbulletbox}}}
+
 \def\rBulletSymbolOdd{$\cdot$}
-\def\rBulletSymbolEven{$\vysmwhtcircle$}
+% \def\rBulletSymbolEven{\mlap{\tiny\faAngleRight}}
+\def\rBulletSymbolEven{\mlap{\fontsize{3pt}{3pt}\faCircleO}}
 
 \newenvironment{rBulletList}[1][1]{%
   \stepcounter{rBulletDepth}
