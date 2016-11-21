@@ -18,7 +18,7 @@
 %
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-\ProvidesClass{resume}[2016/08/15 v0.9.1.7 Resume class (Mabey)]
+\ProvidesClass{resume}[2016/11/21 v0.9.1.8 Resume class (Mabey)]
 
 %%%%%%%%%%%%%%%%%%%%%%%%%% Pre-options Section - all imports and variable declarations must go here, before the first \DeclareOptionX
 \usepackage{xkeyval} % Processes keyword arguments
