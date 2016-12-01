@@ -1,9 +1,12 @@
 # Resume & CV Template/Example
 
+For the most up-to-date version of these instructions, go to https://bitbucket.org/mmabey/resume/overview.
+
 This template is based on the `resume.cls` class first created by [Trey Hunner](http://www.treyhunner.com/), then
 modified and posted on [LaTeX Templates](http://www.latextemplates.com/template/medium-length-professional-cv). Key
 modifications to the original template include:
 
+* Automatically generated PDF index of the sections and subsections.
 * Reordering of the fields for experience entries so that the position title and date are on the first line and the
   organization and location are on the second line. (See also issues #12 and #13.)
 * Ability to specify a "logo" which appears in the upper right-hand corner of the document.
