@@ -1,5 +1,7 @@
 # Resume & CV Template/Example
 
+For the most up-to-date version of these instructions, go to https://bitbucket.org/mmabey/resume/overview.
+
 This template is based on the `resume.cls` class first created by [Trey Hunner](http://www.treyhunner.com/), then
 modified and posted on [LaTeX Templates](http://www.latextemplates.com/template/medium-length-professional-cv). Key
 modifications to the original template include:

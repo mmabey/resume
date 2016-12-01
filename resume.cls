@@ -18,7 +18,7 @@
 %
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-\ProvidesClass{resume}[2016/11/21 v0.9.1.8 Resume class (Mabey)]
+\ProvidesClass{resume}[2016/12/01 v0.9.2.0 Resume class (Mabey)]
 
 %%%%%%%%%%%%%%%%%%%%%%%%%% Pre-options Section - all imports and variable declarations must go here, before the first \DeclareOptionX
 \usepackage{xkeyval} % Processes keyword arguments
@@ -356,6 +356,10 @@
 %	SECTION FORMATTING
 %----------------------------------------------------------------------------------------
 
+% Counters for PDF Index creation
+\newcounter{rSectionCount}
+\newcounter{rSubSectionCount}[rSectionCount]
+
 \define@boolkey{rSectionFlags}{titleOnly}[true]{}
 
 % Defines the rSection environment for the large sections within the CV
@@ -376,6 +380,8 @@
 
 \newenvironment{rBulletSubsection}[1]{
   \needspace{\subsecSpace}
+  \stepcounter{rSubSectionCount}
+  \pdfbookmark[1]{#1}{ss:\Roman{rSectionCount}\roman{rSubSectionCount}}
   {\bf #1}
   \begin{rBulletList}
 }{
@@ -385,6 +391,8 @@
 \newenvironment{rSectionHeading}[1]{ % 1 input argument - section name
   \sectionskip
   \needspace{\secHeadSpace}
+  \stepcounter{rSectionCount}
+  \pdfbookmark[0]{#1}{s:\Roman{rSectionCount}}
   \MakeUppercase{\bf #1} % Section title
   \sectionlineskip
   \hrule % Horizontal line
@@ -412,7 +420,12 @@
   % Note: The "keyword" parameter is conjunctive if specified multiple times, not disjunctive.
   \printbibliography[resetnumbers=1, omitnumbers=false, heading=mybibheading, keyword={#3}, postnote=remove_post_vspace]%
 }
-\defbibheading{mybibheading}{ \needspace{\bibSpace} \normalfont\selectfont\normalsize \bf \@mybibtitle \ifdefempty{\@mybibtitle}{\emptybibheadingskip}{\bibheadingskip} }
+\defbibheading{mybibheading}{%
+  \needspace{\bibSpace}%
+  \ifdefempty{\@mybibtitle}{}{\stepcounter{rSubSectionCount} \pdfbookmark[1]{\@mybibtitle}{b:\Roman{rSectionCount}\roman{rSubSectionCount}}}%
+  \normalfont\selectfont\normalsize \bf \@mybibtitle%
+  \ifdefempty{\@mybibtitle}{\emptybibheadingskip}{\bibheadingskip}%
+}
 \defbibnote{remove_post_vspace}{\bibpostskip}
 
 %----------------------------------------------------------------------------------------
@@ -546,6 +559,10 @@
 
 \newenvironment{rExperienceHeader}[4]{ % 4 input arguments - company name, year(s) employed, job title and location
   \needspace{\expHeaderSpace}
+  \ifbool{titleOnly}{}{
+    \stepcounter{rSubSectionCount}
+    \pdfbookmark[1]{\@exp@pos}{ss:\Roman{rSectionCount}\roman{rSubSectionCount}}
+  }
   {\@expsty@TL #1} \hfill {\@expsty@TR #2} % Bold company name and italic date on the right
   \ifblank{#3}{}{ % If the third argument is not specified, don't print the job title and location line
   \\
