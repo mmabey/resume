@@ -18,7 +18,7 @@
 %
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-\ProvidesClass{resume}[2016/12/01 v0.9.2.0 Resume class (Mabey)]
+\ProvidesClass{resume}[2016/12/02 v0.9.2.1 Resume class (Mabey)]
 
 %%%%%%%%%%%%%%%%%%%%%%%%%% Pre-options Section - all imports and variable declarations must go here, before the first \DeclareOptionX
 \usepackage{xkeyval} % Processes keyword arguments
@@ -220,12 +220,15 @@
 \usepackage{xparse} % Advanced environment declarations (multiple optional arguments)
 
 \usepackage{hyperref} %links - http and mailto
+\urlstyle{same}
 \hypersetup{hidelinks} %hide boxes around links
 %check out other hyperref options
 \iflink@icon
   \usepackage{fontawesome} % Required for new definition of \href
   \let\orighref\href % Store the original \href command
   \renewcommand{\href}[2]{\orighref{#1}{#2\,{\tiny \faExternalLink}}}  % Add icon next to all links
+  \let\origurl\url % Store the original \url command
+  \renewcommand{\url}[1]{\origurl{#1}\href{#1}{}}  % Add icon next to all links
 \fi
 
 \usepackage{quoting} % Equivalent to the quote environment without the spacing before and after
