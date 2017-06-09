@@ -18,7 +18,7 @@
 %
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-\ProvidesClass{resume}[2016/12/02 v0.9.2.1 Resume class (Mabey)]
+\ProvidesClass{resume}[2017/06/09 v0.9.2.2 Resume class (Mabey)]
 
 %%%%%%%%%%%%%%%%%%%%%%%%%% Pre-options Section - all imports and variable declarations must go here, before the first \DeclareOptionX
 \usepackage{xkeyval} % Processes keyword arguments
@@ -238,7 +238,7 @@
 \def\namesize{\huge} % Size of the name at the top of the document
 % Some pre-defined skips for different document locations
 % The below commands define the whitespace after certain things in the document - they can be \smallskip, \medskip or \bigskip
-\def\sectionskip{\smallskip} % The space after the heading section
+\def\sectionskip{\penalty-200\smallskip} % The space after the heading section
 \def\sectionlineskip{\medskip} % The space above the horizontal line for each section
 \def\nameskip{\medskip} % The space after your name at the top
 \def\addressskip{} % The space between the two address (or phone/email) lines
@@ -270,7 +270,7 @@
 \setbool{titleOnly}{false}
 
 %----------------------------------------------------------------------------------------
-%	HEADINGS COMMANDS: Commands for printing name and address
+% HEADINGS COMMANDS: Commands for printing name and address
 %----------------------------------------------------------------------------------------
 
 \def \name#1{\def\@name{#1}} % Defines the \name command to set name
@@ -321,12 +321,12 @@
 % \printicon is used to place an icon in the top right corner
 \def \printicon {
   \ifboolexpr{bool{icon@tf@fn} and bool{icon@tf@sz}}{
-	\begingroup
-		\begin{wrapfigure}{r}{\icon@val@sz}
+  \begingroup
+    \begin{wrapfigure}{r}{\icon@val@sz}
       \vspace{-2ex}
-			\includegraphics[width=\icon@val@sz]{\icon@val@fn}
-		\end{wrapfigure}~ % Without the ~, the icon goes to the end of the document
-	\endgroup
+      \includegraphics[width=\icon@val@sz]{\icon@val@fn}
+    \end{wrapfigure}~ % Without the ~, the icon goes to the end of the document
+  \endgroup
   }{
     \ifboolexpr{bool{icon@tf@fn} or bool{icon@tf@sz}}
       {\ClassError{resume}{You\space must\space give\space a\space filename\space *and*\space a\space size\space to\space use\space the\space icon\space option.}
@@ -335,7 +335,7 @@
 }
 
 %----------------------------------------------------------------------------------------
-%	PRINT THE HEADING LINES
+% PRINT THE HEADING LINES
 %----------------------------------------------------------------------------------------
 
 \let\ori@document=\document
@@ -356,7 +356,7 @@
 }
 
 %----------------------------------------------------------------------------------------
-%	SECTION FORMATTING
+% SECTION FORMATTING
 %----------------------------------------------------------------------------------------
 
 % Counters for PDF Index creation
@@ -411,7 +411,7 @@
 }
 
 %----------------------------------------------------------------------------------------
-%	PUBLICATIONS FORMATTING
+% PUBLICATIONS FORMATTING
 %----------------------------------------------------------------------------------------
 
 % Leverages the bibliography to print a list of publications
@@ -432,7 +432,7 @@
 \defbibnote{remove_post_vspace}{\bibpostskip}
 
 %----------------------------------------------------------------------------------------
-%	WORK EXPERIENCE FORMATTING
+% WORK EXPERIENCE FORMATTING
 %----------------------------------------------------------------------------------------
 
 \newcounter{rBulletDepth}  % Keep track of how deep we are nested
@@ -463,6 +463,8 @@
     \setlength{\partopsep}{0pt}
     \setlength{\labelwidth}{0.5em} % Keeps left edge of item paragraphs aligned (when wrapping) because it is wider than either of the symbols used as bullets
   }
+  % Try *really* hard to not place a break at the beginning of these lists. Overrides the default value of -51.
+  \@beginparpenalty=9000
   \def \@rNumCols{#1}
   \ifnumgreater{\@rNumCols}{1}{%
     \ifbool{addListSkip}{\smallskip\setbool{addListSkip}{false}}{}
@@ -590,7 +592,7 @@
 
 
 %----------------------------------------------------------------------------------------
-%	FOOTER COMMNADS: PRINT THE MODIFIED DATE OF THE MAIN .TEX FILE
+% FOOTER COMMNADS: PRINT THE MODIFIED DATE OF THE MAIN .TEX FILE
 %----------------------------------------------------------------------------------------
 
 \usepackage{filemod}
@@ -674,7 +676,7 @@
 
 
 %----------------------------------------------------------------------------------------
-%	Other custom stuff
+% Other custom stuff
 %----------------------------------------------------------------------------------------
 
 
