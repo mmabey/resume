@@ -10,3 +10,4 @@
 *.bcf
 *.run.xml
 sections/references.tex
+*.swp

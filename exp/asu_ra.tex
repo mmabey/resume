@@ -4,7 +4,7 @@
 \expPosPeriod{Nov 2009 -- Present}
 \expOrgName{\href{http://sefcom.asu.edu/}{Security Engineering for Future Computing (SEFCOM) Lab}, ASU}
 \expOrgLoc{Tempe, AZ}
-\expExtra{\textit{Lab Directors}: Gail-Joon Ahn, Adam Doup\'{e}%
+\expExtra{\textit{Lab Directors}: Gail-Joon Ahn, Adam Doup\'{e}, Ziming Zhao%
   \rResumeOnly{\\ \textit{Sponsors}: Department of Energy, National Science Foundation}% CV lists sponsors down below
   }
 
@@ -18,39 +18,49 @@
       \begin{rBulletList}
   }
 
-  \rResumeOnly{ % Resume lists the IASP scholarship here, CV doesn't
+        \item Created a method for identifying extensions installed on \textbf{Chrome~OS} by analyzing the encrypted
+          files on the hard drive. Wrote an accompanying crawler in \textbf{Python} (and using \textbf{Ansible},
+          \textbf{Celery}, \textbf{MySQL}, \textbf{sshfs}, and \textbf{OpenStack}) to download all extensions on the
+          Chrome Web Store and analyze them.\rCVonly{\\
+          \emph{Publications:}~\cite{MabeyDFRWS, IASymp_Mabey2015, MabeyBlogCheckout2016, MabeyBlogFixRepo2015}}
 
-  \item Recipient of the Department of Defense Information Assurance Scholarship Program (IASP) from 2012--2017 (5 school years).
+        \rCVonly{
+        \item Helped design and implement a cloud-based version of the International Capture the Flag (iCTF)
+          competition, allowing educators to more easily host their own CTF competitions. Used \textbf{Ansible},
+          \textbf{Vagrant}, \textbf{Amazon EC2}, and \textbf{Python} for the implementation and deployment.\\
+          \emph{Publications:}~\cite{Trickel2017}
+        }
 
-  }
-
-
-        \item Researched forensic techniques for \textbf{Chrome~OS}/\textbf{Chromium~OS} by creating tools in \textbf{Python} and using \textbf{libvirt} to interface with a \textbf{KVM/QEMU} hypervisor. (In progress)\rCVonly{\\
-          \emph{Publications:}~\cite{MabeyDFRWS},~\cite{IASymp_Mabey2015},~\cite{MabeyBlogCheckout2016},~\cite{MabeyBlogFixRepo2015}}
-
-        \item Developed a web email forensic acquisition approach that reestablishes persistent cookie sessions stored by a browser, and automated the process using \textbf{Python} and \textbf{Selenium}.\rCVonly{\\
+        \item Developed a forensic acquisition approach for web email that reestablishes persistent cookie sessions
+          stored by a browser, and automated the process using \textbf{Python} and \textbf{Selenium}.\rCVonly{\\
           \emph{Publications:}~\cite{Paglierani2013}}
 
-        \item Designed and implemented the core components of a modular, highly scalable, collaboration-centric digital forensic framework built on the \textbf{OpenStack} cloud architecture. Functions of the components included distributed job scheduling, storage management, and concise evidence representation and transmission.\rCVonly{\\
-          \emph{Publications:}~\cite{Mabey2011},~\cite{Mabey2013},~\cite{IAWS_Mabey2012}}
+        \item Designed and implemented the core components of a modular, highly scalable, collaboration-centric digital
+          forensic framework built on the \textbf{OpenStack} cloud architecture. Functions of the components included
+          distributed job scheduling, storage management, and concise evidence representation and
+          transmission.\rCVonly{\\
+          \emph{Publications:}~\cite{Mabey2011, Mabey2013, IAWS_Mabey2012}}
 
-
-  \rResumeOnly{ % Items to list that aren't projects to be listed on the CV
-
-  % \item Set up and maintained an \textbf{OpenVPN} installation for the SEFCOM lab.
-
-  %\item Researched methods for performing forensic acquisition on \textbf{Android} devices.
-
-  %\item Acted as a mentor for an undergraduate student that otherwise would not have pursued a master's degree and collaborated with him on the research for his thesis.
-
-
-  }
-
-  \rCVonly{ % While we're in a CV section, let's close the sublist and add the sponsors
+  \rCVonly{
 
       \end{rBulletList}
 
-    \item Sponsors
+    \item Other experience:
+      \begin{rBulletList}
+  }
+
+        \item Maintained fifteen servers for the lab, including a public-facing router, an \textbf{OpenVPN} server, a
+          reverse-proxy web server with \textbf{TLS} certificate management, an \textbf{OpenStack} cloud, switches
+          transmitting \textbf{VLAN}-tagged traffic, and a \textbf{GitLab} server.
+
+  \rCVonly{
+
+        % \item Acted as a mentor for an undergraduate student that otherwise would not have pursued a master's degree and
+          % collaborated with him on the research for his thesis.
+
+      \end{rBulletList}
+
+    \item Sponsors:
       \begin{rBulletList}[2]
 
         \item Department of Defense Information Assurance Scholarship Program (IASP)
