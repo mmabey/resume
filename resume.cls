@@ -137,72 +137,75 @@
 \LoadClass[11pt,letterpaper]{article} % Font size and paper type
 
 
-\usepackage{expl3} % For LaTeX3 commands
-\ExplSyntaxOn
-\newcommand*{\loadfont}[1]{%
-  % Shout out to Christian Hupfer whose examples at http://tex.stackexchange.com/questions/314302/good-examples-of-tl-casenntf-and-str-casenntf helped me make sense of \str_case
-  \str_case_x:nnTF{#1} {%
-    {berasans}{\usepackage[T1]{fontenc}\usepackage[]{berasans}\renewcommand*\familydefault{\sfdefault}}%
-    {cantarell}{\usepackage[T1]{fontenc}\usepackage[default, scale=0.95]{cantarell}}%
-    {computermodern}{\usepackage[T1]{fontenc}\renewcommand*{\familydefault}{\sfdefault}}%
-    {lato}{\usepackage[T1]{fontenc}\usepackage[default, scale=0.95]{lato}}%
-    {quattrocento}{\usepackage[T1]{fontenc}\usepackage[sfdefault]{quattrocento}}%
-    {sourcesanspro}{\usepackage[T1]{fontenc}\usepackage[default,semibold]{sourcesanspro}}%
-    % I can't recommend any of these fonts, but they'll work
-    {alegreya}{\usepackage[T1]{fontenc}\usepackage[sfdefault]{AlegreyaSans}}%
-    {alegreyablack}{\usepackage[T1]{fontenc}\usepackage[sfdefault,black]{AlegreyaSans}}%
-    {biolinum}{\usepackage[T1]{fontenc}\usepackage{libertine}\renewcommand*\familydefault{\sfdefault}}%
-    {cabin}{\usepackage[T1]{fontenc}\usepackage[sfdefault]{cabin}}%
-    {cabinc}{\usepackage[T1]{fontenc}\usepackage[sfdefault,condensed]{cabin}}%
-    {comfortaa}{\usepackage[T1]{fontenc}\usepackage[default]{comfortaa}}%
-    {cmbright}{\usepackage[T1]{fontenc}\usepackage{cmbright}}%
-    {dejavusans}{\usepackage[T1]{fontenc}\usepackage{DejaVuSans}\renewcommand*\familydefault{\sfdefault}}%
-    {dejavuc}{\usepackage[T1]{fontenc}\usepackage{DejaVuSansCondensed}\renewcommand*\familydefault{\sfdefault}}%
-    {droidsans}{\usepackage[T1]{fontenc}\usepackage[defaultsans]{droidsans}\renewcommand*\familydefault{\sfdefault}}%
-    {firasans}{\usepackage[T1]{fontenc}\usepackage[sfdefault]{FiraSans}}%
-    {gfsneohellenic}{\usepackage[default]{gfsneohellenic}\usepackage[LGR,T1]{fontenc}}%
-    {gillius}{\usepackage[T1]{fontenc}\usepackage[default]{gillius}}%
-    {iwona}{\usepackage[math]{iwona}\usepackage[T1]{fontenc}}%
-    {iwonac}{\usepackage[condensed,math]{iwona}\usepackage[T1]{fontenc}}%
-    {iwonal}{\usepackage[light,math]{iwona}\usepackage[T1]{fontenc}}%
-    {iwonalc}{\usepackage[light,condensed,math]{iwona}\usepackage[T1]{fontenc}}%
-    {kurier}{\usepackage[math]{kurier}\usepackage[T1]{fontenc}}%
-    {kurierc}{\usepackage[condensed,math]{kurier}\usepackage[T1]{fontenc}}%
-    {kurierl}{\usepackage[light,math]{kurier}\usepackage[T1]{fontenc}}%
-    {kurierlc}{\usepackage[light,condensed,math]{kurier}\usepackage[T1]{fontenc}}%
-    {lmodern}{\usepackage{lmodern}\renewcommand*\familydefault{\sfdefault}\usepackage[T1]{fontenc}}%
-    {lmodernex}{\renewcommand*\sfdefault{lmssq}\renewcommand*\familydefault{\sfdefault}\usepackage[T1]{fontenc}}%
-    {libris}{\usepackage{libris}\renewcommand*\familydefault{\sfdefault}\usepackage[T1]{fontenc}}%
-    {lxfonts}{\usepackage[T1]{fontenc}\usepackage{lxfonts}}%
-    {merriweather}{\usepackage[T1]{fontenc}\usepackage[sfdefault]{merriweather}}%
-    {merriweatherl}{\usepackage[T1]{fontenc}\usepackage[sfdefault,light]{merriweather}}%
-    {mintspirit}{\usepackage[T1]{fontenc}\usepackage[default]{mintspirit}}%
-    {opensans}{\usepackage[default,osfigures,scale=0.95]{opensans}\usepackage[T1]{fontenc}}%
-    {paratype}{\usepackage{paratype}\renewcommand*\familydefault{\sfdefault}\usepackage[T1]{fontenc}}%
-    {paratypecap}{\usepackage{PTSansCaption}\renewcommand*\familydefault{\sfdefault}\usepackage[T1]{fontenc}}%
-    {paratypen}{\usepackage{PTSansNarrow}\renewcommand*\familydefault{\sfdefault}\usepackage[T1]{fontenc}}%
-    {raleway}{\usepackage[T1]{fontenc}\usepackage[default]{raleway}}%
-    {roboto}{\usepackage[sfdefault]{roboto}\usepackage[T1]{fontenc}}%
-    {robotoc}{\usepackage[sfdefault,condensed]{roboto}\usepackage[T1]{fontenc}}%
-    {robotol}{\usepackage[sfdefault,light]{roboto}\usepackage[T1]{fontenc}}%
-    {robotolc}{\usepackage[sfdefault,light,condensed]{roboto}\usepackage[T1]{fontenc}}%
-    {robotot}{\usepackage[sfdefault,thin]{roboto}\usepackage[T1]{fontenc}}%
-    {tgadventor}{\usepackage{tgadventor}\renewcommand*\familydefault{\sfdefault}\usepackage[T1]{fontenc}}%
-    {tgheros}{\usepackage{tgheros}\renewcommand*\familydefault{\sfdefault}\usepackage[T1]{fontenc}}%
-    {universal}{\usepackage[default]{uni}\usepackage[OT1]{fontenc}}%
-    {urwgothic}{\usepackage{avant}\renewcommand*\familydefault{\sfdefault}}%
-    {urwnimbus}{\usepackage[scaled]{helvet}\renewcommand*\familydefault{\sfdefault}\usepackage[T1]{fontenc}}%
-    {venturis}{\usepackage[lf]{venturis}\renewcommand*\familydefault{\sfdefault}\usepackage[T1]{fontenc}}%
-    {none}{}%
-  }{}{\ClassWarningNoLine{resume}{Invalid~font~option~given,\space falling~back~to~default:~computermodern}
-      \renewcommand*{\familydefault}{\sfdefault}}%
-}
-\ExplSyntaxOff
-\loadfont{\@fontselection} % \@fontselection must NOT have trailing {} or it won't match the strings above
+% \usepackage{expl3} % For LaTeX3 commands
+% \ExplSyntaxOn
+% \newcommand*{\loadfont}[1]{%
+  % % Shout out to Christian Hupfer whose examples at http://tex.stackexchange.com/questions/314302/good-examples-of-tl-casenntf-and-str-casenntf helped me make sense of \str_case
+  % \str_case_x:nnTF{#1} {%
+    % {berasans}{\usepackage[T1]{fontenc}\usepackage[]{berasans}\renewcommand*\familydefault{\sfdefault}}%
+    % {cantarell}{\usepackage[T1]{fontenc}\usepackage[default, scale=0.95]{cantarell}}%
+    % {computermodern}{\usepackage[T1]{fontenc}\renewcommand*{\familydefault}{\sfdefault}}%
+    % {lato}{\usepackage[T1]{fontenc}\usepackage[default, scale=0.95]{lato}}%
+    % {quattrocento}{\usepackage[T1]{fontenc}\usepackage[sfdefault]{quattrocento}}%
+    % {sourcesanspro}{\usepackage[T1]{fontenc}\usepackage[default,semibold]{sourcesanspro}}%
+    % % I can't recommend any of these fonts, but they'll work
+    % {alegreya}{\usepackage[T1]{fontenc}\usepackage[sfdefault]{AlegreyaSans}}%
+    % {alegreyablack}{\usepackage[T1]{fontenc}\usepackage[sfdefault,black]{AlegreyaSans}}%
+    % {biolinum}{\usepackage[T1]{fontenc}\usepackage{libertine}\renewcommand*\familydefault{\sfdefault}}%
+    % {cabin}{\usepackage[T1]{fontenc}\usepackage[sfdefault]{cabin}}%
+    % {cabinc}{\usepackage[T1]{fontenc}\usepackage[sfdefault,condensed]{cabin}}%
+    % {comfortaa}{\usepackage[T1]{fontenc}\usepackage[default]{comfortaa}}%
+    % {cmbright}{\usepackage[T1]{fontenc}\usepackage{cmbright}}%
+    % {dejavusans}{\usepackage[T1]{fontenc}\usepackage{DejaVuSans}\renewcommand*\familydefault{\sfdefault}}%
+    % {dejavuc}{\usepackage[T1]{fontenc}\usepackage{DejaVuSansCondensed}\renewcommand*\familydefault{\sfdefault}}%
+    % {droidsans}{\usepackage[T1]{fontenc}\usepackage[defaultsans]{droidsans}\renewcommand*\familydefault{\sfdefault}}%
+    % {firasans}{\usepackage[T1]{fontenc}\usepackage[sfdefault]{FiraSans}}%
+    % {gfsneohellenic}{\usepackage[default]{gfsneohellenic}\usepackage[LGR,T1]{fontenc}}%
+    % {gillius}{\usepackage[T1]{fontenc}\usepackage[default]{gillius}}%
+    % {iwona}{\usepackage[math]{iwona}\usepackage[T1]{fontenc}}%
+    % {iwonac}{\usepackage[condensed,math]{iwona}\usepackage[T1]{fontenc}}%
+    % {iwonal}{\usepackage[light,math]{iwona}\usepackage[T1]{fontenc}}%
+    % {iwonalc}{\usepackage[light,condensed,math]{iwona}\usepackage[T1]{fontenc}}%
+    % {kurier}{\usepackage[math]{kurier}\usepackage[T1]{fontenc}}%
+    % {kurierc}{\usepackage[condensed,math]{kurier}\usepackage[T1]{fontenc}}%
+    % {kurierl}{\usepackage[light,math]{kurier}\usepackage[T1]{fontenc}}%
+    % {kurierlc}{\usepackage[light,condensed,math]{kurier}\usepackage[T1]{fontenc}}%
+    % {lmodern}{\usepackage{lmodern}\renewcommand*\familydefault{\sfdefault}\usepackage[T1]{fontenc}}%
+    % {lmodernex}{\renewcommand*\sfdefault{lmssq}\renewcommand*\familydefault{\sfdefault}\usepackage[T1]{fontenc}}%
+    % {libris}{\usepackage{libris}\renewcommand*\familydefault{\sfdefault}\usepackage[T1]{fontenc}}%
+    % {lxfonts}{\usepackage[T1]{fontenc}\usepackage{lxfonts}}%
+    % {merriweather}{\usepackage[T1]{fontenc}\usepackage[sfdefault]{merriweather}}%
+    % {merriweatherl}{\usepackage[T1]{fontenc}\usepackage[sfdefault,light]{merriweather}}%
+    % {mintspirit}{\usepackage[T1]{fontenc}\usepackage[default]{mintspirit}}%
+    % {opensans}{\usepackage[default,osfigures,scale=0.95]{opensans}\usepackage[T1]{fontenc}}%
+    % {paratype}{\usepackage{paratype}\renewcommand*\familydefault{\sfdefault}\usepackage[T1]{fontenc}}%
+    % {paratypecap}{\usepackage{PTSansCaption}\renewcommand*\familydefault{\sfdefault}\usepackage[T1]{fontenc}}%
+    % {paratypen}{\usepackage{PTSansNarrow}\renewcommand*\familydefault{\sfdefault}\usepackage[T1]{fontenc}}%
+    % {raleway}{\usepackage[T1]{fontenc}\usepackage[default]{raleway}}%
+    % {roboto}{\usepackage[sfdefault]{roboto}\usepackage[T1]{fontenc}}%
+    % {robotoc}{\usepackage[sfdefault,condensed]{roboto}\usepackage[T1]{fontenc}}%
+    % {robotol}{\usepackage[sfdefault,light]{roboto}\usepackage[T1]{fontenc}}%
+    % {robotolc}{\usepackage[sfdefault,light,condensed]{roboto}\usepackage[T1]{fontenc}}%
+    % {robotot}{\usepackage[sfdefault,thin]{roboto}\usepackage[T1]{fontenc}}%
+    % {tgadventor}{\usepackage{tgadventor}\renewcommand*\familydefault{\sfdefault}\usepackage[T1]{fontenc}}%
+    % {tgheros}{\usepackage{tgheros}\renewcommand*\familydefault{\sfdefault}\usepackage[T1]{fontenc}}%
+    % {universal}{\usepackage[default]{uni}\usepackage[OT1]{fontenc}}%
+    % {urwgothic}{\usepackage{avant}\renewcommand*\familydefault{\sfdefault}}%
+    % {urwnimbus}{\usepackage[scaled]{helvet}\renewcommand*\familydefault{\sfdefault}\usepackage[T1]{fontenc}}%
+    % {venturis}{\usepackage[lf]{venturis}\renewcommand*\familydefault{\sfdefault}\usepackage[T1]{fontenc}}%
+    % {none}{}%
+  % }{}{\ClassWarningNoLine{resume}{Invalid~font~option~given,\space falling~back~to~default:~computermodern}
+      % \renewcommand*{\familydefault}{\sfdefault}}%
+% }
+% \ExplSyntaxOff
+% \loadfont{\@fontselection} % \@fontselection must NOT have trailing {} or it won't match the strings above
+
+\usepackage[T1]{fontenc}\usepackage[default, scale=0.95]{cantarell}
 
 
 \usepackage{geometry} % Document margins
 
+\pretolerance=7000
 \setlength{\parindent}{0pt}
 \setlength{\parskip}{6.8pt plus 2.0pt}
 \setlength{\parsep}{6.8pt plus 2.0pt}
@@ -210,6 +213,8 @@
 \setlength{\itemsep}{0pt}
 \setlength{\partopsep}{0pt}
 \usepackage{array} % Required for boldface (\bf and \bfseries) tabular columns
+\usepackage{tabularx}
+\usepackage{multirow}
 
 \usepackage{wrapfig}
 \usepackage{graphicx}
@@ -225,26 +230,38 @@
 %check out other hyperref options
 \iflink@icon
   \usepackage{fontawesome} % Required for new definition of \href
+  \usepackage{ocg-p} % Allows hiding the icon when printing
   \let\orighref\href % Store the original \href command
+  % Next line needs a counter (I think) to keep the ID unique
+  % See http://tex.stackexchange.com/questions/103824/how-to-disappear-text-or-figures-by-printing for an example
+  % \renewcommand{\href}[2]{\orighref{#1}{#2\begin{ocg}[printocg=never]{linkIcons}{linkId}{1}\,{\tiny \faExternalLink}\end{ocg}}}  % Add icon next to all links
   \renewcommand{\href}[2]{\orighref{#1}{#2\,{\tiny \faExternalLink}}}  % Add icon next to all links
   \let\origurl\url % Store the original \url command
   \renewcommand{\url}[1]{\origurl{#1}\href{#1}{}}  % Add icon next to all links
+  \newcommand{\mailto}[1]{\orighref{mailto:#1}{#1}}
 \fi
 
 \usepackage{quoting} % Equivalent to the quote environment without the spacing before and after
 \quotingsetup{vskip=0pt}
 
+% Don't allow hyphenation. This might cause some horizontal spacing problems, but it makes the document easier
+% to read for machines.
+\hyphenpenalty=10000
 
 \def\namesize{\huge} % Size of the name at the top of the document
 % Some pre-defined skips for different document locations
 % The below commands define the whitespace after certain things in the document - they can be \smallskip, \medskip or \bigskip
-\def\sectionskip{\penalty-200\smallskip} % The space after the heading section
-\def\sectionlineskip{\medskip} % The space above the horizontal line for each section
-\def\nameskip{\medskip} % The space after your name at the top
-\def\addressskip{} % The space between the two address (or phone/email) lines
+\def\sectionskip{\penalty-200\vspace{3pt plus 12pt minus 4pt}} % The space after the heading section
+\def\sectionlineskip{\vspace{6pt}} % The space above the horizontal line for each section
+\def\postsectionskip{\vspace{0pt plus 2pt minus 0pt}}
+\def\nameskip{\vspace{6pt}} % The space after your name at the top
+\def\addressskip{\vspace{-8pt}} % The space between the two address (or phone/email) lines
 \def\bibheadingskip{\vspace{-2\parskip}} % The space after the bib heading and before the first entry
 \def\emptybibheadingskip{\vspace{-\parskip}} % The space before the first bib entry when there is no heading
 \def\bibpostskip{\vspace{-4\parskip}} % The space at the end of the bibliography before any other content
+\def\postexpheaderskip{\vspace{3pt plus 2pt minus 1pt}}
+\def\preexpskip{\vspace{0pt plus 0pt minus 2pt}}
+\def\postexpskip{\penalty-100\vspace{0pt plus 7pt minus 0pt}}
 
 % More sophisticated bibliography styling and printing. Looks for custom biblatex.cfg file in same directory.
 \usepackage[backend=biber]{biblatex}
@@ -252,9 +269,9 @@
 \pagestyle{empty} % Suppress page numbers
 
 \usepackage{needspace} % Allows us to specify when a certain number of lines need to be on the same page
-\def\bibSpace{3\baselineskip}
+\def\bibSpace{2\baselineskip}
 \def\subsecSpace{2\baselineskip}
-\def\secHeadSpace{7\baselineskip}
+\def\secHeadSpace{4\baselineskip}
 \def\expHeaderSpace{3\baselineskip}
 
 \usepackage{scrextend} % Allows us to specify custom margins for whole blocks of code
@@ -303,16 +320,15 @@
   \begingroup
     \def \\ {\addressSep\ }
     \centerline{#1}
+    \addressskip
   \endgroup
-  \par
-  \addressskip
 }
 
 % \printname is used to print the name as a page header
 \def \printname {
   \begingroup
     \hfil{\namesize\bf \@name}\hfil
-    \nameskip\break
+    \nameskip
   \endgroup
 }
 
@@ -374,7 +390,7 @@
   \fi
   % Start the section
   \begin{rSectionHeading}{#2}
-    \begin{addmargin}[1.5em]{0pt} % Margin within the section
+    \begin{addmargin}[0em]{0pt} % Margin within the section
 }{
     \end{addmargin}
   \end{rSectionHeading}
@@ -382,31 +398,36 @@
 }
 
 \newenvironment{rBulletSubsection}[1]{
-  \needspace{\subsecSpace}
+  \preexpskip
+  \Needspace*{\subsecSpace}
   \stepcounter{rSubSectionCount}
   \pdfbookmark[1]{#1}{ss:\Roman{rSectionCount}\roman{rSubSectionCount}}
   {\bf #1}
   \begin{rBulletList}
 }{
   \end{rBulletList}
+  \postexpskip
 }
 
 \newenvironment{rSectionHeading}[1]{ % 1 input argument - section name
   \sectionskip
-  \needspace{\secHeadSpace}
+  \Needspace*{\secHeadSpace}
   \stepcounter{rSectionCount}
   \pdfbookmark[0]{#1}{s:\Roman{rSectionCount}}
-  \MakeUppercase{\bf #1} % Section title
+  \MakeUppercase{{\bf #1}} % Section title
   \sectionlineskip
   \hrule % Horizontal line
+  \postsectionskip
 }{}
 
 \newenvironment{rBulletSection}[2][1]{
   \setbool{addListSkip}{true}
   \begin{rSection}{#2}
+    \preexpskip
     \begin{rBulletList}[#1]
 }{
     \end{rBulletList}
+    \postexpskip
   \end{rSection}
 }
 
@@ -424,7 +445,7 @@
   \printbibliography[resetnumbers=1, omitnumbers=false, heading=mybibheading, keyword={#3}, postnote=remove_post_vspace]%
 }
 \defbibheading{mybibheading}{%
-  \needspace{\bibSpace}%
+  \Needspace*{\bibSpace}%
   \ifdefempty{\@mybibtitle}{}{\stepcounter{rSubSectionCount} \pdfbookmark[1]{\@mybibtitle}{b:\Roman{rSectionCount}\roman{rSubSectionCount}}}%
   \normalfont\selectfont\normalsize \bf \@mybibtitle%
   \ifdefempty{\@mybibtitle}{\emptybibheadingskip}{\bibheadingskip}%
@@ -549,35 +570,48 @@
 \NewDocumentEnvironment{rExperience}{ G{\@exp@TL} G{\@exp@TR} G{\@exp@BL} G{\@exp@BR} G{\@exp@extra} }
   {\Collect@Body\@exp@collect@body}% Get everything up until the \end{rExperience} command
   {
-    \ifdefempty{\@exp@extra}
-      {\def\@last@arg{#4}}
-      {\def\@last@arg{#4\\\textnormal{#5}}}
+    % \ifdefempty{\@exp@extra}
+      \def\@last@arg{#4}
+      % {\def\@last@arg{#4\\\textnormal{#5}}}
     \ifbool{titleOnly}{
-      \begin{rExperienceHeader}{#1}{#2}{#3}{\@last@arg} \end{rExperienceHeader}
+      \togglefalse{fullAddress}
+      \begin{rExperienceHeader}{#1}{#2}{#3}{\@last@arg}{}%\ifdefempty{\@exp@extra}{}{\\\textnormal{#5}}} %
+      \end{rExperienceHeader}
     }{
-      \begin{rExperienceBullets}{#1}{#2}{#3}{\@last@arg}
+    \begin{rExperienceBullets}{#1}{#2}{#3}{\@last@arg}{#5}
         \@exp@body
       \end{rExperienceBullets}
     }
     \@clear@exp@vars{}% Reset the fields back to empty
   }
 
-\newenvironment{rExperienceHeader}[4]{ % 4 input arguments - company name, year(s) employed, job title and location
-  \needspace{\expHeaderSpace}
+\newenvironment{rExperienceHeader}[5]{ % 4 input arguments - company name, year(s) employed, job title, location, and extra stuff
+  \preexpskip
+  \Needspace*{\expHeaderSpace}
   \ifbool{titleOnly}{}{
     \stepcounter{rSubSectionCount}
     \pdfbookmark[1]{\@exp@pos}{ss:\Roman{rSectionCount}\roman{rSubSectionCount}}
   }
-  {\@expsty@TL #1} \hfill {\@expsty@TR #2} % Bold company name and italic date on the right
-  \ifblank{#3}{}{ % If the third argument is not specified, don't print the job title and location line
-  \\
-  {\@expsty@BL #3} \hfill {\@expsty@BR #4} % Job title and location
+  \begin{tabularx}{\linewidth}{@{} >{\raggedright}Xr@{}}
+    {\@expsty@TL #1} & {\@expsty@TR #2} \\ % Bold company name and italic date on the right
+    {\@expsty@BL #3} & {\@expsty@BR #4}
+    % TODO: This was an attempt to make the space after the header be the same when there was and was not an extra line,
+    % but it didn't seem to help...
+    % \ifblank{#5}{}{\\ \multicolumn{2}{@{}l@{}}{#5}}
+  \end{tabularx}%
+  % {\@expsty@TL #1} \hfill {\@expsty@TR #2} % Bold company name and italic date on the right
+  % \ifblank{#3}{}{ % If the third argument is not specified, don't print the job title and location line
+  % \\
+  % {\@expsty@BL #3} \hfill {\@expsty@BR #4} % Job title and location
+  % }
+  \ifblank{#5}{\vspace{-1ex}}{\\#5}%
+  \postexpheaderskip%
+}{%
+  \postexpskip%
+}
 
-  }\smallskip
-}{}
-
-\newenvironment{rExperienceBullets}[4]{ %
-  \begin{rExperienceHeader}{#1}{#2}{#3}{#4}
+\newenvironment{rExperienceBullets}[5]{ %
+  \begin{rExperienceHeader}{#1}{#2}{#3}{#4}{#5}
   \begin{rBulletList}
 }{
   \end{rBulletList}
@@ -679,5 +713,11 @@
 % Other custom stuff
 %----------------------------------------------------------------------------------------
 
+% The \threecol command makes three paragraph boxes of equal size and places them on the same line
+\newcommand{\threecol}[3]{%
+\parbox{.333\linewidth}{#1\hfill}%
+\parbox{.333\linewidth}{\hfil#2\hfil}%
+\parbox{.333\linewidth}{\hfill#3}%
+}
 
 \endinput

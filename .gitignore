@@ -11,3 +11,5 @@
 *.run.xml
 sections/references.tex
 *.swp
+.DS_Store
+Session.vim
