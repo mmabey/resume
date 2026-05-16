@@ -4,47 +4,30 @@
 \expOrgName{Cedar Cares, Inc.}
 \expOrgLoc{Salt Lake City, UT}
 % \iftoggle{superInfo}{
-  \expExtra{%
-  \textit{Supervisor:}\; Tristan McCormick\;\; (651) 494-8503\;\; \mailto{tristan@cedar.com}}
+  % \expExtra{%
+  % \textit{Supervisor:}\; Tristan McCormick\;\; (651) 494-8503\;\; \mailto{tristan@cedar.com}}
 % }{}
 
 
 \begin{rExperience}
 
-  \item Initially hired by OODA Health, Inc., which was acquired by Cedar in Jun 2021.
+  \item Technical point-of-contact while integrating with two major electronic health record (EHR) systems.
 
-  \item Authored and open-sourced \href{https://github.com/cedar-team/pyredox}{\texttt{pyredox}}, a \textbf{Python}
-    library that aids in parsing, validating, and generating JSON payloads for communicating with
-    \href{https://www.redoxengine.com/}{Redox Engine}, a clinical data broker.
-    % platform designed to connect providers, payers, and products.
+  \item Eliminated the need for teammate engineers to manually validate composed JSON payloads by conceiving, authoring,
+    and open-sourcing a \textbf{Python} library for generating spec-compliant payloads
+    (\href{https://github.com/cedar-team/pyredox}{\faGithub\ pyredox}).
 
-  % \item Implemented tools for health insurance companies to review claims and prior authorization requests that
-    % identified, parsed, and presented the relevant clinical information to decrease the time needed to process and
-    % adjudicate requests.
+  \item Reduced client data refresh times from 30 minutes (average) down to a few seconds using \textbf{Domain-Driven
+    Development} (DDD) patterns to refactor a batch-based \textbf{Python} service to be event-based.
 
-  \item Used \textbf{Domain-Driven Development} (DDD) patterns while refactoring a batch-based \textbf{Python} service
-    to be event-based, reducing client data refresh times from 30 minutes (average) down to a few seconds.
-
-  \item Implemented tools that identified, parsed, and presented clinical information relevant to claims and prior
-    authorization requests to decrease the time needed for
-    % health insurance companies
-    payers
-    to process and adjudicate
-    requests. Technologies used include \textbf{Python}, \textbf{gRPC}/\textbf{protobufs}, AWS (\textbf{EC2},
+  \item Implemented insurance claim adjudication tools with a stack of
+    \textbf{Python}, \textbf{gRPC}/\textbf{protobufs}, AWS (\textbf{EC2},
     \textbf{SQS}, \textbf{S3}, and \textbf{KMS}), \textbf{MariaDB}/\textbf{Postgres}, \textbf{OpenCV}, \textbf{OAuth},
     as well as the X12 \textbf{EDI} and \textbf{FHIR} data formats.
 
-  \item Led the effort to integrate with two electronic health record (EHR) systems, Cerner and Epic, using the
-    FHIR specification; included acting as technical point-of-contact during certification by Cerner.
+  % \item Implemented many \textbf{ETLs} and \textbf{ELTs} in \textbf{Python}.
 
-  \item Implemented many \textbf{ETLs} in \textbf{Python} for transforming external data to match internal structures
-    and vice versa.
-
-  \item Wrote \textbf{Swagger} documentation for customers connecting to our API implemented in \textbf{FastAPI}.
-
-  % \item Contributed to the open-source \href{https://github.com/nazrulworld/fhir.resources}{\texttt{fhir.resources}}
-    % Python library to include support for the DSTU2 version of the FHIR spec, which was necessary to complete the EHR
-    % integrations mentioned above.
+  \item Wrote a customer-facing API using \textbf{FastAPI} with accompanying documentation in \textbf{Swagger}.
 
 \end{rExperience}
 

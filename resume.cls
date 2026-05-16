@@ -481,7 +481,7 @@
     \setlength{\parskip}{0pt}
     \setlength{\topsep}{0pt}
     \setlength{\parsep}{0pt}
-    \setlength{\itemsep}{0pt}
+    \setlength{\itemsep}{3pt}
     \setlength{\partopsep}{0pt}
     \setlength{\labelwidth}{0.5em} % Keeps left edge of item paragraphs aligned (when wrapping) because it is wider than either of the symbols used as bullets
   }
