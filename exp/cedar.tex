@@ -11,23 +11,27 @@
 
 \begin{rExperience}
 
-  \item Technical point-of-contact while integrating with two major electronic health record (EHR) systems.
+  \item Served as technical lead for integrations with Cerner and Epic --- representing Cedar's capabilities to provider
+    clients, negotiating API contracts with EHR vendors, and owning the compliance and certification submissions
+    required to access regulated patient data under each vendor's authorization program.
 
-  \item Eliminated the need for teammate engineers to manually validate composed JSON payloads by conceiving, authoring,
-    and open-sourcing a \textbf{Python} library for generating spec-compliant payloads
-    (\href{https://github.com/cedar-team/pyredox}{\faGithub\ pyredox}).
+  \item Eliminated manual JSON payload validation for the engineering team by conceiving, authoring, and open-sourcing
+    \href{https://github.com/cedar-team/pyredox}{pyredox} --- a Python library for generating Redox-spec-compliant
+    payloads. Adopted by dozens of Cedar engineers; because Redox abstracts access to multiple EHR systems, the library
+    reduced incremental onboarding effort for each additional Redox-based customer to near zero.
 
-  \item Reduced client data refresh times from 30 minutes (average) down to a few seconds using \textbf{Domain-Driven
-    Development} (DDD) patterns to refactor a batch-based \textbf{Python} service to be event-based.
+  \item Reduced client data refresh times from 30 minutes to seconds by applying \textbf{Domain-Driven Design} (DDD)
+    patterns to refactor a batch-based Python service into an event-driven architecture.
 
-  \item Implemented insurance claim adjudication tools with a stack of
-    \textbf{Python}, \textbf{gRPC}/\textbf{protobufs}, AWS (\textbf{EC2},
-    \textbf{SQS}, \textbf{S3}, and \textbf{KMS}), \textbf{MariaDB}/\textbf{Postgres}, \textbf{OpenCV}, \textbf{OAuth},
-    as well as the X12 \textbf{EDI} and \textbf{FHIR} data formats.
+  \item Built insurance claim adjudication tooling requiring deep ETL/ELT work across two complex data exchange
+    standards --- legacy \textbf{X12 EDI} and modern \textbf{FHIR} --- using \textbf{Python},
+    \textbf{gRPC}/\textbf{protobufs}, AWS (\textbf{EC2}, \textbf{SQS}, \textbf{S3}, and \textbf{KMS}), and
+    \textbf{OpenCV}. Co-led a full rewrite of the data access layer to migrate to \textbf{Postgres}, enabling
+    JSON-native storage for upcoming product requirements.
 
   % \item Implemented many \textbf{ETLs} and \textbf{ELTs} in \textbf{Python}.
 
-  \item Wrote a customer-facing API using \textbf{FastAPI} with accompanying documentation in \textbf{Swagger}.
+  % \item Wrote a customer-facing API using \textbf{FastAPI} with accompanying documentation in \textbf{Swagger}.
 
 \end{rExperience}
 

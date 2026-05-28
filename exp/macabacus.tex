@@ -1,7 +1,7 @@
 
 % Define the fields for this entry
 \expPosTitle{Backend Software Engineer}
-\expPosPeriod{Apr 2025 -- Present} % Remember to use -- between dates
+\expPosPeriod{Apr 2025 -- May 2026} % Remember to use -- between dates
 \expOrgName{Macabacus Inc.}
 \expOrgLoc{\textit{(remote)} Salt Lake City, UT}
 \expExtra{} % Optional information to display below all the other fields
@@ -9,10 +9,13 @@
 
 \begin{rExperience}
 
-  \item Converted code that used \textbf{Celery} to use \textbf{Taskiq}, allowing for asyncronous queuing and processing
-    of long-running tasks, improving the responsiveness of the web interface, and decreasing API server's load.
+  \item Modernized 279 of ~420 Python files (66\% of the codebase) across 10 PRs --- enforcing strict type annotations
+    and \textbf{Ruff}/\textbf{Ty} linting rules, patching security vulnerabilities surfaced by automated review
+    (including a latent SSRF risk in the Okta OAuth flow), and eliminating dozens of crashable runtime paths.
 
-  \item Helped maintain and improve the internal, backend API, comprised of \textbf{FastAPI} and \textbf{MySQL} running
-    on \textbf{Azure}.
+  \item Identified an async incompatibility in the planned \textbf{Celery} integration, pivoted to \textbf{Taskiq} after
+    a successful POC, and led full implementation --- including building progress monitoring and error handling not
+    provided by the library --- establishing patterns adopted by the rest of the team for subsequent background task
+    work.
 
 \end{rExperience}
